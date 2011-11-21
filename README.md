@@ -19,6 +19,7 @@ started.
 * Form validation occurs both client-side and server-side
 * Hooks let you define custom PHP form handling
 * Embed forms into any page through the WYSIWYG editor
+* CSRF and other abuse prevention built-in
 
 ## Notes on storage
 
