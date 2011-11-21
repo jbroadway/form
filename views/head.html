@@ -23,4 +23,9 @@ $(function () {
 	$('#{{ form_id }}-form').autosave ();
 });
 </script>
-<form method="post" id="{{ form_id }}-form"{% if multipart %} enctype="multipart/form-data"{% end %}>
+
+{% if message %}
+<p>{{ message }}</p>
+{% end %}
+
+<form method="post" id="{{ form_id }}-form">
