@@ -1,0 +1,26 @@
+<script type="text/javascript" src="/js/jquery.verify_values.js"></script>
+<script type="text/javascript">
+$(function () {
+	$('#{{ form_id }}-form').verify_values ({
+		handler: '{{ form_id }}',
+		prefix: '/forms/validator/',
+		callback: function (failed) {
+			// highlight the failed elements
+			for (var i = 0; i < failed.length; i++) {
+				$('#' + failed[i] + '-notice').show ();
+			}
+		},
+		reset: function (fields) {
+			for (var i = 0; i < fields.length; i++) {
+				$('#' + fields[i] + '-notice').hide ();
+			}
+		}
+	});
+	{% foreach failed %}
+	$('#{{ loop_value }}-notice').show ();
+	{% end %}
+
+	$('#{{ form_id }}-form').autosave ();
+});
+</script>
+<form method="post" id="{{ form_id }}-form"{% if multipart %} enctype="multipart/form-data"{% end %}>
