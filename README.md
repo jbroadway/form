@@ -15,7 +15,6 @@ To do:
 * Checkbox fields
 * Radio fields
 * Default values
-* CC Recipient handler
 * Admin UI
   * Form builder
   * Export results
@@ -31,6 +30,7 @@ Done:
 * Saving to results table
 * Calling hooks
 * Email action
+* CC Recipient handler
 * Store IP addresses
 * Embed through Dynamic Objects
 * Admin UI

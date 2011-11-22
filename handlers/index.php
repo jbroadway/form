@@ -64,9 +64,9 @@ if ($f->submit ()) {
 				$msg_body = $action->body_intro;
 				if ($action->include_data == 'yes') {
 					$labels = $f->labels ();
-					$msg_body .= "\n";
+					$msg_body .= "\n\n";
 					foreach ($_POST as $k => $v) {
-						$msg_body .= '* ' . str_pad ($labels[$k], 40, ' ', STR_PAD_RIGHT) . ': ' . $v . "\n";
+						$msg_body .= '* ' . str_pad ($labels[$k], 32, ' ', STR_PAD_RIGHT) . ': ' . $v . "\n";
 					}
 					$msg_body .= "\n";
 				}
