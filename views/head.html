@@ -1,8 +1,8 @@
 <script type="text/javascript" src="/js/jquery.verify_values.js"></script>
 <script type="text/javascript">
 $(function () {
-	$('#{{ id }}-form').verify_values ({
-		handler: '{{ form_id }}',
+	$('#form-{{ id }}').verify_values ({
+		handler: '{{ id }}',
 		prefix: '/forms/validator/',
 		callback: function (failed) {
 			// highlight the failed elements
@@ -20,7 +20,7 @@ $(function () {
 	$('#{{ loop_value }}-notice').show ();
 	{% end %}
 
-	$('#{{ id }}-form').autosave ();
+	$('#form-{{ id }}').autosave ();
 });
 </script>
 
@@ -28,4 +28,4 @@ $(function () {
 <p>{{ message }}</p>
 {% end %}
 
-<form method="post" id="{{ id }}-form">
+<form method="post" id="form-{{ id }}">

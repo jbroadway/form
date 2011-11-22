@@ -1,0 +1,9 @@
+{" A form has just been submitted "}:
+
+{% foreach values %}
+* {{ loop_index|str_pad (%s, 40, ' ', STR_PAD_RIGHT) }} : {{ loop_value }}
+{% end %}
+
+--
+
+{{ $_SERVER.HTTP_HOST }}
