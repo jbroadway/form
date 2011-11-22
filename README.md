@@ -108,8 +108,7 @@ Additional properties for textarea:
 
 Additional properties for select, checkbox, and radio:
 
-* `"require": "apps/myapp/lib/Functions.php"`
-* `"callback": "function_to_get_value_list"`
+* `"values": ["Option 1", "Option 2"]`
 
 This is not exhaustive, but it is sufficient for most ordinary web forms, which
 is the target use for this app. Forms is not meant to handle every type of form,
