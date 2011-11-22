@@ -2,6 +2,11 @@
 
 namespace form;
 
-class Results extends \Model {}
+class Results extends \Model {
+	/**
+	 * Table name.
+	 */
+	public $table = 'results';
+}
 
 ?>

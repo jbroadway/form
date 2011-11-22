@@ -8,6 +8,16 @@ namespace form;
  */
 class Form extends \Model {
 	/**
+	 * Table name.
+	 */
+	public $table = 'form';
+
+	/**
+	 * List of fields that failed validation.
+	 */
+	public $failed = array ();
+
+	/**
 	 * Stores field data.
 	 */
 	private $_fields = false;
@@ -18,9 +28,14 @@ class Form extends \Model {
 	private $_actions = false;
 
 	/**
+	 * A `\Form` object used internally.
+	 */
+	private $_form;
+
+	/**
 	 * Get labels as associative array from fields.
 	 */
-	function labels () {
+	public function labels () {
 		$labels = array ();
 		foreach ($this->fields as $field) {
 			$labels[$field->id] = $field->label;
@@ -31,7 +46,7 @@ class Form extends \Model {
 	/**
 	 * Get a list of validation rules for this form.
 	 */
-	function rules () {
+	public function rules () {
 		$rules = array ();
 		foreach ($this->fields as $field) {
 			$rules[$field->id] = (array) $field->rules;
@@ -40,17 +55,37 @@ class Form extends \Model {
 	}
 
 	/**
+	 * Checks whether the form can be submitted.
+	 */
+	public function submit () {
+		if (! is_object ($this->_form)) {
+			$this->_form = new \Form ('POST');
+			$this->_form->rules = $this->rules ();
+		}
+		$res = $this->_form->submit ();
+		$this->failed = $this->_form->failed;
+		return $res;
+	}
+
+	/**
+	 * Calls the internal `\Form::merge_values()`.
+	 */
+	public function merge_values ($obj) {
+		return $this->_form->merge_values ($obj);
+	}
+
+	/**
 	 * Dynamic getter that unserializes fields and actions.
 	 */
-	function __get ($key) {
+	public function __get ($key) {
 		if ($key == 'fields') {
-			if ($this->_fields = false) {
-				$this->_fields = (array) json_decode ($this->data['fields']);
+			if ($this->_fields === false) {
+				$this->_fields = json_decode ($this->data['fields']);
 			}
 			return $this->_fields;
 		} elseif ($key == 'actions') {
-			if ($this->_actions = false) {
-				$this->_actions = (array) json_decode ($this->data['actions']);
+			if ($this->_actions === false) {
+				$this->_actions = json_decode ($this->data['actions']);
 			}
 			return $this->_fields;
 		}
@@ -60,7 +95,7 @@ class Form extends \Model {
 	/**
 	 * Dynamic setter that serializes fields and actions.
 	 */
-	function __set ($key, $val) {
+	public function __set ($key, $val) {
 		if ($key == 'fields') {
 			$this->_fields = $val;
 			$this->data[$key] = json_encode ($val);
