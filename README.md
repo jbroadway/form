@@ -14,7 +14,6 @@ To do:
 * Select fields
 * Checkbox fields
 * Radio fields
-* Textareas
 * Default values
 * CC Recipient handler
 * Embed through Dynamic Objects
@@ -30,6 +29,7 @@ Done:
 * Basic output
 * CSRF prevention
 * Text field rendering
+* Textarea rendering
 * Saving to results table
 * Calling hooks
 * Email action
