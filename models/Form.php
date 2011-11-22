@@ -37,7 +37,7 @@ class Form extends \Model {
 	 */
 	public function labels () {
 		$labels = array ();
-		foreach ($this->fields as $field) {
+		foreach ($this->field_list as $field) {
 			$labels[$field->id] = $field->label;
 		}
 		return $labels;
@@ -48,7 +48,7 @@ class Form extends \Model {
 	 */
 	public function rules () {
 		$rules = array ();
-		foreach ($this->fields as $field) {
+		foreach ($this->field_list as $field) {
 			$rules[$field->id] = (array) $field->rules;
 		}
 		return $rules;
@@ -78,7 +78,7 @@ class Form extends \Model {
 	 * Dynamic getter that unserializes fields and actions.
 	 */
 	public function __get ($key) {
-		if ($key == 'fields') {
+		if ($key == 'field_list') {
 			if ($this->_fields === false) {
 				$this->_fields = json_decode ($this->data['fields']);
 			}
@@ -96,7 +96,7 @@ class Form extends \Model {
 	 * Dynamic setter that serializes fields and actions.
 	 */
 	public function __set ($key, $val) {
-		if ($key == 'fields') {
+		if ($key == 'field_list') {
 			$this->_fields = $val;
 			$this->data[$key] = json_encode ($val);
 			return;

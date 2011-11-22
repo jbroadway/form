@@ -24,8 +24,6 @@ if ($f->error) {
 	return;
 }
 
-info ($f->fields, true);
-
 if ($f->submit ()) {
 	// handle form submission
 
@@ -101,7 +99,7 @@ if ($f->submit ()) {
 	$o->failed = $f->failed;
 	echo $tpl->render ('form/head', $o);
 
-	foreach ($f->fields as $field) {
+	foreach ($f->field_list as $field) {
 		echo $tpl->render ('form/field/' . $field->type, $field);
 	}
 
