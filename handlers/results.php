@@ -40,7 +40,7 @@ if ($count > 0) {
 			$results[$k]->field_one = $res->{$field_one};
 			$results[$k]->field_two = '';
 		}
-	} elseif (count ($data) > 1) {
+	} elseif (count ($labels) > 1) {
 		$keys = array_keys ($labels);
 		$vals = array_values ($labels);
 		$field_one = array_shift ($keys);
