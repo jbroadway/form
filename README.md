@@ -14,15 +14,14 @@ To do:
 * Select fields
 * Checkbox fields
 * Radio fields
-* Default values
 * Admin UI
   * Form builder
-  * Export results
 
 Done:
 
 * Server-side validation
 * Client-side validation
+* Default values
 * Basic output
 * CSRF prevention
 * Text field rendering
@@ -35,6 +34,7 @@ Done:
 * Embed through Dynamic Objects
 * Admin UI
   * Browse results
+  * Export results
 
 ## Feature overview
 
