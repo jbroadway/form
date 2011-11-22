@@ -3,26 +3,30 @@
 $(function () {
 	$('#form-{{ id }}').verify_values ({
 		handler: '{{ id }}',
-		prefix: '/forms/validator/',
+		prefix: '/form/validator/',
 		callback: function (failed) {
 			// highlight the failed elements
 			for (var i = 0; i < failed.length; i++) {
-				$('#' + failed[i] + '-notice').show ();
+				$('#form-' + failed[i] + '-notice').show ();
 			}
 		},
 		reset: function (fields) {
 			for (var i = 0; i < fields.length; i++) {
-				$('#' + fields[i] + '-notice').hide ();
+				$('#form-' + fields[i] + '-notice').hide ();
 			}
 		}
 	});
 	{% foreach failed %}
-	$('#{{ loop_value }}-notice').show ();
+	$('#form-{{ loop_value }}-notice').show ();
 	{% end %}
-
-	$('#form-{{ id }}').autosave ();
 });
 </script>
+<style>
+.form-notice {
+	display: none;
+	color: red;
+}
+</style>
 
 {% if message %}
 <p>{{ message }}</p>
