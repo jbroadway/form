@@ -9,7 +9,7 @@
 
 if (count ($this->params) != 1) {
 	die ('Usage: /form/validator/form_id');
-} elseif (! is_numeric ('/^[a-zA-Z0-9_-]+$/', $this->params[0])) {
+} elseif (! is_numeric ($this->params[0])) {
 	die ('Invalid form name');
 }
 
