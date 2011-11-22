@@ -79,14 +79,17 @@ Fields is a JSON array with the following structure for each element:
 
 ```
 {
-	"id": "name",
-	"label": "Your name",
+	"id": "website",
+	"label": "Website",
 	"type": "text",
 	"size": 40,
 	"rules": {
-		"not empty": 1
+		"not empty": 1,
+		"regex": "|^https?://|"
 	},
-	"message": "Please enter your name."
+	"message": "Please enter a valid website address.",
+	"default": "http://",
+	"placeholder": "http://"
 }
 ```
 
@@ -97,6 +100,16 @@ Types can include:
 * radio
 * checkbox
 * select
+
+Additional properties for textarea:
+
+* `"cols": 60`
+* `"rows": 4`
+
+Additional properties for select, checkbox, and radio:
+
+* `"require": "apps/myapp/lib/Functions.php"`
+* `"callback": "function_to_get_value_list"`
 
 This is not exhaustive, but it is sufficient for most ordinary web forms, which
 is the target use for this app. Forms is not meant to handle every type of form,
