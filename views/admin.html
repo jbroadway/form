@@ -1,0 +1,26 @@
+<p><a href="/form/add">{" Create a new form "}</a></p>
+
+<p>
+<table width="100%">
+	<tr>
+		<th width="40%">{"Title"}</th>
+		<th width="30%">{"Created"}</th>
+		<th width="15%">{"Results"}</th>
+		<th width="15%">&nbsp;</th>
+	</tr>
+{% foreach forms %}
+	<tr>
+		<td>{{ loop_value->title }}</td>
+		<td>{{ loop_value->ts|date ('F j, Y - g:ia', strtotime (%s)) }}</td>
+		<td><a href="/form/results?id={{ loop_value->id }}" title="{" Browse results "}">{{ loop_value->id|form_results_count }}</a></td>
+		<td>
+			{% if loop_value->locked %}
+			{"Editing Locked"}
+			{% else %}
+			<a href="/form/edit?id={{ loop_value->id }}">{"Edit"}</a> | <a href="/form/delete?id={{ loop_value->id }}" onclick="return confirm ('{"Are you sure you want to permanently delete this form and all of its result data?"}');">{"Delete"}</a>
+			{% end %}
+		</td>
+	</tr>
+{% end %}
+</table>
+</p>

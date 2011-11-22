@@ -1,0 +1,24 @@
+<p><a href="/form/results?id={{ form }}">{" All results "}</a></p>
+
+<p>
+<table width="100%">
+	<tr>
+		<th width="30%">{" Field "}</th>
+		<th width="70%">{" Value "}</th>
+	</tr>
+	<tr>
+		<td>{" Submitted "}</td>
+		<td>{{ submitted|date ('F j, Y - g:ia', strtotime (%s)) }}</td>
+	</tr>
+	<tr>
+		<td>{" IP Address "}</td>
+		<td>{{ ip }}</td>
+	</tr>
+{% foreach data %}
+	<tr>
+		<td valign="top">{{ labels[$data->loop_index] }}</td>
+		<td valign="top">{{ loop_value }}</td>
+	</tr>
+{% end %}
+</table>
+</p>

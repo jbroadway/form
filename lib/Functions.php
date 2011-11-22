@@ -9,4 +9,13 @@ function form_list_all () {
 		->fetch_assoc ('id', 'title');
 }
 
+/**
+ * Get a count of the results for a particular form.
+ */
+function form_results_count ($id) {
+	return form\Results::query ()
+		->where ('form_id', $id)
+		->count ();
+}
+
 ?>

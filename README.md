@@ -19,7 +19,6 @@ To do:
 * Embed through Dynamic Objects
 * Admin UI
   * Form builder
-  * Browse results
   * Export results
 
 Done:
@@ -33,6 +32,9 @@ Done:
 * Saving to results table
 * Calling hooks
 * Email action
+* Store IP addresses
+* Admin UI
+  * Browse results
 
 ## Feature overview
 
@@ -45,6 +47,7 @@ Done:
 * Hooks let you define custom PHP form handling
 * Embed forms into any page through the WYSIWYG editor
 * CSRF and other abuse prevention built-in
+* Tracks submission time and IP address
 
 ## Notes on storage
 

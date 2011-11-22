@@ -34,8 +34,9 @@ if ($f->submit ()) {
 	$r = new form\Results (array (
 		'form_id' => $id,
 		'ts' => gmdate ('Y-m-d H:i:s'),
-		'results' => json_encode ($_POST)
+		'ip' => $_SERVER['REMOTE_ADDR']
 	));
+	$r->results = $_POST;
 	$r->put ();
 
 	// call any custom hooks
