@@ -101,6 +101,10 @@ Types can include:
 * checkbox
 * select
 
+Properties specific to text:
+
+* size
+
 Additional properties for textarea:
 
 * `"cols": 60`
