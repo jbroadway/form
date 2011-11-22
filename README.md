@@ -16,7 +16,6 @@ To do:
 * Radio fields
 * Default values
 * CC Recipient handler
-* Embed through Dynamic Objects
 * Admin UI
   * Form builder
   * Export results
@@ -33,6 +32,7 @@ Done:
 * Calling hooks
 * Email action
 * Store IP addresses
+* Embed through Dynamic Objects
 * Admin UI
   * Browse results
 

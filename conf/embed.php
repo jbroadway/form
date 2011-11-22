@@ -2,7 +2,7 @@
 
 [form/index]
 
-label = "Form"
+label = "Custom Form"
 
 id[label] = Form
 id[type] = select
