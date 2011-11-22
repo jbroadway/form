@@ -15,6 +15,7 @@ create table results (
 	id int not null auto_increment primary key,
 	form_id int not null,
 	ts datetime not null,
+	ip char(15) not null,
 	results text not null,
 	index (form_id, ts)
 );

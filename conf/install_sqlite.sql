@@ -16,6 +16,7 @@ create table results (
 	id integer primary key,
 	form_id int not null,
 	ts datetime not null,
+	ip char(15) not null,
 	results text not null
 );
 
