@@ -87,7 +87,7 @@ class Form extends \Model {
 			if ($this->_actions === false) {
 				$this->_actions = json_decode ($this->data['actions']);
 			}
-			return $this->_fields;
+			return $this->_actions;
 		}
 		return parent::__get ($key);
 	}

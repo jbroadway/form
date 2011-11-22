@@ -52,7 +52,7 @@ if ($f->submit ()) {
 					$action->to,
 					$f->title,
 					$tpl->render ('form/email', array ('values' => $_POST)),
-					'From: ' . conf ('General', 'email_from')
+					'From: "' . conf ('General', 'site_name') . '" <' . conf ('General', 'email_from') . '>'
 				);
 				break;
 			case 'cc_recipient':
