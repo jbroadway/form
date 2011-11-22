@@ -1,0 +1,14 @@
+<div class="form-field form-field-select">
+	<div class="form-field-label">
+		<label for="{{ id }}">{{ label }}:</label>
+		<span class="form-notice" id="form-{{ id }}-notice">{{ message }}</span>
+	</div>
+	<div class="form-field-input">
+		<select name="{{ id }}" value="{{ default }}" placeholder="{{ placeholder }}">
+			<option value="">- {" Choose "} -</option>
+{% foreach values %}
+			<option value="{{ loop_value }}"{% if loop_value == $data->default %} selected="selected"{% end %}>{{ loop_value }}</option>
+{% end %}
+		</select>
+	</div>
+</div>

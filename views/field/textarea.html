@@ -1,3 +1,9 @@
-<p>{{ label }}: <span class="form-notice" id="form-{{ id }}-notice">{{ message }}</span><br />
-<textarea name="{{ id }}" cols="{{ cols }}" rows="{{ rows }}" placeholder="{{ placeholder }}">{{ default }}</textarea>
-</p>
+<div class="form-field form-field-textarea">
+	<div class="form-field-label">
+		<label for="{{ id }}">{{ label }}:</label>
+		<span class="form-notice" id="form-{{ id }}-notice">{{ message }}</span>
+	</div>
+	<div class="form-field-input">
+		<textarea name="{{ id }}" cols="{{ cols }}" rows="{{ rows }}" placeholder="{{ placeholder }}">{{ default }}</textarea>
+	</div>
+</div>
