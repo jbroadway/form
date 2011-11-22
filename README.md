@@ -9,6 +9,31 @@ This app is still in the process of being outlined. No admin UI has been
 created, and only the underlying data structures/handling logic have been
 started.
 
+To do:
+
+* Select fields
+* Checkbox fields
+* Radio fields
+* Textareas
+* Default values
+* CC Recipient handler
+* Embed through Dynamic Objects
+* Admin UI
+  * Form builder
+  * Browse results
+  * Export results
+
+Done:
+
+* Server-side validation
+* Client-side validation
+* Basic output
+* CSRF prevention
+* Text field rendering
+* Saving to results table
+* Calling hooks
+* Email action
+
 ## Feature overview
 
 * Easy to use web-based form builder
