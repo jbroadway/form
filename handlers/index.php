@@ -12,15 +12,19 @@
 
 $id = (isset ($this->params[0])) ? $this->params[0] : (isset ($data['id']) ? $data['id'] : false);
 if (! $id) {
-	no form specified
+	// no form specified
+	@error_log ('no form specified');
 	return;
 }
 
-$f = new form\Form ($id);
+$f = new form\Form ((int) $id);
 if ($f->error) {
 	// form not found
+	@error_log ('form not found');
 	return;
 }
+
+info ($f->fields, true);
 
 if ($f->submit ()) {
 	// handle form submission
@@ -72,7 +76,7 @@ if ($f->submit ()) {
 				@mail (
 					$send_to,
 					$action->subject,
-					$msg_body
+					$msg_body,
 					'From: ' . $action->reply_from
 				);
 				break;
@@ -93,13 +97,15 @@ if ($f->submit ()) {
 		$page->title = $f->title;
 	}
 
-	echo $tpl->render ('forms/head', $f);
+	$o = $f->orig ();
+	$o->failed = $f->failed;
+	echo $tpl->render ('form/head', $o);
 
 	foreach ($f->fields as $field) {
-		echo $tpl->render ('forms/' . $field->type, $field);
+		echo $tpl->render ('form/field/' . $field->type, $field);
 	}
 
-	echo $tpl->render ('forms/tail', $f);
+	echo $tpl->render ('form/tail', $o);
 }
 
 ?>
