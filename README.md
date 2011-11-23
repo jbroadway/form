@@ -11,8 +11,6 @@ started.
 
 To do:
 
-* Field types
-  * Time
 * Admin UI
   * Form builder
 
