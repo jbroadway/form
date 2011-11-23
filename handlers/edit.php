@@ -22,6 +22,9 @@ $page->add_script ('/apps/form/js/underscore-min.js');
 $page->add_script ('/apps/form/js/backbone-min.js');
 $page->add_script ('/apps/form/js/formbuilder.js');
 $page->add_script ('/apps/form/css/formbuilder.css');
+
+$page->title = i18n_get ('Edit Form');
+
 echo $tpl->render ('form/edit', $f);
 
 ?>
