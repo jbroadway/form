@@ -34,6 +34,9 @@ foreach ($results as $row) {
 	echo $row->ts . ',' . $row->ip . ',';
 	$res = json_decode ($row->results);
 	foreach ($res as $k => $v) {
+		if (is_array ($v)) {
+			$v = join (', ', $v);
+		}
 		$v = str_replace ('"', '""', $v);
 		if (strpos ($v, ',') !== false) {
 			$v = '"' . $v . '"';

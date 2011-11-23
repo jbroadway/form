@@ -11,7 +11,6 @@ started.
 
 To do:
 
-* Checkbox fields
 * Admin UI
   * Form builder
 
@@ -26,6 +25,7 @@ Done:
 * Textarea rendering
 * Select fields
 * Radio fields
+* Checkbox fields
 * Saving to results table
 * Calling hooks
 * Email action

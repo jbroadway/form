@@ -45,6 +45,12 @@ if ($f->submit ()) {
 		'values' => $_POST
 	));
 
+	foreach ($_POST as $k => $v) {
+		if (is_array ($v)) {
+			$_POST[$k] = join (', ', $v);
+		}
+	}
+
 	foreach ($f->actions as $action) {
 		// handle action
 		switch ($action->type) {

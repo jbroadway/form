@@ -23,8 +23,15 @@ $page->title = i18n_get ('Browsing Result') . ': ' . $res->id;
 
 $labels = $res->form_id ()->labels ();
 
+$fields = (array) $res->results;
+foreach ($fields as $k => $v) {
+	if (is_array ($v)) {
+		$fields[$k] = join (', ', $v);
+	}
+}
+
 echo $tpl->render ('form/result', array (
-	'data' => $res->results,
+	'data' => $fields,
 	'submitted' => $res->ts,
 	'ip' => $res->ip,
 	'form' => $res->form_id,
