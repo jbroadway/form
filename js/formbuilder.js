@@ -3,6 +3,9 @@
  */
 
 $(function () {
+	// Initialize the tabs
+	$('#tabs').tabs ();
+
 	/**
 	 * Form model.
 	 */
@@ -70,7 +73,7 @@ $(function () {
 	 * The application.
 	 */
 	window.AppView = Backbone.View.extend ({
-		el: $('#form'),
+		el: $('#properties'),
 		
 		events: {
 			'click a.add-field': 'addField',
