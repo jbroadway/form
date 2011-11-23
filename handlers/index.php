@@ -107,6 +107,18 @@ if ($f->submit ()) {
 	echo $tpl->render ('form/head', $o);
 
 	foreach ($f->field_list as $field) {
+		if ($field->type == 'range') {
+			$page->add_script ('/apps/form/js/jquery.tools.min.js');
+			$page->add_script ('<script>$(function(){$(":range").rangeinput({progress:true});});</script>');
+			$page->add_script ('/apps/form/css/rangeinput.css');
+		} elseif ($field->type == 'date') {
+			$page->add_script ('/apps/form/js/jquery.tools.min.js');
+			$page->add_script ('<script>$(function(){$(":date").dateinput({format:"yyyy-mm-dd"});});</script>');
+			$page->add_script ('/apps/form/css/dateinput.css');
+			if ($field->default == 'today') {
+				$field->default = gmdate ('Y-m-d');
+			}
+		}
 		echo $tpl->render ('form/field/' . $field->type, $field);
 	}
 

@@ -11,6 +11,8 @@ started.
 
 To do:
 
+* Field types
+  * Time
 * Admin UI
   * Form builder
 
@@ -21,11 +23,14 @@ Done:
 * Default values
 * Basic output
 * CSRF prevention
-* Text field rendering
-* Textarea rendering
-* Select fields
-* Radio fields
-* Checkbox fields
+* Field types
+  * Text field rendering
+  * Textarea rendering
+  * Select fields
+  * Radio fields
+  * Checkbox fields
+  * Range
+  * Date
 * Saving to results table
 * Calling hooks
 * Email action
@@ -49,3 +54,4 @@ Done:
 * CSRF and other abuse prevention built-in
 * Tracks submission time and IP address
 * Easily style generated forms to fit your site
+* Field types: text, textarea, select, checkbox, radio, range, date
