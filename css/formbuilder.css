@@ -1,5 +1,127 @@
 /* custom styles for /form/edit form builder */
 
+.sidebar {
+	float: left;
+	width: 200px;
+	background: #e5e5e5;
+	padding: 10px;
+	margin-bottom: 15px;
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border: 1px solid #d5d5d5;
+	margin-top: 28px;
+}
+
+.main {
+	width: 700px;
+	float: right;
+}
+
+	.col {
+		width: 330px;
+		float: left;
+	}
+
+	.col p {
+		height: 22px;
+	}
+
+.section {
+	background: #e5e5e5;
+	padding: 10px;
+	margin-bottom: 15px;
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border: 1px solid #d5d5d5;
+}
+
+	.section h6 {
+		margin-top: -6px;
+		margin-bottom: 8px;
+	}
+
+	.section p:last-child {
+		margin-bottom: 0px;
+	}
+
+.info {
+	font-style: italic;
+	color: #666;
+}
+
+p {
+	margin-bottom: 8px;
+}
+
+p.indent {
+	margin-left: 20px;
+	clear: both;
+}
+
+	.label {
+		display: block;
+		width: 110px;
+		float: left;
+		margin-top: 2px;
+	}
+
+/* full/list fields toggle */
+.toggle {
+	text-align: right;
+	height: 28px;
+}
+
+	.toggle a {
+		display: block;
+		float: right;
+		width: 20px;
+		height: 20px;
+	}
+
+	#toggle-full {
+		background: url(full-off.png);
+		-webkit-border-top-left-radius: 3px;
+		-webkit-border-bottom-left-radius: 3px;
+		-moz-border-radius-topleft: 3px;
+		-moz-border-radius-bottomleft: 3px;
+		border-top-left-radius: 3px;
+		border-bottom-left-radius: 3px;
+		border: 1px solid #c5c5c5;
+		border-right: 0px;
+	}
+
+	#toggle-list {
+		background: url(list-off.png);
+		border: 1px solid #c5c5c5;
+		border-right: 0px;
+	}
+
+	#toggle-preview {
+		background: url(preview-off.png);
+		-webkit-border-top-right-radius: 3px;
+		-webkit-border-bottom-right-radius: 3px;
+		-moz-border-radius-topright: 3px;
+		-moz-border-radius-bottomright: 3px;
+		border-top-right-radius: 3px;
+		border-bottom-right-radius: 3px;
+		border: 1px solid #c5c5c5;
+	}
+
+	#toggle-full.active {
+		background: url(full-on.png);
+	}
+
+	#toggle-list.active {
+		background: url(list-on.png);
+	}
+
+	#toggle-preview.active {
+		background: url(preview-on.png);
+	}
+
+/* tabs */
 .ui-tabs-panel {
 	padding-top: 15px;
 }

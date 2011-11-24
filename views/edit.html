@@ -1,3 +1,5 @@
+<p style="float: right"><a href="/form/admin">{"Done editing"}</a></p>
+
 <div id="tabs">
 	<ul>
 		<li><a href="#properties">{"Properties"}</a></li>
@@ -6,12 +8,88 @@
 	</ul>
 
 	<div id="properties">
+		<form id="properties-form">
+			<div class="section">
+				<p>{"Page title"}:<br />
+				<input type="text" name="title" size="30" value="{{ title }}" /></p>
+				<p>{"Instructions (HTML is okay)"}:<br />
+				<textarea name="title" rows="3" cols="60">{{ message }}</textarea></p>
+			</div>
+			<div class="section">
+				<p>{"Respones page title"}:<br />
+				<input type="text" name="response_title" size="30" value="{{ response_title }}" /></p>
+				<p>{"Response message (HTML is okay)"}:<br />
+				<textarea name="response_body" rows="3" cols="60">{{ response_body }}</textarea></p>
+			</div>
+			<p class="info">{"Note: Titles will not be visible if the form is embedded in a page."}</p>
+		</form>
 	</div>
 	
 	<div id="fields">
+		<div class="sidebar">
+			<p>{"Add a field:"}</p>
+			<ul>
+				<li><a href="#" id="add-text">{"Single-line text"}</a></li>
+				<li><a href="#" id="add-textarea">{"Paragraph text"}</a></li>
+				<li><a href="#" id="add-select">{"Drop down"}</a></li>
+				<li><a href="#" id="add-checkbox">{"Checkboxes"}</a></li>
+				<li><a href="#" id="add-radio">{"Multiple choice"}</a></li>
+				<li><a href="#" id="add-date">{"Date"}</a></li>
+				<li><a href="#" id="add-slider">{"Slider"}</a></li>
+			</ul>
+		</div>
+		<div class="main">
+			<div class="toggle">
+				<a href="#" id="toggle-preview" title="{"Preview form"}"></a>
+				<a href="#" id="toggle-list" title="{"View as list"}"></a>
+				<a href="#" id="toggle-full" title="{"View in full"}" class="active"></a>
+			</div>
+			<div id="field-list">
+				<div class="section">
+					<h6>{"Single-line text"}</h6>
+					<div class="col">
+					<p><span class="label">{"Label:"}</span> <input type="text" size="30" /></p>
+					<p><span class="label">{"Default value:"}</span> <input type="text" size="30" /></p>
+					<p><span class="label">{"Placeholder text:"}</span> <input type="text" size="30" /></p>
+					</div>
+					<div class="col">
+					<p><input type="checkbox" /> {"Required field."}</p>
+					<p><span class="label">{"Verify value is:"}</span> <select>
+						<option value="">- {"Choose"} -</option>
+					</select></p>
+					<p><span class="label">{"Error message:"}</span> <input type="text" size="30" /></p>
+					</div>
+					<div class="clear"></div>
+				</div>
+			</div>
+		</div>
 	</div>
 	
 	<div id="actions">
+		<form id="actions-form">
+			<p class="info">{"Note: Results are automatically saved under Tools &gt; Forms."}<br />
+			<a href="https://github.com/jbroadway/form/wiki/Custom-hooks" target="_blank">{"Click here"}</a> {"for developer info on attaching custom actions to your form."}</p>
+			<div class="section">
+				<p><input type="checkbox" name="email-toggle" value="yes" />
+				{"Email results to"} <input type="text" name="email-to" size="30" /></p>
+			</div>
+			<div class="section">
+				<p><input type="checkbox" name="redirect-toggle" value="yes" />
+				{"Redirect user to"} <input type="text" name="redirect-to" size="30" /></p>
+			</div>
+			<div class="section">
+				<p><input type="checkbox" name="email-toggle" value="yes" />
+				{"Email the user."}
+				<p class="indent"><span class="label">{"Name field"}:</span>
+				<select name="name-field">
+				</select></p>
+				<p class="indent"><span class="label">{"Email field"}:</span>
+				<select name="email-field">
+				</select></p>
+				<p class="indent"><span class="label">{"Send from email"}:</span>
+				<input type="text" name="reply-from-field" size="30" /></p>
+			</div>
+		</form>
 	</div>
 
 </div>
