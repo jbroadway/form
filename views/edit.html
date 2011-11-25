@@ -1,3 +1,7 @@
+<script>
+var form_id = {{ id }};
+</script>
+
 <p style="float: right"><a href="/form/admin">{"Done editing"}</a></p>
 
 <div id="tabs">
@@ -44,7 +48,7 @@
 				<a href="#" id="toggle-list" title="{"View as list"}"></a>
 				<a href="#" id="toggle-full" title="{"View in full"}" class="active"></a>
 			</div>
-			<div id="field-list">
+			<div id="field-list-full">
 
 				<div class="section">
 					<div class="buttons">
@@ -171,7 +175,18 @@
 				</div>
 
 			</div>
+
+			<div id="field-list-list">
+				<ul>
+					<li>...</li>
+				</ul>
+			</div>
+	
+			<div id="field-list-preview">
+				
+			</div>
 		</div>
+
 	</div>
 	
 	<div id="actions">

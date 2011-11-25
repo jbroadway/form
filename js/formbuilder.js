@@ -6,6 +6,45 @@ $(function () {
 	// Initialize the tabs
 	$('#tabs').tabs ();
 
+	// Initialize the full/list/preview buttons
+	$('#toggle-full').on ('click', function () {
+		$('#toggle-full').addClass ('active');
+		$('#toggle-list').removeClass ('active');
+		$('#toggle-preview').removeClass ('active');
+		$('#field-list-full').show ();
+		$('#field-list-list').hide ();
+		$('#field-list-preview').hide ();
+		return false;
+	});
+	$('#toggle-list').on ('click', function () {
+		$('#toggle-full').removeClass ('active');
+		$('#toggle-list').addClass ('active');
+		$('#toggle-preview').removeClass ('active');
+		$('#field-list-full').hide ();
+		$('#field-list-list').show ();
+		$('#field-list-preview').hide ();
+		return false;
+	});
+	$('#toggle-preview').on ('click', function () {
+		$('#toggle-full').removeClass ('active');
+		$('#toggle-list').removeClass ('active');
+		$('#toggle-preview').addClass ('active');
+		$('#field-list-full').hide ();
+		$('#field-list-list').hide ();
+		$('#field-list-preview').show ();
+
+		$('#field-list-preview').html ('Loading...');
+
+		// Load preview of form
+		$.get ('/form/preview/' + form_id, function (res) {
+			$('#field-list-preview').html (res);
+			$(":range").rangeinput({progress:true});
+			$(":date").dateinput({format:"yyyy-mm-dd"});
+		});
+
+		return false;
+	});
+
 	/**
 	 * Form model.
 	 */

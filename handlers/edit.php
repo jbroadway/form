@@ -24,6 +24,10 @@ $page->add_script ('/apps/form/js/backbone-min.js');
 $page->add_script ('/apps/form/js/formbuilder.js');
 $page->add_script ('/apps/form/css/formbuilder.css');
 
+$page->add_script ('/apps/form/js/jquery.tools.min.js');
+$page->add_script ('/apps/form/css/rangeinput.css');
+$page->add_script ('/apps/form/css/dateinput.css');
+
 $page->title = i18n_get ('Form Builder');
 
 echo $tpl->render ('form/edit', $f);

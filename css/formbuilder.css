@@ -71,6 +71,10 @@ p.indent {
 		margin-top: 2px;
 	}
 
+#field-list-list, #field-list-preview {
+	display: none;
+}
+
 /* full/list fields toggle */
 .toggle {
 	text-align: right;
