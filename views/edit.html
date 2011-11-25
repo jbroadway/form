@@ -16,7 +16,7 @@
 				<textarea name="title" rows="3" cols="60">{{ message }}</textarea></p>
 			</div>
 			<div class="section">
-				<p>{"Respones page title"}:<br />
+				<p>{"Response page title"}:<br />
 				<input type="text" name="response_title" size="30" value="{{ response_title }}" /></p>
 				<p>{"Response message (HTML is okay)"}:<br />
 				<textarea name="response_body" rows="3" cols="60">{{ response_body }}</textarea></p>
@@ -46,6 +46,9 @@
 			</div>
 			<div id="field-list">
 				<div class="section">
+					<div class="buttons">
+						<a href="#" class="delete-field">{"Delete"}</a>
+					</div>
 					<h6>{"Single-line text"}</h6>
 					<div class="col">
 					<p><span class="label">{"Label:"}</span> <input type="text" size="30" /></p>
@@ -86,8 +89,16 @@
 				<p class="indent"><span class="label">{"Email field"}:</span>
 				<select name="email-field">
 				</select></p>
-				<p class="indent"><span class="label">{"Send from email"}:</span>
-				<input type="text" name="reply-from-field" size="30" /></p>
+				<p class="indent"><span class="label">{"Send email from"}:</span>
+				<input type="text" name="reply-from" size="30" /></p>
+				<p class="indent"><span class="label">{"Subject"}:</span>
+				<input type="text" name="subject-field" size="30" /></p>
+				<p class="indent">{"Message body intro"}:<br />
+				<textarea name="body_intro" rows="3" cols="60">{{ body_intro }}</textarea></p>
+				<p class="indent">{"Message signature"}:<br />
+				<textarea name="body_sig" rows="3" cols="60">{{ body_sig }}</textarea></p>
+				<p class="indent"><input type="checkbox" name="include_data" value="yes" />
+				{"Include submitted data in the message body."}</p>
 			</div>
 		</form>
 	</div>

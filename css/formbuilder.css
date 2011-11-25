@@ -46,6 +46,10 @@
 		margin-bottom: 0px;
 	}
 
+	.section .buttons {
+		float: right;
+	}
+
 .info {
 	font-style: italic;
 	color: #666;
