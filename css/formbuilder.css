@@ -75,6 +75,12 @@ p.indent {
 	display: none;
 }
 
+.section-header {
+	color: #666;
+	font-weight: bold;
+	border-bottom: 1px solid #ccc;
+}
+
 /* full/list fields toggle */
 .toggle {
 	text-align: right;

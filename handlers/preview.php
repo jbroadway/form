@@ -23,6 +23,8 @@ if ($f->error) {
 }
 
 // render the form
+echo '<p class="section-header">' . i18n_get ('Form preview') . '</p>';
+
 echo '<h1>' . $f->title . '</h1>';
 
 $o = $f->orig ();
@@ -40,8 +42,10 @@ foreach ($f->field_list as $field) {
 
 echo $tpl->render ('form/previewtail', $o);
 
-echo '<hr />';
+echo '<p>&nbsp;</p>';
+echo '<p class="section-header">' . i18n_get ('Response page') . '</p>';
 echo '<h1>' . $f->response_title . '</h1>';
 echo $f->response_body;
+echo '<p>&nbsp;</p>';
 
 ?>
