@@ -24,7 +24,7 @@
 	}
 
 	.col p {
-		height: 22px;
+		min-height: 22px;
 	}
 
 .section {
