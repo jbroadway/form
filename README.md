@@ -3,11 +3,12 @@ Admins can create forms by adding fields, assigning validation rules, and
 selecting form handling "actions", then embed them into web pages through
 the Dynamic Objects dialog.
 
-## Status: Pre-alpha
+> Note: Requires Elefant 1.1+
 
-This app is still in the process of being outlined. No admin UI has been
-created, and only the underlying data structures/handling logic have been
-started.
+## Status: Alpha
+
+The form builder is currently just an outline, but the rest of the app is
+fairly complete, including form publishing and handling.
 
 To do:
 
