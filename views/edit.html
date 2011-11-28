@@ -2,7 +2,10 @@
 var form_id = {{ id }};
 </script>
 
-<p style="float: right"><a href="/form/admin">{"Done editing"}</a></p>
+<p style="float: right">
+	<a href="/form/admin" id="done-editing">{"Done editing"}</a>
+	<span id="saving">{"Saving..."} &nbsp;</span>
+</p>
 
 <div id="tabs">
 	<ul>
@@ -15,15 +18,15 @@ var form_id = {{ id }};
 		<form id="properties-form">
 			<div class="section">
 				<p>{"Page title"}:<br />
-				<input type="text" name="title" size="30" value="{{ title }}" /></p>
+				<input type="text" name="title" id="form-title" size="30" value="{{ title }}" /></p>
 				<p>{"Instructions (HTML is okay)"}:<br />
-				<textarea name="title" rows="3" cols="60">{{ message }}</textarea></p>
+				<textarea name="message" id="form-message" rows="3" cols="60">{{ message }}</textarea></p>
 			</div>
 			<div class="section">
 				<p>{"Response page title"}:<br />
-				<input type="text" name="response_title" size="30" value="{{ response_title }}" /></p>
+				<input type="text" name="response_title" id="form-response-title" size="30" value="{{ response_title }}" /></p>
 				<p>{"Response message (HTML is okay)"}:<br />
-				<textarea name="response_body" rows="3" cols="60">{{ response_body }}</textarea></p>
+				<textarea name="response_body" id="form-response-body" rows="3" cols="60">{{ response_body }}</textarea></p>
 			</div>
 			<p class="info">{"Note: Titles will not be visible if the form is embedded in a page."}</p>
 		</form>

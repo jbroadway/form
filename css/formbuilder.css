@@ -81,6 +81,15 @@ p.indent {
 	border-bottom: 1px solid #ccc;
 }
 
+#saving {
+	display: none;
+	float: right;
+}
+
+#done-editing {
+	float: right;
+}
+
 /* full/list fields toggle */
 .toggle {
 	text-align: right;

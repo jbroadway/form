@@ -3,10 +3,14 @@
  */
 
 $(function () {
-	// Initialize the tabs
+	/**
+	 * Initialize the properties/fields/actions tabs.
+	 */
 	$('#tabs').tabs ();
 
-	// Initialize the full/list/preview buttons
+	/**
+	 * Initialize the full/list/preview buttons.
+	 */
 	$('#toggle-full').on ('click', function () {
 		$('#toggle-full').addClass ('active');
 		$('#toggle-list').removeClass ('active');
@@ -45,20 +49,48 @@ $(function () {
 		return false;
 	});
 
-	/**
-	 * Form model.
+	/*
+	 * Disable "Done Editing" link and show "Saving..." message.
 	 */
-	window.Form = Backbone.Model.extend ({
-		defaults: function () {
-			return {
-				title: 'Untitled',
-				message: 'Please fill in the following information.',
-				fields: [],
-				actions: [],
-				response_title: 'Thank you',
-				response_body: 'Your information has been saved.'
-			};
-		}
+	function show_saving () {
+		$('#saving').fadeIn ('slow');
+		$('#done-editing').addClass ('disabled').on ('click', function (e) {
+			e.preventDefault ();
+			if ($(this).hasClass ('disabled')) {
+				return false;
+			}
+			window.location.href = $(this).attr ('href');
+		});
+	}
+
+	/*
+	 * Re-enable "Done Editing" link and hide "Saving..." message.
+	 */
+	function done_saving () {
+		$('#done-editing').removeClass ('disabled');
+		$('#saving').fadeOut ('slow');
+	}
+
+	/**
+	 * Save form basics on blur of main fields.
+	 */
+	$('#form-title, #form-message, #form-response-title, #form-response-body').on ('blur', function () {
+		var data = {
+			title: $('#form-title').val (),
+			message: $('#form-message').val (),
+			response_title: $('#form-response-title').val (),
+			response_body: $('#form-response-body').val ()
+		};
+
+		show_saving ();
+		$.post ('/form/api/update/' + form_id, data, function (res) {
+			if (res.success) {
+				done_saving ();
+				return;
+			}
+			$.add_notification (res.error);
+			done_saving ();
+		});
 	});
 
 	/**
