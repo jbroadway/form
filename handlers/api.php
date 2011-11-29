@@ -55,6 +55,37 @@ if (! $cmd || empty ($cmd)) {
 			$msg = i18n_get ('Form updated');
 			
 			break;
+
+		case 'actions';
+			/**
+			 * Update the core fields. Usage:
+			 *
+			 *     /form/api/actions/form-id
+			 *
+			 * Expected POST fields:
+			 *
+			 *     actions
+			 */
+			$f = new form\Form ($id);
+			if ($f->error) {
+				$error = $f->error;
+				break;
+			}
+
+			if (is_array ($_POST['actions'])) {
+				$f->actions = $_POST['actions'];
+			} else {
+				$f->actions = array ();
+			}
+
+			$f->put ();
+			if ($f->error) {
+				$error = $f->error;
+				break;
+			}
+			$msg = i18n_get ('Form updated');
+			
+			break;
 	
 		default:
 			$error = i18n_get ('Invalid command');

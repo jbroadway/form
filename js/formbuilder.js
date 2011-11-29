@@ -15,6 +15,62 @@ var form = {
 	init: function (data) {
 		form.data = data;
 
+		/**
+		 * Define an observable for the email action.
+		 */
+		form.actions_email = ko.dependentObservable ({
+			read: function () {
+				for (var i = 0; i < form.data.actions.length; i++) {
+					if (form.data.actions[i].type == 'email') {
+						return form.data.actions[i].to;
+					}
+				}
+				return '';
+			},
+			write: function (value) {
+				for (var i = 0; i < form.data.actions.length; i++) {
+					if (form.data.actions[i].type == 'email') {
+						if (value == '') {
+							form.data.actions.splice (i, 1);
+						} else {
+							form.data.actions[i].to = value;
+						}
+						return;
+					}
+				}
+				form.data.actions.push ({type: 'email', to: value});
+			},
+			owner: form
+		});
+
+		/**
+		 * Define an observable for the redirect action.
+		 */
+		form.actions_redirect = ko.dependentObservable ({
+			read: function () {
+				for (var i = 0; i < form.data.actions.length; i++) {
+					if (form.data.actions[i].type == 'redirect') {
+						return form.data.actions[i].url;
+					}
+				}
+				return '';
+			},
+			write: function (value) {
+				for (var i = 0; i < form.data.actions.length; i++) {
+					if (form.data.actions[i].type == 'redirect') {
+						if (value == '') {
+							form.data.actions.splice (i, 1);
+						} else {
+							form.data.actions[i].url = value;
+						}
+						return;
+					}
+				}
+				form.data.actions.push ({type: 'redirect', url: value});
+			},
+			owner: form
+		});
+
 		// Bind the form model to the view elements.
 		ko.applyBindings (form);
 	},
@@ -22,7 +78,7 @@ var form = {
 	/**
 	 * Save the core form fields on blur of main fields.
 	 */
-	update_form: function (e) {
+	update_form: function () {
 		var data = {
 			title: form.data.title,
 			message: form.data.message,
@@ -32,6 +88,21 @@ var form = {
 
 		form.show_saving ();
 		$.post ('/form/api/update/' + form.data.id, data, function (res) {
+			if (res.success) {
+				form.done_saving ();
+				return;
+			}
+			$.add_notification (res.error);
+			form.done_saving ();
+		});
+	},
+
+	/**
+	 * Save the actions to the server.
+	 */
+	update_actions: function () {
+		form.show_saving ();
+		$.post ('/form/api/actions/' + form.data.id, {actions: form.data.actions}, function (res) {
 			if (res.success) {
 				form.done_saving ();
 				return;

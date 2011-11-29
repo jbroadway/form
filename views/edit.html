@@ -79,18 +79,18 @@ $(function () {
 			<p class="info">{"Note: Results are automatically saved under Tools &gt; Forms."}<br />
 			<a href="https://github.com/jbroadway/form/wiki/Custom-hooks" target="_blank">{"Click here"}</a> {"for developer info on attaching custom actions to your form."}</p>
 			<div class="section">
-				<p>&bull;&nbsp; {"Email results to"} <input type="text" name="email-to" id="email-to" size="30" value="{{ actions_email_to }}" /></p>
+				<p>&bull;&nbsp; {"Email results to"} <input type="text" name="email-to" id="email-to" size="30" data-bind="value: actions_email, event: { blur: update_actions }" /></p>
 			</div>
 			<div class="section">
-				<p>&bull;&nbsp; {"Redirect user to"} <input type="text" name="redirect-to" id="redirect-to" size="30" value="{{ actions_redirect_to }}" /></p>
+				<p>&bull;&nbsp; {"Redirect user to"} <input type="text" name="redirect-to" id="redirect-to" size="30" data-bind="value: actions_redirect, event: { blur: update_actions }" /></p>
 			</div>
 			<div class="section">
 				<p>&bull;&nbsp; {"Email the user."}
 				<p class="indent"><span class="label">{"Name field"}:</span>
-				<select name="name-field" id="name-field">
+				<select name="name-field" id="name-field" data-bind="options: data.fields, optionsValue: 'id', optionsText: 'label'">
 				</select></p>
 				<p class="indent"><span class="label">{"Email field"}:</span>
-				<select name="email-field" id="email-field">
+				<select name="email-field" id="email-field" data-bind="options: data.fields, optionsValue: 'id', optionsText: 'label'">
 				</select></p>
 				<p class="indent"><span class="label">{"Send email from"}:</span>
 				<input type="text" name="reply-from" id="reply-from" size="30" value="{{ actions_reply_from }}" /></p>
