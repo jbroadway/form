@@ -71,8 +71,124 @@ var form = {
 			owner: form
 		});
 
+		/**
+		 * Define an observable for the cc_recipient name_field.
+		 */
+		form.actions_cc_name_field = ko.dependentObservable ({
+			read: function () {
+				return form.read_cc_recipient ('name_field');
+			},
+			write: function (value) {
+				if (typeof value == 'undefined') {
+					return;
+				}
+				return form.update_cc_recipient ('name_field', value);
+			},
+			owner: form
+		});
+
+		/**
+		 * Define an observable for the cc_recipient email_field.
+		 */
+		form.actions_cc_email_field = ko.dependentObservable ({
+			read: function () {
+				return form.read_cc_recipient ('email_field');
+			},
+			write: function (value) {
+				if (typeof value == 'undefined') {
+					return;
+				}
+				return form.update_cc_recipient ('email_field', value);
+			},
+			owner: form
+		});
+
+		/**
+		 * Define an observable for the cc_recipient include_data.
+		 */
+		form.actions_cc_include_data = ko.dependentObservable ({
+			read: function () {
+				for (var i = 0; i < form.data.actions.length; i++) {
+					if (form.data.actions[i].type == 'cc_recipient' && form.data.actions[i].hasOwnProperty ('include_data')) {
+						return form.data.actions[i].include_data == 'yes' ? true : false;
+					}
+				}
+				return false;
+			},
+			write: function (value) {
+				console.log ('checked');
+				for (var i = 0; i < form.data.actions.length; i++) {
+					if (form.data.actions[i].type == 'cc_recipient') {
+						form.data.actions[i].include_data = (value) ? 'yes' : 'no';
+						form.update_actions ();
+						return;
+					}
+				}
+				form.data.actions.push ({
+					type: 'cc_recipient',
+					name_field: form.read_cc_recipient ('name_field'),
+					email_field: form.read_cc_recipient ('email_field'),
+					reply_from: form.read_cc_recipient ('reply_from'),
+					subject: form.read_cc_recipient ('subject'),
+					body_intro: form.read_cc_recipient ('body_intro'),
+					body_sig: form.read_cc_recipient ('body_sig'),
+					include_data: 'no'
+				});
+				form.update_actions ();
+			},
+			owner: form
+		});
+
 		// Bind the form model to the view elements.
 		ko.applyBindings (form);
+	},
+
+	/**
+	 * Read the selected field from cc_recipient action.
+	 */
+	read_cc_recipient: function (name) {
+		for (var i = 0; i < form.data.actions.length; i++) {
+			if (form.data.actions[i].type == 'cc_recipient' && form.data.actions[i].hasOwnProperty (name)) {
+				return form.data.actions[i][name];
+			}
+		}
+		return '';
+	},
+
+	/**
+	 * Update the cc_recipient action.
+	 */
+	update_cc_recipient: function (name, value) {
+		for (var i = 0; i < form.data.actions.length; i++) {
+			if (form.data.actions[i].type == 'cc_recipient') {
+				form.data.actions[i][name] = value;
+				return;
+			}
+		}
+		// Create a new cc_recipient action since one was not found.
+		form.data.actions.push ({
+			type: 'cc_recipient',
+			name_field: form.read_cc_recipient ('name_field'),
+			email_field: form.read_cc_recipient ('email_field'),
+			reply_from: form.read_cc_recipient ('reply_from'),
+			subject: form.read_cc_recipient ('subject'),
+			body_intro: form.read_cc_recipient ('body_intro'),
+			body_sig: form.read_cc_recipient ('body_sig'),
+			include_data: 'no'
+		});
+	},
+
+	/**
+	 * Clear the cc_recipient action.
+	 */
+	clear_cc_recipient: function () {
+		for (var i = 0; i < form.data.actions.length; i++) {
+			if (form.data.actions[i].type == 'cc_recipient') {
+				form.data.actions.splice (i, 1);
+				return false;
+			}
+		}
+		return false;
 	},
 
 	/**
@@ -110,6 +226,7 @@ var form = {
 			$.add_notification (res.error);
 			form.done_saving ();
 		});
+		return true;
 	},
 
 	/**
