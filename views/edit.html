@@ -100,7 +100,7 @@ $(function () {
 				<textarea name="body-intro" id="body-intro" rows="3" cols="60">{{ actions_body_intro }}</textarea></p>
 				<p class="indent">{"Message signature"}:<br />
 				<textarea name="body-sig" rows="3" cols="60">{{ actions_body_sig }}</textarea></p>
-				<p class="indent"><input type="checkbox" name="include-data" id="include-data" data-bind="checked: actions_cc_include_data" />
+				<p class="indent"><input type="checkbox" name="include-data" id="include-data" onclick="window.form.actions_cc_include_data (this)" />
 				{"Include submitted data in the message body."}</p>
 			</div>
 		</form>

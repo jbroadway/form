@@ -103,44 +103,35 @@ var form = {
 			owner: form
 		});
 
-		/**
-		 * Define an observable for the cc_recipient include_data.
-		 */
-		form.actions_cc_include_data = ko.dependentObservable ({
-			read: function () {
-				for (var i = 0; i < form.data.actions.length; i++) {
-					if (form.data.actions[i].type == 'cc_recipient' && form.data.actions[i].hasOwnProperty ('include_data')) {
-						return form.data.actions[i].include_data == 'yes' ? true : false;
-					}
+		// Set the initial include_data checked status.
+		// Doing this field the backwards way because of issues
+		// with checked handling in Knockout.
+		for (var i = 0; i < form.data.actions.length; i++) {
+			if (form.data.actions[i].type == 'cc_recipient' && form.data.actions[i].hasOwnProperty ('include_data')) {
+				if (form.data.actions[i].include_data == 'yes') {
+					$('#include-data').attr ('checked', true);
+				} else {
+					$('#include-data').attr ('checked', false);
 				}
-				return false;
-			},
-			write: function (value) {
-				console.log ('checked');
-				for (var i = 0; i < form.data.actions.length; i++) {
-					if (form.data.actions[i].type == 'cc_recipient') {
-						form.data.actions[i].include_data = (value) ? 'yes' : 'no';
-						form.update_actions ();
-						return;
-					}
-				}
-				form.data.actions.push ({
-					type: 'cc_recipient',
-					name_field: form.read_cc_recipient ('name_field'),
-					email_field: form.read_cc_recipient ('email_field'),
-					reply_from: form.read_cc_recipient ('reply_from'),
-					subject: form.read_cc_recipient ('subject'),
-					body_intro: form.read_cc_recipient ('body_intro'),
-					body_sig: form.read_cc_recipient ('body_sig'),
-					include_data: 'no'
-				});
-				form.update_actions ();
-			},
-			owner: form
-		});
+				break;
+			}
+		}
 
 		// Bind the form model to the view elements.
 		ko.applyBindings (form);
+	},
+
+	/**
+	 * Define an observable for the cc_recipient include_data.
+	 */
+	actions_cc_include_data: function (el) {
+		for (var i = 0; i < form.data.actions.length; i++) {
+			if (form.data.actions[i].type == 'cc_recipient') {
+				form.data.actions[i].include_data = $(el).is (':checked') ? 'yes' : 'no';
+				form.update_actions ();
+				return;
+			}
+		}
 	},
 
 	/**
