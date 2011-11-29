@@ -1,5 +1,11 @@
 <script>
-var form_id = {{ id }};
+$(function () {
+	// Initialize the main tabs.
+	$('#tabs').tabs ();
+
+	// Here we populate the data in the view.
+	form.init ({{ form_data|json_encode }});
+});
 </script>
 
 <p style="float: right">
@@ -18,15 +24,15 @@ var form_id = {{ id }};
 		<form id="properties-form">
 			<div class="section">
 				<p>{"Page title"}:<br />
-				<input type="text" name="title" id="form-title" size="30" value="{{ title }}" /></p>
+				<input type="text" name="title" id="form-title" size="30" data-bind="value: data.title, event: { blur: update_form }" /></p>
 				<p>{"Instructions (HTML is okay)"}:<br />
-				<textarea name="message" id="form-message" rows="3" cols="60">{{ message }}</textarea></p>
+				<textarea name="message" id="form-message" rows="3" cols="60" data-bind="value: data.message, event: { blur: update_form }"></textarea></p>
 			</div>
 			<div class="section">
 				<p>{"Response page title"}:<br />
-				<input type="text" name="response_title" id="form-response-title" size="30" value="{{ response_title }}" /></p>
+				<input type="text" name="response_title" id="form-response-title" size="30" data-bind="value: data.response_title, event: { blur: update_form }" /></p>
 				<p>{"Response message (HTML is okay)"}:<br />
-				<textarea name="response_body" id="form-response-body" rows="3" cols="60">{{ response_body }}</textarea></p>
+				<textarea name="response_body" id="form-response-body" rows="3" cols="60" data-bind="value: data.response_body, event: { blur: update_form }"></textarea></p>
 			</div>
 			<p class="info">{"Note: Titles will not be visible if the form is embedded in a page."}</p>
 		</form>
@@ -36,146 +42,22 @@ var form_id = {{ id }};
 		<div class="sidebar">
 			<p>{"Add a field:"}</p>
 			<ul>
-				<li><a href="#" id="add-text">{"Single-line text"}</a></li>
-				<li><a href="#" id="add-textarea">{"Paragraph text"}</a></li>
-				<li><a href="#" id="add-select">{"Drop down"}</a></li>
-				<li><a href="#" id="add-checkbox">{"Checkboxes"}</a></li>
-				<li><a href="#" id="add-radio">{"Multiple choice"}</a></li>
-				<li><a href="#" id="add-date">{"Date"}</a></li>
-				<li><a href="#" id="add-slider">{"Slider"}</a></li>
+				<li><a href="#" id="add-text" data-bind="click: add_text">{"Single-line text"}</a></li>
+				<li><a href="#" id="add-textarea" data-bind="click: add_textarea">{"Paragraph text"}</a></li>
+				<li><a href="#" id="add-select" data-bind="click: add_select">{"Drop down"}</a></li>
+				<li><a href="#" id="add-checkbox" data-bind="click: add_checkbox">{"Checkboxes"}</a></li>
+				<li><a href="#" id="add-radio" data-bind="click: add_radio">{"Multiple choice"}</a></li>
+				<li><a href="#" id="add-date" data-bind="click: add_date">{"Date"}</a></li>
+				<li><a href="#" id="add-slider" data-bind="click: add_slider">{"Slider"}</a></li>
 			</ul>
 		</div>
 		<div class="main">
 			<div class="toggle">
-				<a href="#" id="toggle-preview" title="{"Preview form"}"></a>
-				<a href="#" id="toggle-list" title="{"View as list"}"></a>
-				<a href="#" id="toggle-full" title="{"View in full"}" class="active"></a>
+				<a href="#" id="toggle-preview" data-bind="click: show_preview" title="{"Preview form"}"></a>
+				<a href="#" id="toggle-list" data-bind="click: show_list" title="{"View as list"}"></a>
+				<a href="#" id="toggle-full" data-bind="click: show_full" title="{"View in full"}" class="active"></a>
 			</div>
 			<div id="field-list-full">
-
-				<div class="section">
-					<div class="buttons">
-						<a href="#" class="delete-field">{"Delete"}</a>
-					</div>
-					<h6>{"Single-line text"}</h6>
-					<div class="col">
-					<p><span class="label">{"Label:"}</span> <input type="text" size="30" /></p>
-					<p><span class="label">{"Default value:"}</span> <input type="text" size="30" /></p>
-					<p><span class="label">{"Placeholder text:"}</span> <input type="text" size="30" /></p>
-					</div>
-					<div class="col">
-					<p><input type="checkbox" /> {"Required field."}</p>
-					<p><span class="label">{"Verify value is:"}</span> <select>
-						<option value="">- {"Choose"} -</option>
-					</select></p>
-					<p><span class="label">{"Error message:"}</span> <input type="text" size="30" /></p>
-					</div>
-					<div class="clear"></div>
-				</div>
-
-				<div class="section">
-					<div class="buttons">
-						<a href="#" class="delete-field">{"Delete"}</a>
-					</div>
-					<h6>{"Paragraph text"}</h6>
-					<div class="col">
-					<p><span class="label">{"Label:"}</span> <input type="text" size="30" /></p>
-					<p><span class="label">{"Default value:"}</span> <input type="text" size="30" /></p>
-					<p><span class="label">{"Placeholder text:"}</span> <input type="text" size="30" /></p>
-					</div>
-					<div class="col">
-					<p><input type="checkbox" /> {"Required field."}</p>
-					<p><span class="label">{"Verify value is:"}</span> <select>
-						<option value="">- {"Choose"} -</option>
-					</select></p>
-					<p><span class="label">{"Error message:"}</span> <input type="text" size="30" /></p>
-					</div>
-					<div class="clear"></div>
-				</div>
-
-				<div class="section">
-					<div class="buttons">
-						<a href="#" class="delete-field">{"Delete"}</a>
-					</div>
-					<h6>{"Drop down"}</h6>
-					<div class="col">
-					<p><span class="label">{"Label:"}</span> <input type="text" size="30" /></p>
-					<p><span class="label">{"Default value:"}</span> <input type="text" size="30" /></p>
-					<p><span class="label">{"Options:<br />(one per line)"}</span> <textarea cols="22" rows="5"></textarea></p>
-					</div>
-					<div class="col">
-					<p><input type="checkbox" /> {"Required field."}</p>
-					<p><span class="label">{"Error message:"}</span> <input type="text" size="30" /></p>
-					</div>
-					<div class="clear"></div>
-				</div>
-
-				<div class="section">
-					<div class="buttons">
-						<a href="#" class="delete-field">{"Delete"}</a>
-					</div>
-					<h6>{"Checkboxes"}</h6>
-					<div class="col">
-					<p><span class="label">{"Label:"}</span> <input type="text" size="30" /></p>
-					<p><span class="label">{"Default value:"}</span> <input type="text" size="30" /></p>
-					<p><span class="label">{"Options:<br />(one per line)"}</span> <textarea cols="22" rows="5"></textarea></p>
-					</div>
-					<div class="col">
-					<p><input type="checkbox" /> {"Required field."}</p>
-					<p><span class="label">{"Error message:"}</span> <input type="text" size="30" /></p>
-					</div>
-					<div class="clear"></div>
-				</div>
-
-				<div class="section">
-					<div class="buttons">
-						<a href="#" class="delete-field">{"Delete"}</a>
-					</div>
-					<h6>{"Multiple choice"}</h6>
-					<div class="col">
-					<p><span class="label">{"Label:"}</span> <input type="text" size="30" /></p>
-					<p><span class="label">{"Default value:"}</span> <input type="text" size="30" /></p>
-					<p><span class="label">{"Options:<br />(one per line)"}</span> <textarea cols="22" rows="5"></textarea></p>
-					</div>
-					<div class="col">
-					<p><input type="checkbox" /> {"Required field."}</p>
-					<p><span class="label">{"Error message:"}</span> <input type="text" size="30" /></p>
-					</div>
-					<div class="clear"></div>
-				</div>
-
-				<div class="section">
-					<div class="buttons">
-						<a href="#" class="delete-field">{"Delete"}</a>
-					</div>
-					<h6>{"Date"}</h6>
-					<div class="col">
-					<p><span class="label">{"Label:"}</span> <input type="text" size="30" /></p>
-					<p><span class="label">{"Default value:"}</span> <input type="text" size="30" value="today" /></p>
-					</div>
-					<div class="col">
-					<p><input type="checkbox" /> {"Required field."}</p>
-					<p><span class="label">{"Error message:"}</span> <input type="text" size="30" /></p>
-					</div>
-					<div class="clear"></div>
-				</div>
-
-				<div class="section">
-					<div class="buttons">
-						<a href="#" class="delete-field">{"Delete"}</a>
-					</div>
-					<h6>{"Slider"}</h6>
-					<div class="col">
-					<p><span class="label">{"Label:"}</span> <input type="text" size="30" /></p>
-					<p><span class="label">{"Default value:"}</span> <input type="text" size="10" value="5" /></p>
-					<p><span class="label">{"Min/max values:"}</span> <input type="text" size="10" value="0" /> &nbsp; <input type="text" size="10" value="10" /></p>
-					</div>
-					<div class="col">
-					<p><input type="checkbox" /> {"Required field."}</p>
-					<p><span class="label">{"Error message:"}</span> <input type="text" size="30" /></p>
-					</div>
-					<div class="clear"></div>
-				</div>
 
 			</div>
 
@@ -197,34 +79,169 @@ var form_id = {{ id }};
 			<p class="info">{"Note: Results are automatically saved under Tools &gt; Forms."}<br />
 			<a href="https://github.com/jbroadway/form/wiki/Custom-hooks" target="_blank">{"Click here"}</a> {"for developer info on attaching custom actions to your form."}</p>
 			<div class="section">
-				<p><input type="checkbox" name="email-toggle" value="yes" />
-				{"Email results to"} <input type="text" name="email-to" size="30" /></p>
+				<p>&bull;&nbsp; {"Email results to"} <input type="text" name="email-to" id="email-to" size="30" value="{{ actions_email_to }}" /></p>
 			</div>
 			<div class="section">
-				<p><input type="checkbox" name="redirect-toggle" value="yes" />
-				{"Redirect user to"} <input type="text" name="redirect-to" size="30" /></p>
+				<p>&bull;&nbsp; {"Redirect user to"} <input type="text" name="redirect-to" id="redirect-to" size="30" value="{{ actions_redirect_to }}" /></p>
 			</div>
 			<div class="section">
-				<p><input type="checkbox" name="email-toggle" value="yes" />
-				{"Email the user."}
+				<p>&bull;&nbsp; {"Email the user."}
 				<p class="indent"><span class="label">{"Name field"}:</span>
-				<select name="name-field">
+				<select name="name-field" id="name-field">
 				</select></p>
 				<p class="indent"><span class="label">{"Email field"}:</span>
-				<select name="email-field">
+				<select name="email-field" id="email-field">
 				</select></p>
 				<p class="indent"><span class="label">{"Send email from"}:</span>
-				<input type="text" name="reply-from" size="30" /></p>
+				<input type="text" name="reply-from" id="reply-from" size="30" value="{{ actions_reply_from }}" /></p>
 				<p class="indent"><span class="label">{"Subject"}:</span>
-				<input type="text" name="subject-field" size="30" /></p>
+				<input type="text" name="subject-field" id="subject-field" size="30" value="{{ actions_subject_field }}" /></p>
 				<p class="indent">{"Message body intro"}:<br />
-				<textarea name="body_intro" rows="3" cols="60">{{ body_intro }}</textarea></p>
+				<textarea name="body-intro" id="body-intro" rows="3" cols="60">{{ actions_body_intro }}</textarea></p>
 				<p class="indent">{"Message signature"}:<br />
-				<textarea name="body_sig" rows="3" cols="60">{{ body_sig }}</textarea></p>
-				<p class="indent"><input type="checkbox" name="include_data" value="yes" />
+				<textarea name="body-sig" rows="3" cols="60">{{ actions_body_sig }}</textarea></p>
+				<p class="indent"><input type="checkbox" name="include-data" id="include-data" value="yes" {% if actions_include_data %}checked{% end %} />
 				{"Include submitted data in the message body."}</p>
 			</div>
 		</form>
 	</div>
 
 </div>
+
+<script id="field-text" type="text/x-jquery-tmpl">
+	<div class="section">
+		<div class="buttons">
+			<a href="#" class="delete-field" data-bind="click: delete_field">{"Delete"}</a>
+		</div>
+		<h6>{"Single-line text"}</h6>
+		<div class="col">
+		<p><span class="label">{"Label:"}</span> <input type="text" size="30" /></p>
+		<p><span class="label">{"Default value:"}</span> <input type="text" size="30" /></p>
+		<p><span class="label">{"Placeholder text:"}</span> <input type="text" size="30" /></p>
+		</div>
+		<div class="col">
+		<p><input type="checkbox" /> {"Required field."}</p>
+		<p><span class="label">{"Verify value is:"}</span> <select>
+			<option value="">- {"Choose"} -</option>
+		</select></p>
+		<p><span class="label">{"Error message:"}</span> <input type="text" size="30" /></p>
+		</div>
+		<div class="clear"></div>
+	</div>
+</script>
+
+<script id="field-textarea" type="text/x-jquery-tmpl">
+	<div class="section">
+		<div class="buttons">
+			<a href="#" class="delete-field" data-bind="click: delete_field">{"Delete"}</a>
+		</div>
+		<h6>{"Paragraph text"}</h6>
+		<div class="col">
+		<p><span class="label">{"Label:"}</span> <input type="text" size="30" /></p>
+		<p><span class="label">{"Default value:"}</span> <input type="text" size="30" /></p>
+		<p><span class="label">{"Placeholder text:"}</span> <input type="text" size="30" /></p>
+		</div>
+		<div class="col">
+		<p><input type="checkbox" /> {"Required field."}</p>
+		<p><span class="label">{"Verify value is:"}</span> <select>
+			<option value="">- {"Choose"} -</option>
+		</select></p>
+		<p><span class="label">{"Error message:"}</span> <input type="text" size="30" /></p>
+		</div>
+		<div class="clear"></div>
+	</div>
+</script>
+
+<script id="field-select" type="text/x-jquery-tmpl">
+	<div class="section">
+		<div class="buttons">
+			<a href="#" class="delete-field" data-bind="click: delete_field">{"Delete"}</a>
+		</div>
+		<h6>{"Drop down"}</h6>
+		<div class="col">
+		<p><span class="label">{"Label:"}</span> <input type="text" size="30" /></p>
+		<p><span class="label">{"Default value:"}</span> <input type="text" size="30" /></p>
+		<p><span class="label">{"Options:<br />(one per line)"}</span> <textarea cols="22" rows="5"></textarea></p>
+		</div>
+		<div class="col">
+		<p><input type="checkbox" /> {"Required field."}</p>
+		<p><span class="label">{"Error message:"}</span> <input type="text" size="30" /></p>
+		</div>
+		<div class="clear"></div>
+	</div>
+</script>
+
+<script id="field-checkbox" type="text/x-jquery-tmpl">
+	<div class="section">
+		<div class="buttons">
+			<a href="#" class="delete-field" data-bind="click: delete_field">{"Delete"}</a>
+		</div>
+		<h6>{"Checkboxes"}</h6>
+		<div class="col">
+		<p><span class="label">{"Label:"}</span> <input type="text" size="30" /></p>
+		<p><span class="label">{"Default value:"}</span> <input type="text" size="30" /></p>
+		<p><span class="label">{"Options:<br />(one per line)"}</span> <textarea cols="22" rows="5"></textarea></p>
+		</div>
+		<div class="col">
+		<p><input type="checkbox" /> {"Required field."}</p>
+		<p><span class="label">{"Error message:"}</span> <input type="text" size="30" /></p>
+		</div>
+		<div class="clear"></div>
+	</div>
+</script>
+
+<script id="field-radio" type="text/x-jquery-tmpl">
+	<div class="section">
+		<div class="buttons">
+			<a href="#" class="delete-field" data-bind="click: delete_field">{"Delete"}</a>
+		</div>
+		<h6>{"Multiple choice"}</h6>
+		<div class="col">
+		<p><span class="label">{"Label:"}</span> <input type="text" size="30" /></p>
+		<p><span class="label">{"Default value:"}</span> <input type="text" size="30" /></p>
+		<p><span class="label">{"Options:<br />(one per line)"}</span> <textarea cols="22" rows="5"></textarea></p>
+		</div>
+		<div class="col">
+		<p><input type="checkbox" /> {"Required field."}</p>
+		<p><span class="label">{"Error message:"}</span> <input type="text" size="30" /></p>
+		</div>
+		<div class="clear"></div>
+	</div>
+</script>
+
+<script id="field-date" type="text/x-jquery-tmpl">
+	<div class="section">
+		<div class="buttons">
+			<a href="#" class="delete-field" data-bind="click: delete_field">{"Delete"}</a>
+		</div>
+		<h6>{"Date"}</h6>
+		<div class="col">
+		<p><span class="label">{"Label:"}</span> <input type="text" size="30" /></p>
+		<p><span class="label">{"Default value:"}</span> <input type="text" size="30" value="today" /></p>
+		</div>
+		<div class="col">
+		<p><input type="checkbox" /> {"Required field."}</p>
+		<p><span class="label">{"Error message:"}</span> <input type="text" size="30" /></p>
+		</div>
+		<div class="clear"></div>
+	</div>
+</script>
+
+<script id="field-slider" type="text/x-jquery-tmpl">
+	<div class="section">
+		<div class="buttons">
+			<a href="#" class="delete-field" data-bind="click: delete_field">{"Delete"}</a>
+		</div>
+		<h6>{"Slider"}</h6>
+		<div class="col">
+		<p><span class="label">{"Label:"}</span> <input type="text" size="30" /></p>
+		<p><span class="label">{"Default value:"}</span> <input type="text" size="10" value="5" /></p>
+		<p><span class="label">{"Min/max values:"}</span> <input type="text" size="10" value="0" /> &nbsp; <input type="text" size="10" value="10" /></p>
+		</div>
+		<div class="col">
+		<p><input type="checkbox" /> {"Required field."}</p>
+		<p><span class="label">{"Error message:"}</span> <input type="text" size="30" /></p>
+		</div>
+		<div class="clear"></div>
+	</div>
+</script>
