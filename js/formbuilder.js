@@ -291,7 +291,6 @@ var form = {
 	update_fields: function () {
 		form.show_saving ();
 		$.post ('/form/api/fields/' + form.data.id, {fields: form.data.fields ()}, function (res) {
-			console.log (res);
 			if (res.success) {
 				form.done_saving ();
 				return;

@@ -98,7 +98,7 @@ class Form extends \Model {
 	public function __set ($key, $val) {
 		if ($key == 'field_list') {
 			$this->_fields = $val;
-			$this->data[$key] = json_encode ($val);
+			$this->data['fields'] = json_encode ($val);
 			return;
 		} elseif ($key == 'actions') {
 			$this->_actions = $val;
