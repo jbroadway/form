@@ -93,13 +93,13 @@ $(function () {
 				<select name="email-field" id="email-field" data-bind="value: actions_cc_email_field, optionsCaption: '- {"Choose"} -', options: data.fields, optionsValue: 'id', optionsText: 'label', event: { change: update_actions }">
 				</select></p>
 				<p class="indent"><span class="label">{"Send email from"}:</span>
-				<input type="text" name="reply-from" id="reply-from" size="30" value="{{ actions_reply_from }}" /></p>
+				<input type="text" name="reply-from" id="reply-from" size="30" data-bind="value: actions_cc_reply_from, event: { blur: update_actions }" /></p>
 				<p class="indent"><span class="label">{"Subject"}:</span>
-				<input type="text" name="subject-field" id="subject-field" size="30" value="{{ actions_subject_field }}" /></p>
+				<input type="text" name="subject-field" id="subject-field" size="30" data-bind="value: actions_cc_subject, event: { blur: update_actions }" /></p>
 				<p class="indent">{"Message body intro"}:<br />
-				<textarea name="body-intro" id="body-intro" rows="3" cols="60">{{ actions_body_intro }}</textarea></p>
+				<textarea name="body-intro" id="body-intro" rows="3" cols="60" data-bind="value: actions_cc_body_intro, event: { blur: update_actions }"></textarea></p>
 				<p class="indent">{"Message signature"}:<br />
-				<textarea name="body-sig" rows="3" cols="60">{{ actions_body_sig }}</textarea></p>
+				<textarea name="body-sig" rows="3" cols="60" data-bind="value: actions_cc_body_sig, event: { blur: update_actions }"></textarea></p>
 				<p class="indent"><input type="checkbox" name="include-data" id="include-data" onclick="window.form.actions_cc_include_data (this)" />
 				{"Include submitted data in the message body."}</p>
 			</div>

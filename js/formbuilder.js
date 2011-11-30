@@ -103,6 +103,58 @@ var form = {
 			owner: form
 		});
 
+		/**
+		 * Define an observable for the cc_recipient reply_from field.
+		 */
+		form.actions_cc_reply_from = ko.dependentObservable ({
+			read: function () {
+				return form.read_cc_recipient ('reply_from');
+			},
+			write: function (value) {
+				return form.update_cc_recipient ('reply_from', value);
+			},
+			owner: form
+		});
+
+		/**
+		 * Define an observable for the cc_recipient subject field.
+		 */
+		form.actions_cc_subject = ko.dependentObservable ({
+			read: function () {
+				return form.read_cc_recipient ('subject');
+			},
+			write: function (value) {
+				return form.update_cc_recipient ('subject', value);
+			},
+			owner: form
+		});
+
+		/**
+		 * Define an observable for the cc_recipient body_intro field.
+		 */
+		form.actions_cc_body_intro = ko.dependentObservable ({
+			read: function () {
+				return form.read_cc_recipient ('body_intro');
+			},
+			write: function (value) {
+				return form.update_cc_recipient ('body_intro', value);
+			},
+			owner: form
+		});
+
+		/**
+		 * Define an observable for the cc_recipient body_sig field.
+		 */
+		form.actions_cc_body_sig = ko.dependentObservable ({
+			read: function () {
+				return form.read_cc_recipient ('body_sig');
+			},
+			write: function (value) {
+				return form.update_cc_recipient ('body_sig', value);
+			},
+			owner: form
+		});
+
 		// Set the initial include_data checked status.
 		// Doing this field the backwards way because of issues
 		// with checked handling in Knockout.
