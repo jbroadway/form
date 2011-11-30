@@ -62,9 +62,8 @@ $(function () {
 			</div>
 
 			<div id="field-list-list">
-				<ul>
-					<li>...</li>
-				</ul>
+				<p class="info">{"Drag and drop to re-order your form fields."}</p>
+				<ul id="field-list-sortable" data-bind="template: { name: 'field-item', foreach: data.fields }, sortableList: data.fields"></ul>
 			</div>
 	
 			<div id="field-list-preview">
@@ -244,4 +243,10 @@ $(function () {
 		</div>
 		<div class="clear"></div>
 	</div>
+</script>
+
+<script id="field-item" type="text/x-jquery-tmpl">
+	<li class="sortable-field-item">
+		<a href="#" data-bind="text: label, click: function() { form.select_field ($data); }"></a>
+	</li>
 </script>

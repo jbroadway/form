@@ -37,6 +37,27 @@ class API extends \Restful {
 		return i18n_get ('Form updated');
 	}
 
+	public function post_fields ($id) {
+		$f = new Form ($id);
+		if ($f->error) {
+			return $this->error (i18n_get ('Form not found'));
+		}
+	
+		if (is_array ($_POST['fields'])) {
+			$f->field_list = $_POST['fields'];
+		} else {
+			$f->field_list = array ();
+		}
+
+		$f->put ();
+		if ($f->error) {
+			error_log ($f->error);
+			return $this->error ('Failed to save changes');
+		}
+
+		return i18n_get ('Form updated');
+	}
+
 	/**
 	 * Update the core fields. Usage:
 	 *

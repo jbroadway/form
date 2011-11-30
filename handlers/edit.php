@@ -18,7 +18,8 @@ if ($f->error) {
 	return;
 }
 
-$page->add_script ('https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.13/jquery-ui.min.js');
+$page->add_script ('/apps/form/js/jquery-ui.min.js');
+$page->add_script ('/apps/form/js/jquery.tmpl.js');
 $page->add_script ('/apps/form/js/knockout-1.2.1.js');
 $page->add_script ('/apps/form/js/formbuilder.js');
 $page->add_script ('/apps/form/css/formbuilder.css');

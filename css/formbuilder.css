@@ -71,6 +71,10 @@ p.indent {
 		margin-top: 2px;
 	}
 
+	.sortable-field-item a:hover {
+		cursor: move;
+	}
+
 #field-list-list, #field-list-preview {
 	display: none;
 }

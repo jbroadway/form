@@ -15,6 +15,35 @@ var form = {
 	init: function (data) {
 		form.data = data;
 
+		form.data.fields = ko.observableArray (form.data.fields);
+
+		/**
+		 * Custom binding for sorting fields in list view.
+		 */
+		ko.bindingHandlers.sortableList = {
+			init: function (element, valueAccessor) {
+				var list = valueAccessor ();
+				$(element).sortable ({
+					update: function (event, ui) {
+						// get the data item
+						var item = ui.item.tmplItem ().data;
+
+						// figure out its new position
+						var position = ko.utils.arrayIndexOf (ui.item.parent ().children (), ui.item[0]);
+
+						// remove the item and add it back in the right spot
+						if (position >= 0) {
+							list.remove (item);
+							list.splice (position, 0, item);
+						}
+
+						// save changes to the server
+						form.update_fields ();
+					}
+				});
+			}
+		};
+
 		/**
 		 * Define an observable for the email action.
 		 */
@@ -257,6 +286,22 @@ var form = {
 	},
 
 	/**
+	 * Save changes to the fields to the server.
+	 */
+	update_fields: function () {
+		form.show_saving ();
+		$.post ('/form/api/fields/' + form.data.id, {fields: form.data.fields ()}, function (res) {
+			console.log (res);
+			if (res.success) {
+				form.done_saving ();
+				return;
+			}
+			$.add_notification (res.error);
+			form.done_saving ();
+		});
+	},
+
+	/**
 	 * Save the actions to the server.
 	 */
 	update_actions: function () {
@@ -327,6 +372,18 @@ var form = {
 	add_slider: function () {
 		return false;
 	},
+
+	/**
+	 * Set the current drag item.
+	 */
+	select_field: function (field) {
+		form.selected_field (field);
+	},
+
+	/**
+	 * The current drag item.
+	 */
+	selected_field: ko.observable (),
 
 	/**
 	 * Disable "Done Editing" link and show "Saving..." message.
