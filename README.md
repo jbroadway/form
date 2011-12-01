@@ -12,8 +12,12 @@ fairly complete, including form publishing and handling.
 
 To do:
 
-* Admin UI
-  * Form builder
+* Form builder
+  * Link all edit fields
+  * Link validation rules
+  * Enable delete links
+  * Server-side field structure input validation
+  * Versioning on saved changes
 
 Done:
 
@@ -39,6 +43,11 @@ Done:
 * Admin UI
   * Browse results
   * Export results
+  * Form builder
+    * Edit form properties, fields, and actions (partial)
+    * Re-sort fields via drag and drop
+    * Preview tab
+    * Auto-saves changes transparently
 
 ## Feature overview
 
