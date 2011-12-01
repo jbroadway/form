@@ -63,3 +63,11 @@ Done:
 * Tracks submission time and IP address
 * Easily style generated forms to fit your site
 * Field types: text, textarea, select, checkbox, radio, range, date
+
+## Future possibilities
+
+* More field types
+* More validation types
+* Multi-page forms
+* Export forms to PHP so they can be customized further
+* Conditional fields (`if (field_a == 'yes') { show field_b } else { show field_c }`)
