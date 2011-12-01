@@ -4,10 +4,10 @@
 		<span class="form-notice" id="form-{{ id }}-notice">{{ message }}</span>
 	</div>
 	<div class="form-field-input">
-		<select name="{{ id }}" value="{{ default }}" placeholder="{{ placeholder }}">
+		<select name="{{ id }}" value="{{ default_value }}" placeholder="{{ placeholder }}">
 			<option value="">- {" Choose "} -</option>
 {% foreach values %}
-			<option value="{{ loop_value }}"{% if loop_value == $data->default %} selected="selected"{% end %}>{{ loop_value }}</option>
+			<option value="{{ loop_value }}"{% if loop_value == $data->default_value %} selected="selected"{% end %}>{{ loop_value }}</option>
 {% end %}
 		</select>
 	</div>

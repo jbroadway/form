@@ -33,8 +33,8 @@ echo $tpl->render ('form/head', $o);
 
 foreach ($f->field_list as $field) {
 	if ($field->type == 'date') {
-		if ($field->default == 'today') {
-			$field->default = gmdate ('Y-m-d');
+		if ($field->default_value == 'today') {
+			$field->default_value = gmdate ('Y-m-d');
 		}
 	}
 	echo $tpl->render ('form/field/' . $field->type, $field);

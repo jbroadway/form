@@ -6,7 +6,7 @@
 	<div class="form-field-input">
 {% foreach values %}
 		<div>
-			<input type="radio" name="{{ id }}" value="{{ loop_value }}"{% if loop_value == $data->default %} checked="checked"{% end %} />
+			<input type="radio" name="{{ id }}" value="{{ loop_value }}"{% if loop_value == $data->default_value %} checked="checked"{% end %} />
 			<span>{{ loop_value }}</span>
 		</div>
 {% end %}

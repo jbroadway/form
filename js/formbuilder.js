@@ -15,7 +15,7 @@ var form = {
 	init: function (data) {
 		form.data = data;
 
-		form.data.fields = ko.observableArray (form.data.fields);
+		form.data.fields = form.make_fields_observable (form.data.fields);
 
 		/**
 		 * Custom binding for sorting fields in list view.
@@ -203,6 +203,49 @@ var form = {
 	},
 
 	/**
+	 * Turn the fields into an observableArray of items whose properties are also observables.
+	 */
+	make_fields_observable: function (fields) {
+		var list = ko.observableArray ([]);
+		for (var i = 0; i < fields.length; i++) {
+			var field = {
+				type: fields[i].type,
+				id: fields[i].id,
+				label: ko.observable (fields[i].label),
+				default_value: ko.observable (fields[i].default_value),
+				rules: fields[i].rules,
+				message: ko.observable (fields[i].message)
+			};
+			if (fields[i].hasOwnProperty ('placeholder')) {
+				field.placeholder = ko.observable (fields[i].placeholder);
+			}
+			if (fields[i].hasOwnProperty ('size')) {
+				field.size = ko.observable (fields[i].size);
+			}
+			if (fields[i].hasOwnProperty ('cols')) {
+				field.cols = ko.observable (fields[i].cols);
+			}
+			if (fields[i].hasOwnProperty ('rows')) {
+				field.rows = ko.observable (fields[i].rows);
+			}
+			if (fields[i].hasOwnProperty ('size')) {
+				field.size = ko.observable (fields[i].size);
+			}
+			if (fields[i].hasOwnProperty ('min')) {
+				field.min = ko.observable (fields[i].min);
+			}
+			if (fields[i].hasOwnProperty ('max')) {
+				field.max = ko.observable (fields[i].max);
+			}
+			if (fields[i].hasOwnProperty ('values')) {
+				field.values = ko.observable (fields[i].values);
+			}
+			list.push (field);
+		}
+		return list;
+	},
+
+	/**
 	 * Define an observable for the cc_recipient include_data.
 	 */
 	actions_cc_include_data: function (el) {
@@ -319,57 +362,74 @@ var form = {
 	/**
 	 * Delete a field from the form.
 	 */
-	delete_field: function () {
+	delete_field: function (item) {
 		return false;
 	},
 
 	/**
 	 * Add a text field to the form.
 	 */
-	add_text: function () {
+	add_text_field: function () {
 		return false;
 	},
 
 	/**
 	 * Add a textarea field to the form.
 	 */
-	add_textarea: function () {
+	add_textarea_field: function () {
 		return false;
 	},
 
 	/**
 	 * Add a select field to the form.
 	 */
-	add_select: function () {
+	add_select_field: function () {
 		return false;
 	},
 
 	/**
 	 * Add a checkbox field to the form.
 	 */
-	add_checkbox: function () {
+	add_checkbox_field: function () {
 		return false;
 	},
 
 	/**
 	 * Add a radio field to the form.
 	 */
-	add_radio: function () {
+	add_radio_field: function () {
 		return false;
 	},
 
 	/**
 	 * Add a date field to the form.
 	 */
-	add_date: function () {
+	add_date_field: function () {
 		return false;
 	},
 
 	/**
-	 * Add a slider field to the form.
+	 * Add a range field to the form.
 	 */
-	add_slider: function () {
+	add_range_field: function () {
+		form.data.fields.push ({
+			type: 'range',
+			id: '',
+			label: ko.observable (''),
+			default_value: ko.observable ('5'),
+			min: ko.observable ('0'),
+			max: ko.observable ('10'),
+			rules: {},
+			message: ko.observable ('')
+		});
 		return false;
+	},
+
+	/**
+	 * Determine template to use to render a given field type.
+	 */
+	determine_template: function (field) {
+		return 'field-' + field.type;
 	},
 
 	/**

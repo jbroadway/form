@@ -115,8 +115,8 @@ if ($f->submit ()) {
 			$page->add_script ('/apps/form/js/jquery.tools.min.js');
 			$page->add_script ('<script>$(function(){$(":date").dateinput({format:"yyyy-mm-dd"});});</script>');
 			$page->add_script ('/apps/form/css/dateinput.css');
-			if ($field->default == 'today') {
-				$field->default = gmdate ('Y-m-d');
+			if ($field->default_value == 'today') {
+				$field->default_value = gmdate ('Y-m-d');
 			}
 		}
 		echo $tpl->render ('form/field/' . $field->type, $field);

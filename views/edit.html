@@ -42,13 +42,13 @@ $(function () {
 		<div class="sidebar">
 			<p>{"Add a field:"}</p>
 			<ul>
-				<li><a href="#" id="add-text" data-bind="click: add_text">{"Single-line text"}</a></li>
-				<li><a href="#" id="add-textarea" data-bind="click: add_textarea">{"Paragraph text"}</a></li>
-				<li><a href="#" id="add-select" data-bind="click: add_select">{"Drop down"}</a></li>
-				<li><a href="#" id="add-checkbox" data-bind="click: add_checkbox">{"Checkboxes"}</a></li>
-				<li><a href="#" id="add-radio" data-bind="click: add_radio">{"Multiple choice"}</a></li>
-				<li><a href="#" id="add-date" data-bind="click: add_date">{"Date"}</a></li>
-				<li><a href="#" id="add-slider" data-bind="click: add_slider">{"Slider"}</a></li>
+				<li><a href="#" id="add-text" data-bind="click: add_text_field">{"Single-line text"}</a></li>
+				<li><a href="#" id="add-textarea" data-bind="click: add_textarea_field">{"Paragraph text"}</a></li>
+				<li><a href="#" id="add-select" data-bind="click: add_select_field">{"Drop down"}</a></li>
+				<li><a href="#" id="add-checkbox" data-bind="click: add_checkbox_field">{"Checkboxes"}</a></li>
+				<li><a href="#" id="add-radio" data-bind="click: add_radio_field">{"Multiple choice"}</a></li>
+				<li><a href="#" id="add-date" data-bind="click: add_date_field">{"Date"}</a></li>
+				<li><a href="#" id="add-range" data-bind="click: add_range_field">{"Slider"}</a></li>
 			</ul>
 		</div>
 		<div class="main">
@@ -58,7 +58,8 @@ $(function () {
 				<a href="#" id="toggle-full" data-bind="click: show_full" title="{"View in full"}" class="active"></a>
 			</div>
 			<div id="field-list-full">
-
+				<p class="info">{"Click the fields to the left to add them to your form."}</p>
+				<div data-bind="template: { name: determine_template, foreach: data.fields }"></div>
 			</div>
 
 			<div id="field-list-list">
@@ -110,12 +111,12 @@ $(function () {
 <script id="field-text" type="text/x-jquery-tmpl">
 	<div class="section">
 		<div class="buttons">
-			<a href="#" class="delete-field" data-bind="click: delete_field">{"Delete"}</a>
+			<a href="#" class="delete-field" data-bind="click: function() { form.delete_field ($data); }">{"Delete"}</a>
 		</div>
 		<h6>{"Single-line text"}</h6>
 		<div class="col">
-		<p><span class="label">{"Label:"}</span> <input type="text" size="30" /></p>
-		<p><span class="label">{"Default value:"}</span> <input type="text" size="30" /></p>
+		<p><span class="label">{"Label:"}</span> <input type="text" size="30" data-bind="value: label" /></p>
+		<p><span class="label">{"Default value:"}</span> <input type="text" size="30" data-bind="value: default_value" /></p>
 		<p><span class="label">{"Placeholder text:"}</span> <input type="text" size="30" /></p>
 		</div>
 		<div class="col">
@@ -123,7 +124,7 @@ $(function () {
 		<p><span class="label">{"Verify value is:"}</span> <select>
 			<option value="">- {"Choose"} -</option>
 		</select></p>
-		<p><span class="label">{"Error message:"}</span> <input type="text" size="30" /></p>
+		<p><span class="label">{"Error message:"}</span> <input type="text" size="30" data-bind="value: message" /></p>
 		</div>
 		<div class="clear"></div>
 	</div>
@@ -132,12 +133,12 @@ $(function () {
 <script id="field-textarea" type="text/x-jquery-tmpl">
 	<div class="section">
 		<div class="buttons">
-			<a href="#" class="delete-field" data-bind="click: delete_field">{"Delete"}</a>
+			<a href="#" class="delete-field" data-bind="click: function() { form.delete_field ($data); }">{"Delete"}</a>
 		</div>
 		<h6>{"Paragraph text"}</h6>
 		<div class="col">
-		<p><span class="label">{"Label:"}</span> <input type="text" size="30" /></p>
-		<p><span class="label">{"Default value:"}</span> <input type="text" size="30" /></p>
+		<p><span class="label">{"Label:"}</span> <input type="text" size="30" data-bind="value: label" /></p>
+		<p><span class="label">{"Default value:"}</span> <input type="text" size="30" data-bind="value: default_value" /></p>
 		<p><span class="label">{"Placeholder text:"}</span> <input type="text" size="30" /></p>
 		</div>
 		<div class="col">
@@ -145,7 +146,7 @@ $(function () {
 		<p><span class="label">{"Verify value is:"}</span> <select>
 			<option value="">- {"Choose"} -</option>
 		</select></p>
-		<p><span class="label">{"Error message:"}</span> <input type="text" size="30" /></p>
+		<p><span class="label">{"Error message:"}</span> <input type="text" size="30" data-bind="value: message" /></p>
 		</div>
 		<div class="clear"></div>
 	</div>
@@ -154,17 +155,17 @@ $(function () {
 <script id="field-select" type="text/x-jquery-tmpl">
 	<div class="section">
 		<div class="buttons">
-			<a href="#" class="delete-field" data-bind="click: delete_field">{"Delete"}</a>
+			<a href="#" class="delete-field" data-bind="click: function() { form.delete_field ($data); }">{"Delete"}</a>
 		</div>
 		<h6>{"Drop down"}</h6>
 		<div class="col">
-		<p><span class="label">{"Label:"}</span> <input type="text" size="30" /></p>
-		<p><span class="label">{"Default value:"}</span> <input type="text" size="30" /></p>
+		<p><span class="label">{"Label:"}</span> <input type="text" size="30" data-bind="value: label" /></p>
+		<p><span class="label">{"Default value:"}</span> <input type="text" size="30" data-bind="value: default_value" /></p>
 		<p><span class="label">{"Options:<br />(one per line)"}</span> <textarea cols="22" rows="5"></textarea></p>
 		</div>
 		<div class="col">
 		<p><input type="checkbox" /> {"Required field."}</p>
-		<p><span class="label">{"Error message:"}</span> <input type="text" size="30" /></p>
+		<p><span class="label">{"Error message:"}</span> <input type="text" size="30" data-bind="value: message" /></p>
 		</div>
 		<div class="clear"></div>
 	</div>
@@ -173,17 +174,17 @@ $(function () {
 <script id="field-checkbox" type="text/x-jquery-tmpl">
 	<div class="section">
 		<div class="buttons">
-			<a href="#" class="delete-field" data-bind="click: delete_field">{"Delete"}</a>
+			<a href="#" class="delete-field" data-bind="click: function() { form.delete_field ($data); }">{"Delete"}</a>
 		</div>
 		<h6>{"Checkboxes"}</h6>
 		<div class="col">
-		<p><span class="label">{"Label:"}</span> <input type="text" size="30" /></p>
-		<p><span class="label">{"Default value:"}</span> <input type="text" size="30" /></p>
+		<p><span class="label">{"Label:"}</span> <input type="text" size="30" data-bind="value: label" /></p>
+		<p><span class="label">{"Default value:"}</span> <input type="text" size="30" data-bind="value: default_value" /></p>
 		<p><span class="label">{"Options:<br />(one per line)"}</span> <textarea cols="22" rows="5"></textarea></p>
 		</div>
 		<div class="col">
 		<p><input type="checkbox" /> {"Required field."}</p>
-		<p><span class="label">{"Error message:"}</span> <input type="text" size="30" /></p>
+		<p><span class="label">{"Error message:"}</span> <input type="text" size="30" data-bind="value: message" /></p>
 		</div>
 		<div class="clear"></div>
 	</div>
@@ -192,17 +193,17 @@ $(function () {
 <script id="field-radio" type="text/x-jquery-tmpl">
 	<div class="section">
 		<div class="buttons">
-			<a href="#" class="delete-field" data-bind="click: delete_field">{"Delete"}</a>
+			<a href="#" class="delete-field" data-bind="click: function() { form.delete_field ($data); }">{"Delete"}</a>
 		</div>
 		<h6>{"Multiple choice"}</h6>
 		<div class="col">
-		<p><span class="label">{"Label:"}</span> <input type="text" size="30" /></p>
-		<p><span class="label">{"Default value:"}</span> <input type="text" size="30" /></p>
+		<p><span class="label">{"Label:"}</span> <input type="text" size="30" data-bind="value: label" /></p>
+		<p><span class="label">{"Default value:"}</span> <input type="text" size="30" data-bind="value: default_value" /></p>
 		<p><span class="label">{"Options:<br />(one per line)"}</span> <textarea cols="22" rows="5"></textarea></p>
 		</div>
 		<div class="col">
 		<p><input type="checkbox" /> {"Required field."}</p>
-		<p><span class="label">{"Error message:"}</span> <input type="text" size="30" /></p>
+		<p><span class="label">{"Error message:"}</span> <input type="text" size="30" data-bind="value: message" /></p>
 		</div>
 		<div class="clear"></div>
 	</div>
@@ -211,35 +212,35 @@ $(function () {
 <script id="field-date" type="text/x-jquery-tmpl">
 	<div class="section">
 		<div class="buttons">
-			<a href="#" class="delete-field" data-bind="click: delete_field">{"Delete"}</a>
+			<a href="#" class="delete-field" data-bind="click: function() { form.delete_field ($data); }">{"Delete"}</a>
 		</div>
 		<h6>{"Date"}</h6>
 		<div class="col">
-		<p><span class="label">{"Label:"}</span> <input type="text" size="30" /></p>
-		<p><span class="label">{"Default value:"}</span> <input type="text" size="30" value="today" /></p>
+		<p><span class="label">{"Label:"}</span> <input type="text" size="30" data-bind="value: label" /></p>
+		<p><span class="label">{"Default value:"}</span> <input type="text" size="30" data-bind="value: default_value" /></p>
 		</div>
 		<div class="col">
 		<p><input type="checkbox" /> {"Required field."}</p>
-		<p><span class="label">{"Error message:"}</span> <input type="text" size="30" /></p>
+		<p><span class="label">{"Error message:"}</span> <input type="text" size="30" data-bind="value: message" /></p>
 		</div>
 		<div class="clear"></div>
 	</div>
 </script>
 
-<script id="field-slider" type="text/x-jquery-tmpl">
+<script id="field-range" type="text/x-jquery-tmpl">
 	<div class="section">
 		<div class="buttons">
-			<a href="#" class="delete-field" data-bind="click: delete_field">{"Delete"}</a>
+			<a href="#" class="delete-field" data-bind="click: function() { form.delete_field ($data); }">{"Delete"}</a>
 		</div>
 		<h6>{"Slider"}</h6>
 		<div class="col">
-		<p><span class="label">{"Label:"}</span> <input type="text" size="30" /></p>
-		<p><span class="label">{"Default value:"}</span> <input type="text" size="10" value="5" /></p>
-		<p><span class="label">{"Min/max values:"}</span> <input type="text" size="10" value="0" /> &nbsp; <input type="text" size="10" value="10" /></p>
+		<p><span class="label">{"Label:"}</span> <input type="text" size="30" data-bind="value: label" /></p>
+		<p><span class="label">{"Default value:"}</span> <input type="text" size="10" value="5" data-bind="value: default_value" /></p>
+		<p><span class="label">{"Min/max values:"}</span> <input type="text" size="10" value="0" data-bind="value: min" /> &nbsp; <input type="text" size="10" value="10" data-bind="value: max" /></p>
 		</div>
 		<div class="col">
 		<p><input type="checkbox" /> {"Required field."}</p>
-		<p><span class="label">{"Error message:"}</span> <input type="text" size="30" /></p>
+		<p><span class="label">{"Error message:"}</span> <input type="text" size="30" data-bind="value: message" /></p>
 		</div>
 		<div class="clear"></div>
 	</div>
