@@ -37,6 +37,14 @@ class API extends \Restful {
 		return i18n_get ('Form updated');
 	}
 
+	/**
+	 * Update the form fields. Usage:
+	 *
+	 *     /form/api/fields/form-id
+	 *
+	 * Expects a single POST item named `fields` containing
+	 * the data structure of the form fields.
+	 */
 	public function post_fields ($id) {
 		$f = new Form ($id);
 		if ($f->error) {
@@ -59,13 +67,12 @@ class API extends \Restful {
 	}
 
 	/**
-	 * Update the core fields. Usage:
+	 * Update the form actions. Usage:
 	 *
 	 *     /form/api/actions/form-id
 	 *
-	 * Expected POST fields:
-	 *
-	 *     actions
+	 * Expects a single POST item named `actions` containing
+	 * the data structure of the form actions.
 	 */
 	public function post_actions ($id) {
 		$f = new Form ($id);
