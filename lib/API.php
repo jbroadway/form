@@ -52,9 +52,22 @@ class API extends \Restful {
 		}
 	
 		if (is_array ($_POST['fields'])) {
+			// make sure fields all have unique ids
+			$ids = array ();
+			foreach ($_POST['fields'] as $k => $field) {
+				if (! isset ($field['id']) || empty ($field['id'])) {
+					$field['id'] = preg_replace ('/[^a-z0-9]+/', '_', strtolower ($field['label']));
+					while (in_array ($field['id'], $ids)) {
+						$field['id'] .= mt_rand (0, 9);
+					}
+					$ids[] = $field['id'];
+					$_POST['fields'][$k]['id'] = $field['id'];
+				}
+			}
+
 			$f->field_list = $_POST['fields'];
-		} else {
-			$f->field_list = array ();
+		//} else {
+		//	$f->field_list = array ();
 		}
 
 		$f->put ();
