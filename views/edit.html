@@ -234,13 +234,13 @@ $(function () {
 		</div>
 		<h6>{"Slider"}</h6>
 		<div class="col">
-		<p><span class="label">{"Label:"}</span> <input type="text" size="30" data-bind="value: label" /></p>
-		<p><span class="label">{"Default value:"}</span> <input type="text" size="10" value="5" data-bind="value: default_value" /></p>
-		<p><span class="label">{"Min/max values:"}</span> <input type="text" size="10" value="0" data-bind="value: min" /> &nbsp; <input type="text" size="10" value="10" data-bind="value: max" /></p>
+		<p><span class="label">{"Label:"}</span> <input type="text" size="30" data-bind="value: label, event: { blur: window.form.update_fields }" /></p>
+		<p><span class="label">{"Default value:"}</span> <input type="text" size="10" value="5" data-bind="value: default_value, event: { blur: window.form.update_fields }" /></p>
+		<p><span class="label">{"Min/max values:"}</span> <input type="text" size="10" value="0" data-bind="value: min, event: { blur: window.form.update_fields }" /> &nbsp; <input type="text" size="10" value="10" data-bind="value: max, event: { blur: window.form.update_fields }" /></p>
 		</div>
 		<div class="col">
 		<p><input type="checkbox" /> {"Required field."}</p>
-		<p><span class="label">{"Error message:"}</span> <input type="text" size="30" data-bind="value: message" /></p>
+		<p><span class="label">{"Error message:"}</span> <input type="text" size="30" data-bind="value: message, event: { blur: window.form.update_fields }" /></p>
 		</div>
 		<div class="clear"></div>
 	</div>

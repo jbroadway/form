@@ -363,6 +363,10 @@ var form = {
 	 * Delete a field from the form.
 	 */
 	delete_field: function (item) {
+		if (confirm ('Are you sure you want to remove this field?')) {
+			form.data.fields.remove (item);
+			return form.update_fields ();
+		}
 		return false;
 	},
 
