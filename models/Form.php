@@ -55,6 +55,188 @@ class Form extends \Model {
 	}
 
 	/**
+	 * Override the `put()` method to validate structures before
+	 * saving them.
+	 */
+	public function put () {
+		if (! $this->_validate_fields ($this->field_list)) {
+			$this->error = 'Fields failed to validate';
+			return false;
+		}
+		if (! $this->_validate_actions ($this->actions)) {
+			$this->error = 'Actions failed to validate';
+			return false;
+		}
+		return parent::put ();
+	}
+
+	/**
+	 * Validates fields array has the correct structure and the
+	 * required fields for each field type. Note: Does not validate
+	 * the contents of the values except field types.
+	 */
+	public function _validate_fields ($fields) {
+		// verify it's an array
+		if (! is_array ($fields)) {
+			return false;
+		}
+
+		foreach ($fields as $field) {
+			// verify it's an array of objects
+			if (! is_object ($field)) {
+				return false;
+			}
+
+			// verify rules
+			if (! is_array ($field->rules)) {
+				return false;
+			} elseif (! $this->_validate_rules ($field->rules)) {
+				return false;
+			}
+
+			// attributes shared by all field types
+			if (! isset ($field->type)) {
+				return false;
+			}
+			if (! isset ($field->label)) {
+				return false;
+			}
+			if (! isset ($field->id)) {
+				return false;
+			}
+			if (! isset ($field->message)) {
+				return false;
+			}
+			if (! isset ($field->default_value)) {
+				return false;
+			}
+
+			// type-specific fields
+			if ($field->type === 'text') {
+				if (! isset ($field->size)) {
+					return false;
+				}
+				if (! isset ($field->placeholder)) {
+					return false;
+				}
+			} elseif ($field->type === 'textarea') {
+				if (! isset ($field->cols)) {
+					return false;
+				}
+				if (! isset ($field->rows)) {
+					return false;
+				}
+				if (! isset ($field->placeholder)) {
+					return false;
+				}
+			} elseif ($field->type === 'select' || $field->type === 'checkbox' || $field->type === 'radio') {
+				if (! isset ($field->values) || ! is_array ($field->values)) {
+					return false;
+				}
+			} elseif ($field->type === 'range') {
+				if (! isset ($field->min)) {
+					return false;
+				}
+				if (! isset ($field->max)) {
+					return false;
+				}
+			} elseif ($field->type !== 'date') {
+				// invalid type
+				return false;
+			}
+		}
+
+		return true;
+	}
+
+	/**
+	 * Validates rules array. Note: Does not validate that the
+	 * rules themselves are valid.
+	 */
+	public function _validate_rules ($rules) {
+		// verify it's an array
+		if (! is_array ($rules)) {
+			return false;
+		}
+
+		foreach ($rules as $key => $value) {
+			// key must be a string
+			if (! is_string ($key)) {
+				return false;
+			}
+
+			// value must not be an array or object
+			if (is_array ($value) || is_object ($value)) {
+				return false;
+			}
+		}
+
+		return true;
+	}
+
+	/**
+	 * Validates actions array has the correct structure and the
+	 * required fields for each action type. Note: Does not validate
+	 * the contents of the values except action types.
+	 */
+	public function _validate_actions ($actions) {
+		// verify it's an array
+		if (! is_array ($actions)) {
+			return false;
+		}
+
+		foreach ($actions as $action) {
+			// verify it's an array of objects
+			if (! is_object ($action)) {
+				return false;
+			}
+
+			// verify it has a type
+			if (! isset ($action->type)) {
+				return false;
+			}
+
+			// type-specific fields
+			if ($action->type === 'email') {
+				if (! isset ($action->to)) {
+					return false;
+				}
+			} elseif ($action->type === 'redirect') {
+				if (! isset ($action->url)) {
+					return false;
+				}
+			} elseif ($action->type === 'cc_recipient') {
+				if (! isset ($action->name_field)) {
+					return false;
+				}
+				if (! isset ($action->email_field)) {
+					return false;
+				}
+				if (! isset ($action->reply_from)) {
+					return false;
+				}
+				if (! isset ($action->subject)) {
+					return false;
+				}
+				if (! isset ($action->body_intro)) {
+					return false;
+				}
+				if (! isset ($action->body_sig)) {
+					return false;
+				}
+				if (! isset ($action->include_data)) {
+					return false;
+				}
+			} else {
+				// invalid type
+				return false;
+			}
+		}
+
+		return true;
+	}
+
+	/**
 	 * Checks whether the form can be submitted.
 	 */
 	public function submit () {
