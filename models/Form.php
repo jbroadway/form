@@ -88,7 +88,7 @@ class Form extends \Model {
 			}
 
 			// verify rules
-			if (! is_array ($field->rules)) {
+			if (! is_object ($field->rules)) {
 				return false;
 			} elseif (! $this->_validate_rules ($field->rules)) {
 				return false;
@@ -154,12 +154,12 @@ class Form extends \Model {
 	 * rules themselves are valid.
 	 */
 	public function _validate_rules ($rules) {
-		// verify it's an array
-		if (! is_array ($rules)) {
+		// verify it's an object
+		if (! is_object ($rules)) {
 			return false;
 		}
 
-		foreach ($rules as $key => $value) {
+		foreach ((array) $rules as $key => $value) {
 			// key must be a string
 			if (! is_string ($key)) {
 				return false;
