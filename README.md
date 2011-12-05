@@ -33,3 +33,21 @@ to be considered stable.
 * Multi-page forms
 * Export forms to PHP so they can be customized further
 * Conditional fields (`if (field_a == 'yes') { show field_b } else { show field_c }`)
+
+## Screenshots
+
+Form builder - properties:
+
+![](http://jbroadway.github.com/form/form_properties.png)
+
+Form builder - fields:
+
+![](http://jbroadway.github.com/form/form_fields.png)
+
+Form builder - preview:
+
+![](http://jbroadway.github.com/form/form_preview.png)
+
+Form builder - actions:
+
+![](http://jbroadway.github.com/form/form_actions.png)
