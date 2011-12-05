@@ -82,6 +82,11 @@ class Form extends \Model {
 		}
 
 		foreach ($fields as $field) {
+			// normalize to an object if it's an array
+			if (is_array ($field)) {
+				$field = (object) $field;
+			}
+
 			// verify it's an array of objects
 			if (! is_object ($field)) {
 				return false;
@@ -159,7 +164,9 @@ class Form extends \Model {
 			return false;
 		}
 
-		foreach ((array) $rules as $key => $value) {
+		$rules = (array) $rules;
+
+		foreach ($rules as $key => $value) {
 			// key must be a string
 			if (! is_string ($key)) {
 				return false;
@@ -186,6 +193,11 @@ class Form extends \Model {
 		}
 
 		foreach ($actions as $action) {
+			// normalize to an object if it's an array
+			if (is_array ($action)) {
+				$action = (object) $action;
+			}
+
 			// verify it's an array of objects
 			if (! is_object ($action)) {
 				return false;
