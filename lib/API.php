@@ -50,29 +50,35 @@ class API extends \Restful {
 		if ($f->error) {
 			return $this->error (i18n_get ('Form not found'));
 		}
-	
-		if (is_array ($_POST['fields'])) {
-			// make sure fields all have unique ids
-			$ids = array ();
-			foreach ($_POST['fields'] as $k => $field) {
-				if (! isset ($field['id']) || empty ($field['id'])) {
-					$field['id'] = preg_replace ('/[^a-z0-9]+/', '_', strtolower ($field['label']));
-					while (in_array ($field['id'], $ids)) {
-						$field['id'] .= mt_rand (0, 9);
-					}
-					$ids[] = $field['id'];
-					$_POST['fields'][$k]['id'] = $field['id'];
-				}
-			}
 
-			$f->field_list = $_POST['fields'];
-		//} else {
-		//	$f->field_list = array ();
+		if (! isset ($_POST['fields']) {
+			return $this->error ('Missing fields parameter');
 		}
+
+		if (! is_array ($_POST['fields'])) {
+			return $this->error ('Invalid fields parameter');
+		}
+
+		// make sure fields all have unique ids
+		$ids = array ();
+		foreach ($_POST['fields'] as $k => $field) {
+			if (! isset ($field['id']) || empty ($field['id'])) {
+				$field['id'] = preg_replace ('/[^a-z0-9]+/', '_', strtolower ($field['label']));
+				while (in_array ($field['id'], $ids)) {
+					$field['id'] .= mt_rand (0, 9);
+				}
+				$ids[] = $field['id'];
+				$_POST['fields'][$k]['id'] = $field['id'];
+			}
+			if (! isset ($field['rules'])) {
+				$_POST['fields'][$k]['rules'] = (object) array ();
+			}
+		}
+
+		$f->field_list = $_POST['fields'];
 
 		$f->put ();
 		if ($f->error) {
-			error_log ($f->error);
 			return $this->error ('Failed to save changes');
 		}
 
@@ -93,11 +99,15 @@ class API extends \Restful {
 			return $this->error (i18n_get ('Form not found'));
 		}
 	
-		if (is_array ($_POST['actions'])) {
-			$f->actions = $_POST['actions'];
-		} else {
-			$f->actions = array ();
+		if (! isset ($_POST['actions'])) {
+			return $this->error ('Missing actions parameter');
 		}
+	
+		if (! is_array ($_POST['actions'])) {
+			return $this->error ('Invalid actions parameter');
+		}
+	
+		$f->actions = $_POST['actions'];
 	
 		$f->put ();
 		if ($f->error) {
