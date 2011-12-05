@@ -19,6 +19,11 @@ if ($f->error) {
 }
 
 $rules = $f->rules ();
+foreach ($rules as $k => $v) {
+	if (is_array ($v) && count ($v) === 0) {
+		unset ($rules[$k]);
+	}
+}
 
 $page->layout = false;
 header ('Content-Type: application/json');
