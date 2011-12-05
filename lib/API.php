@@ -33,6 +33,8 @@ class API extends \Restful {
 		if ($f->error) {
 			return $this->error ('Failed to save changes');
 		}
+
+		Versions::add ($f);
 		
 		return i18n_get ('Form updated');
 	}
@@ -91,33 +93,9 @@ class API extends \Restful {
 			return $this->error (i18n_get ('Failed to save changes'));
 		}
 
-		return i18n_get ('Form updated');
-	}
+		Versions::add ($f);
 
-	/**
-	 * Translates the rules from the client into the format used
-	 * to store rules. See the equivalent function on the client
-	 * side that converts the stored rules into the format used
-	 * in the UI.
-	 */
-	function transform_rules ($key) {
-		switch ($key) {
-			case 'email':
-				return (object) array ('email' => 1);
-			case 'url':
-				return (object) array ('url' => 1);
-			case 'numeric':
-				return (object) array ('type' => 'numeric');
-			case 'alphanumeric':
-				return (object) array ('regex' => '/[a-zA-Z0-9]+/');
-			case 'alpha':
-				return (object) array ('regex' => '/[a-zA-Z]+/');
-			case 'yes':
-			case 'true':
-				return (object) array ('not empty' => 1);
-			default:
-				return (object) array ();
-		}
+		return i18n_get ('Form updated');
 	}
 
 	/**
@@ -149,7 +127,35 @@ class API extends \Restful {
 			return $this->error (i18n_get ('Failed to save changes'));
 		}
 
+		Versions::add ($f);
+
 		return i18n_get ('Form updated');
+	}
+
+	/**
+	 * Translates the rules from the client into the format used
+	 * to store rules. See the equivalent function on the client
+	 * side that converts the stored rules into the format used
+	 * in the UI.
+	 */
+	function transform_rules ($key) {
+		switch ($key) {
+			case 'email':
+				return (object) array ('email' => 1);
+			case 'url':
+				return (object) array ('url' => 1);
+			case 'numeric':
+				return (object) array ('type' => 'numeric');
+			case 'alphanumeric':
+				return (object) array ('regex' => '/[a-zA-Z0-9]+/');
+			case 'alpha':
+				return (object) array ('regex' => '/[a-zA-Z]+/');
+			case 'yes':
+			case 'true':
+				return (object) array ('not empty' => 1);
+			default:
+				return (object) array ();
+		}
 	}
 }
 

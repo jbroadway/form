@@ -12,12 +12,7 @@ fairly complete, including form publishing and handling.
 
 To do:
 
-* Form builder
-  * Link all edit fields
-  * Link validation rules
-  * Enable delete links
-  * Server-side field structure input validation
-  * Versioning on saved changes
+* Testing!!!
 
 Done:
 
@@ -48,6 +43,11 @@ Done:
     * Re-sort fields via drag and drop
     * Preview tab
     * Auto-saves changes transparently
+    * Server-side field structure input validation
+    * Delete links functioning
+    * All edit fields linked
+    * Validation rules mapped
+    * Versioning on saved changes
 
 ## Feature overview
 

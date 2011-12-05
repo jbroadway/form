@@ -20,6 +20,7 @@ $f = new form\Form (array (
 	'response_body' => 'Your information has been saved.'
 ));
 $f->put ();
+Versions::add ($f);
 
 if (! $f->error) {
 	$this->redirect ('/form/edit?id=' . $f->id);
