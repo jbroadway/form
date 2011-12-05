@@ -34,7 +34,7 @@ class API extends \Restful {
 			return $this->error ('Failed to save changes');
 		}
 
-		Versions::add ($f);
+		\Versions::add ($f);
 		
 		return i18n_get ('Form updated');
 	}
@@ -93,7 +93,7 @@ class API extends \Restful {
 			return $this->error (i18n_get ('Failed to save changes'));
 		}
 
-		Versions::add ($f);
+		\Versions::add ($f);
 
 		return i18n_get ('Form updated');
 	}
@@ -127,7 +127,7 @@ class API extends \Restful {
 			return $this->error (i18n_get ('Failed to save changes'));
 		}
 
-		Versions::add ($f);
+		\Versions::add ($f);
 
 		return i18n_get ('Form updated');
 	}

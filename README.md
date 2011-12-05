@@ -5,49 +5,10 @@ the Dynamic Objects dialog.
 
 > Note: Requires Elefant 1.1+
 
-## Status: Alpha
+## Status: Beta
 
-The form builder is currently just an outline, but the rest of the app is
-fairly complete, including form publishing and handling.
-
-To do:
-
-* Testing!!!
-
-Done:
-
-* Server-side validation
-* Client-side validation
-* Default values
-* Basic output
-* CSRF prevention
-* Field types
-  * Text field rendering
-  * Textarea rendering
-  * Select fields
-  * Radio fields
-  * Checkbox fields
-  * Range
-  * Date
-* Saving to results table
-* Calling hooks
-* Email action
-* CC Recipient handler
-* Store IP addresses
-* Embed through Dynamic Objects
-* Admin UI
-  * Browse results
-  * Export results
-  * Form builder
-    * Edit form properties, fields, and actions (partial)
-    * Re-sort fields via drag and drop
-    * Preview tab
-    * Auto-saves changes transparently
-    * Server-side field structure input validation
-    * Delete links functioning
-    * All edit fields linked
-    * Validation rules mapped
-    * Versioning on saved changes
+The form builder is now feature-complete, but requires loads more testing
+to be considered stable.
 
 ## Feature overview
 
@@ -63,6 +24,7 @@ Done:
 * Tracks submission time and IP address
 * Easily style generated forms to fit your site
 * Field types: text, textarea, select, checkbox, radio, range, date
+* Form edits are version-controlled
 
 ## Future possibilities
 
