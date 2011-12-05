@@ -2,7 +2,7 @@
 
 [form/index]
 
-label = "Custom Form"
+label = "Embed a Form"
 
 id[label] = Form
 id[type] = select
