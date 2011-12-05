@@ -52,7 +52,7 @@ class API extends \Restful {
 		}
 
 		if (! isset ($_POST['fields'])) {
-			return $this->error (i18n_get ('Missing fields parameter'));
+			$_POST['fields'] = array ();
 		}
 
 		if (! is_array ($_POST['fields'])) {
@@ -135,7 +135,7 @@ class API extends \Restful {
 		}
 	
 		if (! isset ($_POST['actions'])) {
-			return $this->error (i18n_get ('Missing actions parameter'));
+			$_POST['actions'] = array ();
 		}
 	
 		if (! is_array ($_POST['actions'])) {

@@ -217,7 +217,6 @@ var form = {
 				message: ko.observable (fields[i].message)
 			};
 			field.rules.subscribe (function (value) {
-				console.log (value);
 				form.update_fields ();
 			});
 			if (fields[i].hasOwnProperty ('placeholder')) {
@@ -403,8 +402,8 @@ var form = {
 	 * Add a text field to the form.
 	 */
 	add_text_field: function () {
-		form.data.fields.push ({
-			type: 'textarea',
+		var f = {
+			type: 'text',
 			id: '',
 			label: ko.observable (''),
 			default_value: ko.observable (''),
@@ -412,7 +411,8 @@ var form = {
 			size: ko.observable ('30'),
 			rules: ko.observable (''),
 			message: ko.observable ('')
-		});
+		};
+		form.data.fields.push (f);
 		return false;
 	},
 
