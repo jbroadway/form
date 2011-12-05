@@ -115,16 +115,22 @@ $(function () {
 		</div>
 		<h6>{"Single-line text"}</h6>
 		<div class="col">
-		<p><span class="label">{"Label:"}</span> <input type="text" size="30" data-bind="value: label" /></p>
-		<p><span class="label">{"Default value:"}</span> <input type="text" size="30" data-bind="value: default_value" /></p>
-		<p><span class="label">{"Placeholder text:"}</span> <input type="text" size="30" data-bind="value: placeholder" /></p>
+		<p><span class="label">{"Label:"}</span> <input type="text" size="30" data-bind="value: label, event: { blur: window.form.update_fields }" /></p>
+		<p><span class="label">{"Default value:"}</span> <input type="text" size="30" data-bind="value: default_value, event: { blur: window.form.update_fields }" /></p>
+		<p><span class="label">{"Placeholder text:"}</span> <input type="text" size="30" data-bind="value: placeholder, event: { blur: window.form.update_fields }" /></p>
+		<p><span class="label">{"Size:"}</span> <input type="text" size="10" value="30" data-bind="value: size, event: { blur: window.form.update_fields }" /></p>
 		</div>
 		<div class="col">
-		<p><input type="checkbox" /> {"Required field."}</p>
-		<p><span class="label">{"Verify value is:"}</span> <select>
+		<p><span class="label">{"Verify value is:"}</span> <select data-bind="value: rules, event: { blur: window.form.update_fields }">
 			<option value="">- {"Choose"} -</option>
+			<option value="yes">{"Not empty"}</option>
+			<option value="email">{"Email address"}</option>
+			<option value="url">{"Website link"}</option>
+			<option value="numeric">{"Numeric"}</option>
+			<option value="alphanumeric">{"Alphanumeric"}</option>
+			<option value="alpha">{"Letters only"}</option>
 		</select></p>
-		<p><span class="label">{"Error message:"}</span> <input type="text" size="30" data-bind="value: message" /></p>
+		<p><span class="label">{"Error message:"}</span> <input type="text" size="35" data-bind="value: message, event: { blur: window.form.update_fields }" /></p>
 		</div>
 		<div class="clear"></div>
 	</div>
@@ -137,16 +143,14 @@ $(function () {
 		</div>
 		<h6>{"Paragraph text"}</h6>
 		<div class="col">
-		<p><span class="label">{"Label:"}</span> <input type="text" size="30" data-bind="value: label" /></p>
-		<p><span class="label">{"Default value:"}</span> <input type="text" size="30" data-bind="value: default_value" /></p>
-		<p><span class="label">{"Placeholder text:"}</span> <input type="text" size="30" data-bind="value: placeholder" /></p>
+		<p><span class="label">{"Label:"}</span> <input type="text" size="30" data-bind="value: label, event: { blur: window.form.update_fields }" /></p>
+		<p><span class="label">{"Default value:"}</span> <input type="text" size="30" data-bind="value: default_value, event: { blur: window.form.update_fields }" /></p>
+		<p><span class="label">{"Placeholder text:"}</span> <input type="text" size="30" data-bind="value: placeholder, event: { blur: window.form.update_fields }" /></p>
+		<p><span class="label">{"Columns/rows:"}</span> <input type="text" size="10" value="50" data-bind="value: cols, event: { blur: window.form.update_fields }" /> &nbsp; <input type="text" size="10" value="4" data-bind="value: rows, event: { blur: window.form.update_fields }" /></p>
 		</div>
 		<div class="col">
-		<p><input type="checkbox" /> {"Required field."}</p>
-		<p><span class="label">{"Verify value is:"}</span> <select>
-			<option value="">- {"Choose"} -</option>
-		</select></p>
-		<p><span class="label">{"Error message:"}</span> <input type="text" size="30" data-bind="value: message" /></p>
+		<p><input type="checkbox" data-bind="checked: rules" /> {"Required field."}</p>
+		<p><span class="label">{"Error message:"}</span> <input type="text" size="35" data-bind="value: message, event: { blur: window.form.update_fields }" /></p>
 		</div>
 		<div class="clear"></div>
 	</div>
@@ -159,13 +163,13 @@ $(function () {
 		</div>
 		<h6>{"Drop down"}</h6>
 		<div class="col">
-		<p><span class="label">{"Label:"}</span> <input type="text" size="30" data-bind="value: label" /></p>
-		<p><span class="label">{"Default value:"}</span> <input type="text" size="30" data-bind="value: default_value" /></p>
-		<p><span class="label">{"Options:<br />(one per line)"}</span> <textarea cols="22" rows="5"></textarea></p>
+		<p><span class="label">{"Label:"}</span> <input type="text" size="30" data-bind="value: label, event: { blur: window.form.update_fields }" /></p>
+		<p><span class="label">{"Default value:"}</span> <input type="text" size="30" data-bind="value: default_value, event: { blur: window.form.update_fields }" /></p>
+		<p><span class="label">{"Options:<br />(one per line)"}</span> <textarea cols="22" rows="5" data-bind="value: values, event: { blur: window.form.update_fields }"></textarea></p>
 		</div>
 		<div class="col">
-		<p><input type="checkbox" /> {"Required field."}</p>
-		<p><span class="label">{"Error message:"}</span> <input type="text" size="30" data-bind="value: message" /></p>
+		<p><input type="checkbox" data-bind="checked: rules" /> {"Required field."}</p>
+		<p><span class="label">{"Error message:"}</span> <input type="text" size="35" data-bind="value: message, event: { blur: window.form.update_fields }" /></p>
 		</div>
 		<div class="clear"></div>
 	</div>
@@ -178,13 +182,13 @@ $(function () {
 		</div>
 		<h6>{"Checkboxes"}</h6>
 		<div class="col">
-		<p><span class="label">{"Label:"}</span> <input type="text" size="30" data-bind="value: label" /></p>
-		<p><span class="label">{"Default value:"}</span> <input type="text" size="30" data-bind="value: default_value" /></p>
-		<p><span class="label">{"Options:<br />(one per line)"}</span> <textarea cols="22" rows="5"></textarea></p>
+		<p><span class="label">{"Label:"}</span> <input type="text" size="30" data-bind="value: label, event: { blur: window.form.update_fields }" /></p>
+		<p><span class="label">{"Default value:"}</span> <input type="text" size="30" data-bind="value: default_value, event: { blur: window.form.update_fields }" /></p>
+		<p><span class="label">{"Options:<br />(one per line)"}</span> <textarea cols="22" rows="5" data-bind="value: values, event: { blur: window.form.update_fields }"></textarea></p>
 		</div>
 		<div class="col">
-		<p><input type="checkbox" /> {"Required field."}</p>
-		<p><span class="label">{"Error message:"}</span> <input type="text" size="30" data-bind="value: message" /></p>
+		<p><input type="checkbox" data-bind="checked: rules" /> {"Required field."}</p>
+		<p><span class="label">{"Error message:"}</span> <input type="text" size="35" data-bind="value: message, event: { blur: window.form.update_fields }" /></p>
 		</div>
 		<div class="clear"></div>
 	</div>
@@ -197,13 +201,13 @@ $(function () {
 		</div>
 		<h6>{"Multiple choice"}</h6>
 		<div class="col">
-		<p><span class="label">{"Label:"}</span> <input type="text" size="30" data-bind="value: label" /></p>
-		<p><span class="label">{"Default value:"}</span> <input type="text" size="30" data-bind="value: default_value" /></p>
-		<p><span class="label">{"Options:<br />(one per line)"}</span> <textarea cols="22" rows="5"></textarea></p>
+		<p><span class="label">{"Label:"}</span> <input type="text" size="30" data-bind="value: label, event: { blur: window.form.update_fields }" /></p>
+		<p><span class="label">{"Default value:"}</span> <input type="text" size="30" data-bind="value: default_value, event: { blur: window.form.update_fields }" /></p>
+		<p><span class="label">{"Options:<br />(one per line)"}</span> <textarea cols="22" rows="5" data-bind="value: values, event: { blur: window.form.update_fields }"></textarea></p>
 		</div>
 		<div class="col">
-		<p><input type="checkbox" /> {"Required field."}</p>
-		<p><span class="label">{"Error message:"}</span> <input type="text" size="30" data-bind="value: message" /></p>
+		<p><input type="checkbox" data-bind="checked: rules" /> {"Required field."}</p>
+		<p><span class="label">{"Error message:"}</span> <input type="text" size="35" data-bind="value: message, event: { blur: window.form.update_fields }" /></p>
 		</div>
 		<div class="clear"></div>
 	</div>
@@ -216,12 +220,12 @@ $(function () {
 		</div>
 		<h6>{"Date"}</h6>
 		<div class="col">
-		<p><span class="label">{"Label:"}</span> <input type="text" size="30" data-bind="value: label" /></p>
-		<p><span class="label">{"Default value:"}</span> <input type="text" size="30" data-bind="value: default_value" /></p>
+		<p><span class="label">{"Label:"}</span> <input type="text" size="30" data-bind="value: label, event: { blur: window.form.update_fields }" /></p>
+		<p><span class="label">{"Default value:"}</span> <input type="text" size="30" data-bind="value: default_value, event: { blur: window.form.update_fields }" /></p>
 		</div>
 		<div class="col">
-		<p><input type="checkbox" /> {"Required field."}</p>
-		<p><span class="label">{"Error message:"}</span> <input type="text" size="30" data-bind="value: message" /></p>
+		<p><input type="checkbox" data-bind="checked: rules" /> {"Required field."}</p>
+		<p><span class="label">{"Error message:"}</span> <input type="text" size="35" data-bind="value: message, event: { blur: window.form.update_fields }" /></p>
 		</div>
 		<div class="clear"></div>
 	</div>
@@ -239,8 +243,8 @@ $(function () {
 		<p><span class="label">{"Min/max values:"}</span> <input type="text" size="10" value="0" data-bind="value: min, event: { blur: window.form.update_fields }" /> &nbsp; <input type="text" size="10" value="10" data-bind="value: max, event: { blur: window.form.update_fields }" /></p>
 		</div>
 		<div class="col">
-		<p><input type="checkbox" /> {"Required field."}</p>
-		<p><span class="label">{"Error message:"}</span> <input type="text" size="30" data-bind="value: message, event: { blur: window.form.update_fields }" /></p>
+		<p><input type="checkbox" data-bind="checked: rules" /> {"Required field."}</p>
+		<p><span class="label">{"Error message:"}</span> <input type="text" size="35" data-bind="value: message, event: { blur: window.form.update_fields }" /></p>
 		</div>
 		<div class="clear"></div>
 	</div>

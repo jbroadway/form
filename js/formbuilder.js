@@ -213,9 +213,13 @@ var form = {
 				id: fields[i].id,
 				label: ko.observable (fields[i].label),
 				default_value: ko.observable (fields[i].default_value),
-				rules: fields[i].rules,
+				rules: ko.observable (form.transform_rules (fields[i].rules)),
 				message: ko.observable (fields[i].message)
 			};
+			field.rules.subscribe (function (value) {
+				console.log (value);
+				form.update_fields ();
+			});
 			if (fields[i].hasOwnProperty ('placeholder')) {
 				field.placeholder = ko.observable (fields[i].placeholder);
 			}
@@ -238,7 +242,7 @@ var form = {
 				field.max = ko.observable (fields[i].max);
 			}
 			if (fields[i].hasOwnProperty ('values')) {
-				field.values = ko.observable (fields[i].values);
+				field.values = ko.observable (fields[i].values.join ("\n"));
 			}
 			list.push (field);
 		}
@@ -304,6 +308,31 @@ var form = {
 			}
 		}
 		return false;
+	},
+
+	/**
+	 * Transform rules from stored format into the format used
+	 * in the form builder UI.
+	 */
+	transform_rules: function (rules) {
+		for (var i in rules) {
+			if (i === 'not empty') {
+				return 'yes';
+			} else if (i === 'email') {
+				return 'email';
+			} else if (i === 'url') {
+				return 'url';
+			} else if (i === 'type') {
+				return 'numeric';
+			} else if (i === 'regex') {
+				if (rules[i] === '/[a-zA-Z]+/') {
+					return 'alpha';
+				}
+				return 'alphanumeric';
+			}
+			// no rules
+			return false;
+		}
 	},
 
 	/**
@@ -374,6 +403,16 @@ var form = {
 	 * Add a text field to the form.
 	 */
 	add_text_field: function () {
+		form.data.fields.push ({
+			type: 'textarea',
+			id: '',
+			label: ko.observable (''),
+			default_value: ko.observable (''),
+			placeholder: ko.observable (''),
+			size: ko.observable ('30'),
+			rules: ko.observable (''),
+			message: ko.observable ('')
+		});
 		return false;
 	},
 
@@ -381,6 +420,21 @@ var form = {
 	 * Add a textarea field to the form.
 	 */
 	add_textarea_field: function () {
+		var f = {
+			type: 'textarea',
+			id: '',
+			label: ko.observable (''),
+			default_value: ko.observable (''),
+			placeholder: ko.observable (''),
+			cols: ko.observable ('50'),
+			rows: ko.observable ('4'),
+			rules: ko.observable (''),
+			message: ko.observable ('')
+		};
+		f.rules.subscribe (function () {
+			form.update_fields ();
+		});
+		form.data.fields.push (f);
 		return false;
 	},
 
@@ -388,6 +442,19 @@ var form = {
 	 * Add a select field to the form.
 	 */
 	add_select_field: function () {
+		var f = {
+			type: 'select',
+			id: '',
+			label: ko.observable (''),
+			default_value: ko.observable (''),
+			values: ko.observable (''),
+			rules: ko.observable (''),
+			message: ko.observable ('')
+		};
+		f.rules.subscribe (function () {
+			form.update_fields ();
+		});
+		form.data.fields.push (f);
 		return false;
 	},
 
@@ -395,6 +462,19 @@ var form = {
 	 * Add a checkbox field to the form.
 	 */
 	add_checkbox_field: function () {
+		var f = {
+			type: 'checkbox',
+			id: '',
+			label: ko.observable (''),
+			default_value: ko.observable (''),
+			values: ko.observable (''),
+			rules: ko.observable (''),
+			message: ko.observable ('')
+		};
+		f.rules.subscribe (function () {
+			form.update_fields ();
+		});
+		form.data.fields.push (f);
 		return false;
 	},
 
@@ -402,6 +482,19 @@ var form = {
 	 * Add a radio field to the form.
 	 */
 	add_radio_field: function () {
+		f = {
+			type: 'radio',
+			id: '',
+			label: ko.observable (''),
+			default_value: ko.observable (''),
+			values: ko.observable (''),
+			rules: ko.observable (''),
+			message: ko.observable ('')
+		};
+		f.rules.subscribe (function () {
+			form.update_fields ();
+		});
+		form.data.fields.push (f);
 		return false;
 	},
 
@@ -409,6 +502,18 @@ var form = {
 	 * Add a date field to the form.
 	 */
 	add_date_field: function () {
+		var f = {
+			type: 'date',
+			id: '',
+			label: ko.observable (''),
+			default_value: ko.observable ('today'),
+			rules: ko.observable (''),
+			message: ko.observable ('')
+		};
+		f.rules.subscribe (function () {
+			form.update_fields ();
+		});
+		form.data.fields.push (f);
 		return false;
 	},
 
@@ -416,16 +521,20 @@ var form = {
 	 * Add a range field to the form.
 	 */
 	add_range_field: function () {
-		form.data.fields.push ({
+		var f = {
 			type: 'range',
 			id: '',
 			label: ko.observable (''),
 			default_value: ko.observable ('5'),
 			min: ko.observable ('0'),
 			max: ko.observable ('10'),
-			rules: {},
+			rules: ko.observable (''),
 			message: ko.observable ('')
+		};
+		f.rules.subscribe (function () {
+			form.update_fields ();
 		});
+		form.data.fields.push (f);
 		return false;
 	},
 
