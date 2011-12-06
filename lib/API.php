@@ -147,9 +147,9 @@ class API extends \Restful {
 			case 'numeric':
 				return (object) array ('type' => 'numeric');
 			case 'alphanumeric':
-				return (object) array ('regex' => '/[a-zA-Z0-9]+/');
+				return (object) array ('regex' => '/^[a-zA-Z0-9]+$/');
 			case 'alpha':
-				return (object) array ('regex' => '/[a-zA-Z]+/');
+				return (object) array ('regex' => '/^[a-zA-Z]+$/');
 			case 'yes':
 			case 'true':
 				return (object) array ('not empty' => 1);

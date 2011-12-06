@@ -324,7 +324,7 @@ var form = {
 			} else if (i === 'type') {
 				return 'numeric';
 			} else if (i === 'regex') {
-				if (rules[i] === '/[a-zA-Z]+/') {
+				if (rules[i] === '/^[a-zA-Z]+$/') {
 					return 'alpha';
 				}
 				return 'alphanumeric';
