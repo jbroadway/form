@@ -10,6 +10,20 @@ var form = {
 	data: {},
 
 	/**
+	 * Whether the form has finished being initialized.
+	 * We won't call any save functions until the initialization
+	 * has been completed, so we're not issuing false saves
+	 * on first load.
+	 */
+	initialized: false,
+
+	/**
+	 * Whether the fields are currently being updated. Prevents
+	 * calling update_actions() incorrectly.
+	 */
+	updating_fields: false,
+
+	/**
 	 * Initialize the form data and apply the bindings.
 	 */
 	init: function (data) {
@@ -31,11 +45,17 @@ var form = {
 						// figure out its new position
 						var position = ko.utils.arrayIndexOf (ui.item.parent ().children (), ui.item[0]);
 
+						// start updating fields list
+						form.updating_fields = true;
+
 						// remove the item and add it back in the right spot
 						if (position >= 0) {
 							list.remove (item);
 							list.splice (position, 0, item);
 						}
+
+						// done updating fields
+						form.updating_fields = false;
 
 						// save changes to the server
 						form.update_fields ();
@@ -200,6 +220,9 @@ var form = {
 
 		// Bind the form model to the view elements.
 		ko.applyBindings (form);
+
+		// Now initialize
+		form.initialized = true;
 	},
 
 	/**
@@ -338,6 +361,10 @@ var form = {
 	 * Save the core form fields on blur of main fields.
 	 */
 	update_form: function () {
+		if (! form.initialized) {
+			return;
+		}
+
 		var data = {
 			title: form.data.title,
 			message: form.data.message,
@@ -360,6 +387,10 @@ var form = {
 	 * Save changes to the fields to the server.
 	 */
 	update_fields: function () {
+		if (! form.initialized) {
+			return;
+		}
+
 		form.show_saving ();
 		$.post ('/form/api/fields/' + form.data.id, {fields: form.data.fields ()}, function (res) {
 			if (res.success) {
@@ -375,6 +406,14 @@ var form = {
 	 * Save the actions to the server.
 	 */
 	update_actions: function () {
+		if (! form.initialized) {
+			return;
+		}
+
+		if (form.updating_fields) {
+			return;
+		}
+
 		form.show_saving ();
 		$.post ('/form/api/actions/' + form.data.id, {actions: form.data.actions}, function (res) {
 			if (res.success) {
