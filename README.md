@@ -7,7 +7,7 @@ the Dynamic Objects dialog.
 
 ## Status: Beta
 
-The form builder is now feature-complete, but requires loads more testing
+The form builder is now feature-complete, but requires more testing
 to be considered stable.
 
 ## Feature overview
