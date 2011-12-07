@@ -3,6 +3,17 @@ $(function () {
 	// Initialize the main tabs.
 	$('#tabs').tabs ();
 
+	// Keep the fields sidebar in view.
+	$.waypoints.settings.scrollThrottle = 30;
+	$('.sidebar').waypoint (function (event, direction) {
+		if ($('body').scrollTop () >= 160 || $('html').scrollTop () >= 160) {
+			$(this).addClass ('sticky');
+		} else {
+			$(this).removeClass ('sticky');
+		}
+		event.stopPropagation ();
+	});
+
 	// Here we populate the data in the view.
 	form.init ({{ form_data|json_encode }});
 });

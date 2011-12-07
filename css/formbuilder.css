@@ -13,6 +13,11 @@
 	margin-top: 28px;
 }
 
+.sticky {
+	position: fixed;
+	top: 15px;
+}
+
 .main {
 	width: 700px;
 	float: right;

@@ -23,6 +23,7 @@ $page->add_script ('/apps/form/js/jquery.tmpl.js');
 $page->add_script ('/apps/form/js/knockout-1.2.1.js');
 $page->add_script ('/apps/form/js/formbuilder.js');
 $page->add_script ('/apps/form/css/formbuilder.css');
+$page->add_script ('/apps/form/js/waypoints.min.js');
 
 $page->add_script ('/apps/form/js/jquery.tools.min.js');
 $page->add_script ('/apps/form/css/rangeinput.css');
