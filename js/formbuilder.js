@@ -438,6 +438,25 @@ var form = {
 	},
 
 	/**
+	 * Put the last field into focus.
+	 */
+	focus_last_field: function () {
+		// make sure the full field list is showing
+		form.show_full ();
+
+		// get the last element in the field list
+		var last_section = $('#field-list-full .section:last');
+
+		// scroll to the last element
+		$('html, body').animate ({
+			scrollTop: last_section.offset ().top
+		}, 500);
+
+		// put first input into focus
+		last_section.find ('input:first').focus ();
+	},
+
+	/**
 	 * Add a text field to the form.
 	 */
 	add_text_field: function () {
@@ -452,6 +471,7 @@ var form = {
 			message: ko.observable ('')
 		};
 		form.data.fields.push (f);
+		form.focus_last_field ();
 		return false;
 	},
 
@@ -474,6 +494,7 @@ var form = {
 			form.update_fields ();
 		});
 		form.data.fields.push (f);
+		form.focus_last_field ();
 		return false;
 	},
 
@@ -494,6 +515,7 @@ var form = {
 			form.update_fields ();
 		});
 		form.data.fields.push (f);
+		form.focus_last_field ();
 		return false;
 	},
 
@@ -514,6 +536,7 @@ var form = {
 			form.update_fields ();
 		});
 		form.data.fields.push (f);
+		form.focus_last_field ();
 		return false;
 	},
 
@@ -534,6 +557,7 @@ var form = {
 			form.update_fields ();
 		});
 		form.data.fields.push (f);
+		form.focus_last_field ();
 		return false;
 	},
 
@@ -553,6 +577,7 @@ var form = {
 			form.update_fields ();
 		});
 		form.data.fields.push (f);
+		form.focus_last_field ();
 		return false;
 	},
 
@@ -574,6 +599,7 @@ var form = {
 			form.update_fields ();
 		});
 		form.data.fields.push (f);
+		form.focus_last_field ();
 		return false;
 	},
 
