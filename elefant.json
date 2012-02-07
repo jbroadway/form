@@ -1,0 +1,16 @@
+{
+    "type":         "app",
+    "folder":       "form",
+    "name":         "Forms",
+    "version":      "0.9.0",
+    "website":      "http://www.elefantcms.com/",
+    "repository":   "git://github.com/jbroadway/form.git",
+    "author": {
+        "name":     "Johnny Broadway",
+        "email":    "johnny@johnnybroadway.com"
+    },
+    "requires": {
+        "php": "5.3.2",
+        "elefant": "1.0.1"
+    }
+}
