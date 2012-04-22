@@ -269,6 +269,38 @@ class Form extends \Model {
 	}
 
 	/**
+	 * Sends email messages, either through `Mailer::send()` or `mail()`
+	 * depending on which is available.
+	 */
+	public function send_email ($to, $subject, $body, $from = false) {
+		if (file_exists ('lib/Mailer.php')) {
+			$msg = array (
+				'to' => $to,
+				'subject' => $subject,
+				'text' => $body
+			);
+			if ($from !== false) {
+				$msg['from'] = $from;
+			}
+			return \Mailer::send ($msg);
+		} else {
+			$to = is_array ($to) ? '"' . $to[1] . '" <' . $to[0] . '>' : $to;
+			if ($from === false) {
+				$from = array ();
+				$from[0] = (self::$config['email_from'] !== 'default') ? self::$config['email_from'] : conf ('General', 'email_from');
+				$from[1] = (self::$config['email_name'] !== 'default') ? self::$config['email_name'] : conf ('General', 'site_name');
+			}
+			$from = is_array ($from) ? '"' . $from[1] . '" <' . $from[0] . '>' : $from;
+			return mail (
+				$to,
+				$subject,
+				$body,
+				'From: ' . $from
+			);
+		}
+	}
+
+	/**
 	 * Dynamic getter that unserializes fields and actions.
 	 */
 	public function __get ($key) {

@@ -55,16 +55,16 @@ if ($f->submit ()) {
 		// handle action
 		switch ($action->type) {
 			case 'email':
-				@mail (
+				$f->send_email (
 					$action->to,
 					$f->title,
 					$tpl->render ('form/email', array ('values' => $_POST)),
-					'From: "' . conf ('General', 'site_name') . '" <' . conf ('General', 'email_from') . '>'
+					array (conf ('General', 'email_from'), conf ('General', 'site_name'))
 				);
 				break;
 			case 'cc_recipient':
 				$send_to = $action->name_field
-					? '"' . $_POST[$action->name_field] . '" <' . $_POST[$action->email_field] . '>'
+					? array ($_POST[$action->email_field], $_POST[$action->name_field])
 					: $_POST[$action->email_field];
 
 				$msg_body = $action->body_intro;
@@ -78,11 +78,11 @@ if ($f->submit ()) {
 				}
 				$msg_body .= $action->body_sig;
 
-				@mail (
+				$f->send_email (
 					$send_to,
 					$action->subject,
 					$msg_body,
-					'From: ' . $action->reply_from
+					$action->reply_from
 				);
 				break;
 			case 'redirect':
