@@ -1,0 +1,20 @@
+{
+    "name": "elefant/app-form",
+    "type": "elefant-app",
+    "description": "Form builder app for the Elefant CMS",
+    "keywords": ["form", "forms", "survey", "input", "contact", "elefant", "cms", "app"],
+    "license": "MIT",
+	"authors": [
+		{
+			"name": "Johnny Broadway",
+			"email": "johnny@johnnybroadway.com",
+			"homepage": "http://www.johnnybroadway.com/"
+		}
+	],
+    "repositories": [
+        {"type": "git", "url": "http://github.com/jbroadway/elefant_installer"}
+    ],
+    "require": {
+        "elefant/app-installer": "*"
+    }
+}
