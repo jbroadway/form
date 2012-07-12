@@ -43,7 +43,7 @@ if ($error) {
 	return;
 }
 
-echo '<p>Done.</p>';
+echo '<p><a href="/form/admin">Done.</a></p>';
 
 $this->mark_installed ('form', $appconf['Admin']['version']);
 
