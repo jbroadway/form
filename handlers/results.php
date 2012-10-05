@@ -23,9 +23,10 @@ $limit = 20;
 $_GET['offset'] = (isset ($_GET['offset'])) ? $_GET['offset'] : 0;
 
 $results = form\Results::query ()
+	->where ('form_id', $_GET['id'])
 	->order ('ts desc')
 	->fetch ($limit, $_GET['offset']);
-$count = form\Results::query ()->count ();
+$count = form\Results::query ()->where ('form_id', $_GET['id'])->count ();
 
 // determine which fields to display as columns
 // as well as the column names
