@@ -51,6 +51,10 @@ if ($f->submit ()) {
 		}
 	}
 
+	// if there's a redirect, we wait to exit after
+	// all actions have been performed.
+	$has_redirect = false;
+
 	foreach ($f->actions as $action) {
 		// handle action
 		switch ($action->type) {
@@ -86,9 +90,14 @@ if ($f->submit ()) {
 				);
 				break;
 			case 'redirect':
-				$this->redirect ($action->url);
+				$this->redirect ($action->url, false);
+				$has_redirect = true;
 				break;
 		}
+	}
+
+	if ($has_redirect) {
+		$this->quit ();
 	}
 
 	if (! $this->internal) {
