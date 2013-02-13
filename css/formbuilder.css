@@ -3,15 +3,26 @@
 .sidebar {
 	float: left;
 	width: 200px;
-	background: #e5e5e5;
 	padding: 10px;
 	margin-bottom: 15px;
 	border-radius: 5px;
 	-moz-border-radius: 5px;
 	-webkit-border-radius: 5px;
-	border: 1px solid #d5d5d5;
+	border: 1px solid #ccc;
 	margin-top: 28px;
 }
+
+	.sidebar ul {
+		list-style-type: none;
+		margin-left: 0;
+		padding-left: 0;
+	}
+
+	.sidebar li {
+		list-style-type: none;
+		margin-left: 0px;
+		padding-left: 0;
+	}
 
 .sticky {
 	position: fixed;
@@ -33,13 +44,12 @@
 	}
 
 .section {
-	background: #e5e5e5;
 	padding: 10px;
 	margin-bottom: 15px;
 	border-radius: 5px;
 	-moz-border-radius: 5px;
 	-webkit-border-radius: 5px;
-	border: 1px solid #d5d5d5;
+	border: 1px solid #ccc;
 }
 
 	.section h6 {
@@ -80,9 +90,52 @@ p.indent {
 		cursor: move;
 	}
 
+#field-list-full, #field-list-list {
+	margin-top: -27px;
+}
+
+#field-list-preview {
+	margin-top: -18px;
+}
+
 #field-list-list, #field-list-preview {
 	display: none;
 }
+
+.field-list-sortable {
+	list-style-type: none;
+	margin-left: 0;
+	padding-left: 0;
+}
+
+.sortable-field-item {
+	list-style-type: none;
+	margin-left: 0;
+	padding-left: 0;
+	background: #f5f5f5;
+	padding: 3px 10px 3px 10px;
+	margin-left: 0px;
+	margin-bottom: 8px;
+	border-radius: 3px;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	border: 1px solid #ccc;
+}
+
+.sortable-field-item:hover {
+	cursor: move;
+}
+
+	.sortable-field-item a {
+		color: #222;
+		text-decoration: none;
+	}
+
+	.sortable-field-item a:hover {
+		color: #222;
+		text-decoration: none;
+		cursor: move;
+	}
 
 .section-header {
 	color: #666;
@@ -164,7 +217,7 @@ p.indent {
 
 .ui-tabs-nav {
 	list-style: none;
-	border-bottom: 1px solid #8A5AB5;
+	border-bottom: 1px solid #ccc;
 	padding: 0px;
 	margin: 0px;
 	padding-bottom: 2px;
@@ -182,21 +235,22 @@ p.indent {
 		line-height: 20px;
 		padding: 5px 10px 5px 10px;
 		background: #e5e5e5;
-		border-right: 1px solid #ccc;
+		color: #222;
+		border-right: 1px solid #bbb;
+		outline: 0;
 	}
 	
 	.ui-state-default a:hover {
-		background: #e8d8ed;
-		color: #8A5AB5;
+		background: #d5d5d5;
+		color: #000;
 	}
 
-	.ui-tabs-selected a {
-		background: #8A5AB5;
-		color: #f5f5f5;
-		border-right: 0px;
+	.ui-tabs-active a {
+		background: #d5d5d5;
+		color: #000;
 	}
 	
-	.ui-tabs-selected a:hover {
-		background: #8A5AB5;
-		color: #f5f5f5;
+	.ui-tabs-active a:hover {
+		background: #d5d5d5;
+		color: #000;
 	}

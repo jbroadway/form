@@ -237,7 +237,8 @@ var form = {
 				label: ko.observable (fields[i].label),
 				default_value: ko.observable (fields[i].default_value),
 				rules: ko.observable (form.transform_rules (fields[i].rules)),
-				message: ko.observable (fields[i].message)
+				message: ko.observable (fields[i].message),
+				icon: fields[i].icon
 			};
 			field.rules.subscribe (function (value) {
 				form.update_fields ();
@@ -468,8 +469,12 @@ var form = {
 			placeholder: ko.observable (''),
 			size: ko.observable ('30'),
 			rules: ko.observable (''),
-			message: ko.observable ('')
+			message: ko.observable (''),
+			icon: 'icon-edit'
 		};
+		f.rules.subscribe (function () {
+			form.update_fields ();
+		});
 		form.data.fields.push (f);
 		form.focus_last_field ();
 		return false;
@@ -488,7 +493,8 @@ var form = {
 			cols: ko.observable ('50'),
 			rows: ko.observable ('4'),
 			rules: ko.observable (''),
-			message: ko.observable ('')
+			message: ko.observable (''),
+			icon: 'icon-edit'
 		};
 		f.rules.subscribe (function () {
 			form.update_fields ();
@@ -509,7 +515,8 @@ var form = {
 			default_value: ko.observable (''),
 			values: ko.observable (''),
 			rules: ko.observable (''),
-			message: ko.observable ('')
+			message: ko.observable (''),
+			icon: 'icon-circle-arrow-down'
 		};
 		f.rules.subscribe (function () {
 			form.update_fields ();
@@ -530,7 +537,8 @@ var form = {
 			default_value: ko.observable (''),
 			values: ko.observable (''),
 			rules: ko.observable (''),
-			message: ko.observable ('')
+			message: ko.observable (''),
+			icon: 'icon-check'
 		};
 		f.rules.subscribe (function () {
 			form.update_fields ();
@@ -551,7 +559,8 @@ var form = {
 			default_value: ko.observable (''),
 			values: ko.observable (''),
 			rules: ko.observable (''),
-			message: ko.observable ('')
+			message: ko.observable (''),
+			icon: 'icon-ok-circle'
 		};
 		f.rules.subscribe (function () {
 			form.update_fields ();
@@ -571,7 +580,8 @@ var form = {
 			label: ko.observable (''),
 			default_value: ko.observable ('today'),
 			rules: ko.observable (''),
-			message: ko.observable ('')
+			message: ko.observable (''),
+			icon: 'icon-calendar'
 		};
 		f.rules.subscribe (function () {
 			form.update_fields ();
@@ -593,7 +603,8 @@ var form = {
 			min: ko.observable ('0'),
 			max: ko.observable ('10'),
 			rules: ko.observable (''),
-			message: ko.observable ('')
+			message: ko.observable (''),
+			icon: 'icon-tasks'
 		};
 		f.rules.subscribe (function () {
 			form.update_fields ();
