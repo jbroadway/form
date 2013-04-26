@@ -1,4 +1,4 @@
-create table form (
+create table #prefix#form (
 	id int not null auto_increment primary key,
 	title char(48) not null,
 	message text not null,
@@ -11,7 +11,7 @@ create table form (
 	index (ts)
 );
 
-create table results (
+create table #prefix#form_results (
 	id int not null auto_increment primary key,
 	form_id int not null,
 	ts datetime not null,

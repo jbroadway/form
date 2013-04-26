@@ -10,7 +10,7 @@ class Results extends \Model {
 	/**
 	 * Table name.
 	 */
-	public $table = 'results';
+	public $table = '#prefix#form_results';
 
 	/**
 	 * Stores results data.

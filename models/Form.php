@@ -10,7 +10,7 @@ class Form extends \Model {
 	/**
 	 * Table name.
 	 */
-	public $table = 'form';
+	public $table = '#prefix#form';
 
 	/**
 	 * List of fields that failed validation.

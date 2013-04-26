@@ -1,4 +1,4 @@
-create table form (
+create table #prefix#form (
 	id integer primary key,
 	title char(48) not null,
 	message text not null,
@@ -9,10 +9,10 @@ create table form (
 	response_body text not null
 );
 
-create index form_title on form (title);
-create index form_ts on form (ts);
+create index #prefix#form_title on #prefix#form (title);
+create index #prefix#form_ts on #prefix#form (ts);
 
-create table results (
+create table #prefix#form_results (
 	id integer primary key,
 	form_id int not null,
 	ts datetime not null,
@@ -20,4 +20,4 @@ create table results (
 	results text not null
 );
 
-create index results_form on results (form_id, ts);
+create index #prefix#form_results_form on #prefix#form_results (form_id, ts);
