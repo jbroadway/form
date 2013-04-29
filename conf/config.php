@@ -5,6 +5,7 @@
 handler = form/admin
 name = Forms
 install = form/install
-version = 0.9.0-beta
+upgrade = form/upgrade
+version = 1.0.2-stable
 
 ; */ ?>

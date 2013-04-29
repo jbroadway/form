@@ -1,47 +1,42 @@
 <?php
 
-$page->layout = 'admin';
+$this->require_admin ();
 
-if (! User::require_admin ()) {
-	header ('Location: /admin');
-	exit;
-}
+$page->layout = 'admin';
 
 $cur = $this->installed ('form', $appconf['Admin']['version']);
 
 if ($cur === true) {
 	$page->title = 'Already installed';
-	echo '<p><a href="/">Home</a></p>';
+	echo '<p><a href="/form/admin">Continue</a></p>';
 	return;
 } elseif ($cur !== false) {
 	header ('Location: /' . $appconf['Admin']['upgrade']);
 	exit;
 }
 
-$page->title = 'Installing app: form';
+$page->title = 'Installing App: Forms';
 
-if (ELEFANT_VERSION < '1.1.0') {
-	$driver = conf ('Database', 'driver');
-} else {
-	$conn = conf ('Database', 'master');
-	$driver = $conn['driver'];
-}
+$conn = conf ('Database', 'master');
+$driver = $conn['driver'];
+DB::beginTransaction ();
 
 $error = false;
 $sqldata = sql_split (file_get_contents ('apps/form/conf/install_' . $driver . '.sql'));
 foreach ($sqldata as $sql) {
-	if (! db_execute ($sql)) {
-		$error = db_error ();
-		echo '<p class="notice">Error: ' . db_error () . '</p>';
+	if (! DB::execute ($sql)) {
+		$error = DB::error ();
 		break;
 	}
 }
 
 if ($error) {
-	echo '<p class="notice">Error: ' . $error . '</p>';
+	DB::rollback ();
+	echo '<p class="visible-notice">Error: ' . $error . '</p>';
 	echo '<p>Install failed.</p>';
 	return;
 }
+DB::commit ();
 
 echo '<p><a href="/form/admin">Done.</a></p>';
 
