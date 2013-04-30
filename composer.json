@@ -4,7 +4,7 @@
     "description": "Form builder app for the Elefant CMS",
     "keywords": ["form", "forms", "survey", "input", "contact", "elefant", "cms", "app"],
     "license": "MIT",
-    "version": "1.0.2",
+    "version": "1.0.3-stable",
 	"authors": [
 		{
 			"name": "Johnny Broadway",
