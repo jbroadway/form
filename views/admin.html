@@ -13,7 +13,7 @@
 		<td>{{ loop_value->title }}</td>
 		<td>{{ loop_value->ts|date ('F j, Y - g:ia', strtotime (%s)) }}</td>
 		<td><a href="/form/results?id={{ loop_value->id }}" title="{" Browse results "}">{{ loop_value->id|form_results_count }}</a></td>
-		<td>
+		<td style="text-align: right">
 			{% if loop_value->locked %}
 			{"Editing Locked"}
 			{% else %}
