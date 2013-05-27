@@ -33,8 +33,8 @@ $count = form\Results::query ()->where ('form_id', $_GET['id'])->count ();
 $labels = $f->labels ();
 if ($count > 0) {
 	if (count ($labels) === 1) {
-		$field_one = array_shift (array_keys ($labels));
-		$field_one_name = array_shift (array_values ($labels));
+		$field_one = current (array_keys ($labels));
+		$field_one_name = current (array_values ($labels));
 		$field_two_name = '';
 		foreach ($results as $k => $v) {
 			$res = $v->results;
