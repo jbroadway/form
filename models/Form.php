@@ -282,7 +282,12 @@ class Form extends \Model {
 			if ($from !== false) {
 				$msg['from'] = $from;
 			}
-			return \Mailer::send ($msg);
+			try {
+				return \Mailer::send ($msg);
+			} catch (Exception $e) {
+				$this->error = $e->getMessage ();
+				return false;
+			}
 		} else {
 			$to = is_array ($to) ? '"' . $to[1] . '" <' . $to[0] . '>' : $to;
 			if ($from === false) {
