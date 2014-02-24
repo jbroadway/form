@@ -55,13 +55,13 @@ $(function () {
 		<div class="sidebar">
 			<p>{"Add a field:"}</p>
 			<ul>
-				<li><i class="icon-edit"></i> <a href="#" id="add-text" data-bind="click: add_text_field">{"Single-line text"}</a></li>
-				<li><i class="icon-edit"></i> <a href="#" id="add-textarea" data-bind="click: add_textarea_field">{"Paragraph text"}</a></li>
-				<li><i class="icon-circle-arrow-down"></i> <a href="#" id="add-select" data-bind="click: add_select_field">{"Drop down"}</a></li>
-				<li><i class="icon-check"></i> <a href="#" id="add-checkbox" data-bind="click: add_checkbox_field">{"Checkboxes"}</a></li>
-				<li><i class="icon-ok-circle"></i> <a href="#" id="add-radio" data-bind="click: add_radio_field">{"Multiple choice"}</a></li>
-				<li><i class="icon-calendar"></i> <a href="#" id="add-date" data-bind="click: add_date_field">{"Date"}</a></li>
-				<li><i class="icon-tasks"></i> <a href="#" id="add-range" data-bind="click: add_range_field">{"Slider"}</a></li>
+				<li><i class="fa fa-edit"></i> <a href="#" id="add-text" data-bind="click: add_text_field">{"Single-line text"}</a></li>
+				<li><i class="fa fa-edit"></i> <a href="#" id="add-textarea" data-bind="click: add_textarea_field">{"Paragraph text"}</a></li>
+				<li><i class="fa fa-arrow-circle-down"></i> <a href="#" id="add-select" data-bind="click: add_select_field">{"Drop down"}</a></li>
+				<li><i class="fa fa-check"></i> <a href="#" id="add-checkbox" data-bind="click: add_checkbox_field">{"Checkboxes"}</a></li>
+				<li><i class="fa fa-check-circle-o"></i> <a href="#" id="add-radio" data-bind="click: add_radio_field">{"Multiple choice"}</a></li>
+				<li><i class="fa fa-calendar"></i> <a href="#" id="add-date" data-bind="click: add_date_field">{"Date"}</a></li>
+				<li><i class="fa fa-tasks"></i> <a href="#" id="add-range" data-bind="click: add_range_field">{"Slider"}</a></li>
 			</ul>
 		</div>
 		<div class="main">
@@ -126,7 +126,7 @@ $(function () {
 		<div class="buttons">
 			<a href="#" class="delete-field" data-bind="click: function() { form.delete_field ($data); }">{"Delete"}</a>
 		</div>
-		<h6><i class="icon-edit"></i> {"Single-line text"}</h6>
+		<h6><i class="fa fa-edit"></i> {"Single-line text"}</h6>
 		<div class="col">
 		<p><span class="label">{"Label:"}</span> <input type="text" size="30" data-bind="value: label, event: { blur: window.form.update_fields }" /></p>
 		<p><span class="label">{"Default value:"}</span> <input type="text" size="30" data-bind="value: default_value, event: { blur: window.form.update_fields }" /></p>
@@ -154,7 +154,7 @@ $(function () {
 		<div class="buttons">
 			<a href="#" class="delete-field" data-bind="click: function() { form.delete_field ($data); }">{"Delete"}</a>
 		</div>
-		<h6><i class="icon-edit"></i> {"Paragraph text"}</h6>
+		<h6><i class="fa fa-edit"></i> {"Paragraph text"}</h6>
 		<div class="col">
 		<p><span class="label">{"Label:"}</span> <input type="text" size="30" data-bind="value: label, event: { blur: window.form.update_fields }" /></p>
 		<p><span class="label">{"Default value:"}</span> <input type="text" size="30" data-bind="value: default_value, event: { blur: window.form.update_fields }" /></p>
@@ -174,7 +174,7 @@ $(function () {
 		<div class="buttons">
 			<a href="#" class="delete-field" data-bind="click: function() { form.delete_field ($data); }">{"Delete"}</a>
 		</div>
-		<h6><i class="icon-circle-arrow-down"></i> {"Drop down"}</h6>
+		<h6><i class="fa fa-arrow-circle-down"></i> {"Drop down"}</h6>
 		<div class="col">
 		<p><span class="label">{"Label:"}</span> <input type="text" size="30" data-bind="value: label, event: { blur: window.form.update_fields }" /></p>
 		<p><span class="label">{"Default value:"}</span> <input type="text" size="30" data-bind="value: default_value, event: { blur: window.form.update_fields }" /></p>
@@ -193,7 +193,7 @@ $(function () {
 		<div class="buttons">
 			<a href="#" class="delete-field" data-bind="click: function() { form.delete_field ($data); }">{"Delete"}</a>
 		</div>
-		<h6><i class="icon-check"></i> {"Checkboxes"}</h6>
+		<h6><i class="fa fa-check"></i> {"Checkboxes"}</h6>
 		<div class="col">
 		<p><span class="label">{"Label:"}</span> <input type="text" size="30" data-bind="value: label, event: { blur: window.form.update_fields }" /></p>
 		<p><span class="label">{"Default value:"}</span> <input type="text" size="30" data-bind="value: default_value, event: { blur: window.form.update_fields }" /></p>
@@ -212,7 +212,7 @@ $(function () {
 		<div class="buttons">
 			<a href="#" class="delete-field" data-bind="click: function() { form.delete_field ($data); }">{"Delete"}</a>
 		</div>
-		<h6><i class="icon-ok-circle"></i> {"Multiple choice"}</h6>
+		<h6><i class="fa fa-check-circle-o"></i> {"Multiple choice"}</h6>
 		<div class="col">
 		<p><span class="label">{"Label:"}</span> <input type="text" size="30" data-bind="value: label, event: { blur: window.form.update_fields }" /></p>
 		<p><span class="label">{"Default value:"}</span> <input type="text" size="30" data-bind="value: default_value, event: { blur: window.form.update_fields }" /></p>
@@ -231,7 +231,7 @@ $(function () {
 		<div class="buttons">
 			<a href="#" class="delete-field" data-bind="click: function() { form.delete_field ($data); }">{"Delete"}</a>
 		</div>
-		<h6><i class="icon-calendar"></i> {"Date"}</h6>
+		<h6><i class="fa fa-calendar"></i> {"Date"}</h6>
 		<div class="col">
 		<p><span class="label">{"Label:"}</span> <input type="text" size="30" data-bind="value: label, event: { blur: window.form.update_fields }" /></p>
 		<p><span class="label">{"Default value:"}</span> <input type="text" size="30" data-bind="value: default_value, event: { blur: window.form.update_fields }" /></p>
@@ -249,7 +249,7 @@ $(function () {
 		<div class="buttons">
 			<a href="#" class="delete-field" data-bind="click: function() { form.delete_field ($data); }">{"Delete"}</a>
 		</div>
-		<h6><i class="icon-tasks"></i> {"Slider"}</h6>
+		<h6><i class="fa fa-tasks"></i> {"Slider"}</h6>
 		<div class="col">
 		<p><span class="label">{"Label:"}</span> <input type="text" size="30" data-bind="value: label, event: { blur: window.form.update_fields }" /></p>
 		<p><span class="label">{"Default value:"}</span> <input type="text" size="10" value="5" data-bind="value: default_value, event: { blur: window.form.update_fields }" /></p>

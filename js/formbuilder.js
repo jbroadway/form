@@ -470,7 +470,7 @@ var form = {
 			size: ko.observable ('30'),
 			rules: ko.observable (''),
 			message: ko.observable (''),
-			icon: 'icon-edit'
+			icon: 'fa fa-edit'
 		};
 		f.rules.subscribe (function () {
 			form.update_fields ();
@@ -494,7 +494,7 @@ var form = {
 			rows: ko.observable ('4'),
 			rules: ko.observable (''),
 			message: ko.observable (''),
-			icon: 'icon-edit'
+			icon: 'fa fa-edit'
 		};
 		f.rules.subscribe (function () {
 			form.update_fields ();
@@ -516,7 +516,7 @@ var form = {
 			values: ko.observable (''),
 			rules: ko.observable (''),
 			message: ko.observable (''),
-			icon: 'icon-circle-arrow-down'
+			icon: 'fa fa-arrow-circle-down'
 		};
 		f.rules.subscribe (function () {
 			form.update_fields ();
@@ -538,7 +538,7 @@ var form = {
 			values: ko.observable (''),
 			rules: ko.observable (''),
 			message: ko.observable (''),
-			icon: 'icon-check'
+			icon: 'fa fa-check'
 		};
 		f.rules.subscribe (function () {
 			form.update_fields ();
@@ -560,7 +560,7 @@ var form = {
 			values: ko.observable (''),
 			rules: ko.observable (''),
 			message: ko.observable (''),
-			icon: 'icon-ok-circle'
+			icon: 'fa fa-check-circle-o'
 		};
 		f.rules.subscribe (function () {
 			form.update_fields ();
@@ -581,7 +581,7 @@ var form = {
 			default_value: ko.observable ('today'),
 			rules: ko.observable (''),
 			message: ko.observable (''),
-			icon: 'icon-calendar'
+			icon: 'fa fa-calendar'
 		};
 		f.rules.subscribe (function () {
 			form.update_fields ();
@@ -604,7 +604,7 @@ var form = {
 			max: ko.observable ('10'),
 			rules: ko.observable (''),
 			message: ko.observable (''),
-			icon: 'icon-tasks'
+			icon: 'fa fa-tasks'
 		};
 		f.rules.subscribe (function () {
 			form.update_fields ();
