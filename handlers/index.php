@@ -107,7 +107,7 @@ if ($f->submit ()) {
 	echo $f->response_body;
 } else {
 	// render the form
-	if (! $this->interal) {
+	if (! $this->internal) {
 		$page->title = $f->title;
 	}
 
