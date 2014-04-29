@@ -2,7 +2,7 @@
     "type":         "app",
     "folder":       "form",
     "name":         "Forms",
-    "version":      "0.9.0",
+    "version":      "1.0.5",
     "website":      "http://www.elefantcms.com/",
     "repository":   "git://github.com/jbroadway/form.git",
     "author": {
