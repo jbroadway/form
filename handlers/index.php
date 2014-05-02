@@ -59,9 +59,13 @@ if ($f->submit ()) {
 		// handle action
 		switch ($action->type) {
 			case 'email':
-				$reply_to = $action->name_field
-					? array ($_POST[$action->email_field], $_POST[$action->name_field])
-					: $_POST[$action->email_field];
+				$reply_to = false;
+				$fields = $f->field_list;
+				foreach ($fields as $field) {
+					if (isset ($field->rules) && isset ($field->rules->email)) {
+						$reply_to = $_POST[$field->id];
+					}
+				}
 
 				$f->send_email (
 					$action->to,
