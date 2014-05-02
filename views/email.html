@@ -1,7 +1,7 @@
 {" A form has just been submitted "}:
 
 {% foreach values %}
-* {{ loop_index|str_pad (%s, 32, ' ', STR_PAD_RIGHT) }} : {{ loop_value }}
+* {{ loop_index|str_pad (%s, 32, ' ', STR_PAD_RIGHT) }} : {{ loop_value|none }}
 
 {% end %}
 
