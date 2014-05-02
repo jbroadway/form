@@ -59,11 +59,16 @@ if ($f->submit ()) {
 		// handle action
 		switch ($action->type) {
 			case 'email':
+				$reply_to = $action->name_field
+					? array ($_POST[$action->email_field], $_POST[$action->name_field])
+					: $_POST[$action->email_field];
+
 				$f->send_email (
 					$action->to,
 					$f->title,
 					$tpl->render ('form/email', array ('values' => $_POST)),
-					array (conf ('General', 'email_from'), conf ('General', 'site_name'))
+					array (conf ('General', 'email_from'), conf ('General', 'site_name')),
+					$reply_to
 				);
 				break;
 			case 'cc_recipient':

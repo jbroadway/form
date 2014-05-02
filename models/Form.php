@@ -272,7 +272,7 @@ class Form extends \Model {
 	 * Sends email messages, either through `Mailer::send()` or `mail()`
 	 * depending on which is available.
 	 */
-	public function send_email ($to, $subject, $body, $from = false) {
+	public function send_email ($to, $subject, $body, $from = false, $reply_to = false) {
 		if (file_exists ('lib/Mailer.php')) {
 			$msg = array (
 				'to' => $to,
@@ -281,6 +281,9 @@ class Form extends \Model {
 			);
 			if ($from !== false) {
 				$msg['from'] = $from;
+			}
+			if ($reply_to) {
+				$msg['reply_to'] = $reply_to;
 			}
 			try {
 				return \Mailer::send ($msg);
