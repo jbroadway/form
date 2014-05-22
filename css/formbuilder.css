@@ -1,5 +1,9 @@
 /* custom styles for /form/edit form builder */
 
+.clear {
+	clear: both;
+}
+
 .sidebar {
 	float: left;
 	width: 200px;
@@ -43,7 +47,7 @@
 		min-height: 22px;
 	}
 
-.section {
+#tabs .section {
 	padding: 10px;
 	margin-bottom: 15px;
 	border-radius: 5px;
@@ -52,16 +56,16 @@
 	border: 1px solid #ccc;
 }
 
-	.section h6 {
+	#tabs .section h6 {
 		margin-top: -6px;
 		margin-bottom: 8px;
 	}
 
-	.section p:last-child {
+	#tabs .section p:last-child {
 		margin-bottom: 0px;
 	}
 
-	.section .buttons {
+	#tabs .section .buttons {
 		float: right;
 	}
 
