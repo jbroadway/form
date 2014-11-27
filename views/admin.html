@@ -10,7 +10,7 @@
 	</tr>
 {% foreach forms %}
 	<tr>
-		<td>{{ loop_value->title }}</td>
+		<td><a href="/form/{{loop_value->id}}" target="_blank">{{ loop_value->title }}</a></td>
 		<td>{{ loop_value->ts|date ('F j, Y - g:ia', strtotime (%s)) }}</td>
 		<td><a href="/form/results?id={{ loop_value->id }}" title="{" Browse results "}">{{ loop_value->id|form_results_count }}</a></td>
 		<td style="text-align: right">
