@@ -8,25 +8,23 @@
  */
 
 if (count ($this->params) != 1) {
-	die ('Usage: /form/validator/form_id');
+    die ('Usage: /form/validator/form_id');
 } elseif (! is_numeric ($this->params[0])) {
-	die ('Invalid form name');
+    die ('Invalid form name');
 }
 
 $f = new form\Form ($this->params[0]);
 if ($f->error) {
-	die ('Form not found');
+    die ('Form not found');
 }
 
 $rules = $f->rules ();
 foreach ($rules as $k => $v) {
-	if (is_array ($v) && count ($v) === 0) {
-		unset ($rules[$k]);
-	}
+    if (is_array ($v) && count ($v) === 0) {
+        unset ($rules[$k]);
+    }
 }
 
 $page->layout = false;
 header ('Content-Type: application/json');
 echo json_encode ($rules);
-
-?>

@@ -6,6 +6,4 @@
 
 $this->require_admin ();
 
-$this->restful (new form\API);
-
-?>
+$this->restful (new form\API());
