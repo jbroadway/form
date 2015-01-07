@@ -87,7 +87,7 @@ if ($f->submit ()) {
                     $labels = $f->labels ();
                     $msg_body .= "\n\n";
                     foreach ($_POST as $k => $v) {
-                        $msg_body .= '* ' . str_pad ($labels[$k], 32, ' ', STR_PAD_RIGHT) . ': ' . $v . "\n";
+                        $msg_body .= '* ' . form\Filter::label ($labels[$k]) . ': ' . $v . "\n";
                     }
                     $msg_body .= "\n";
                 }
