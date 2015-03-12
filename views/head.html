@@ -5,6 +5,8 @@ $(function () {
 		handler: '{{ id }}',
 		prefix: '/form/validator/',
 		callback: function (failed) {
+			$('#form-{{ id }}')[0].scrollIntoView ();
+			
 			// highlight the failed elements
 			for (var i = 0; i < failed.length; i++) {
 				$('#form-' + failed[i] + '-notice').show ();
