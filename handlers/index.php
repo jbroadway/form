@@ -115,7 +115,11 @@ if ($f->submit ()) {
         $page->title = $f->response_title;
     }
 
+	// ensure form submission message is in view
+	echo '<div id="form-' . $id . '">';
     echo $f->response_body;
+    echo '</div>';
+	echo '<script>$(\'#form-' . $id . '\')[0].scrollIntoView ();</script>';
 } else {
     // render the form
     if (! $this->internal) {
