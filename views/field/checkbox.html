@@ -6,8 +6,8 @@
 	<div class="form-field-input">
 {% foreach values %}
 		<div>
-			<input type="checkbox" name="{{ id }}[]" value="{{ loop_value }}"{% if loop_value == $data->default_value %} checked="checked"{% end %} />
-			<span>{{ loop_value }}</span>
+			<label><input type="checkbox" name="{{ id }}[]" value="{{ loop_value }}"{% if loop_value == $data->default_value %} checked="checked"{% end %} />
+			<span>{{ loop_value }}</span></label>
 		</div>
 {% end %}
 	</div>
