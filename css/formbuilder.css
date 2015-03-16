@@ -167,6 +167,7 @@ p.indent {
 		float: right;
 		width: 20px;
 		height: 20px;
+		padding: 0;
 	}
 
 	#toggle-full {
@@ -177,6 +178,12 @@ p.indent {
 		-moz-border-radius-bottomleft: 3px;
 		border-top-left-radius: 3px;
 		border-bottom-left-radius: 3px;
+		-webkit-border-top-right-radius: 0px;
+		-webkit-border-bottom-right-radius: 0px;
+		-moz-border-radius-topright: 0px;
+		-moz-border-radius-bottomright: 0px;
+		border-top-right-radius: 0px;
+		border-bottom-right-radius: 0px;
 		border: 1px solid #c5c5c5;
 		border-right: 0px;
 	}
@@ -195,6 +202,12 @@ p.indent {
 		-moz-border-radius-bottomright: 3px;
 		border-top-right-radius: 3px;
 		border-bottom-right-radius: 3px;
+		-webkit-border-top-left-radius: 0px;
+		-webkit-border-bottom-left-radius: 0px;
+		-moz-border-radius-topleft: 0px;
+		-moz-border-radius-bottomleft: 0px;
+		border-top-left-radius: 0px;
+		border-bottom-left-radius: 0px;
 		border: 1px solid #c5c5c5;
 	}
 
