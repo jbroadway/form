@@ -303,7 +303,7 @@ class Form extends \Model
             }
             try {
                 return \Mailer::send ($msg);
-            } catch (Exception $e) {
+            } catch (\Exception $e) {
                 $this->error = $e->getMessage ();
 
                 return false;
