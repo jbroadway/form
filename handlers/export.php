@@ -23,6 +23,7 @@ header ('Content-Type: text/plain');
 header ('Content-Disposition: attachment; filename=' . preg_replace ('/[^a-z0-9_-]+/', '-', strtolower ($f->title)) . '-' . gmdate ('Y-m-d') . '.csv');
 
 $results = form\Results::query ()
+	->where ('id', $_GET['id'])
     ->order ('ts desc')
     ->fetch_orig ();
 
