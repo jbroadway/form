@@ -62,6 +62,7 @@ $(function () {
 				<li><i class="fa fa-check-circle-o"></i> <a href="#" id="add-radio" data-bind="click: add_radio_field">{"Multiple choice"}</a></li>
 				<li><i class="fa fa-calendar"></i> <a href="#" id="add-date" data-bind="click: add_date_field">{"Date"}</a></li>
 				<li><i class="fa fa-tasks"></i> <a href="#" id="add-range" data-bind="click: add_range_field">{"Slider"}</a></li>
+				<li><i class="fa fa-info-circle"></i> <a href="#" id="add-wysiwyg" data-bind="click: add_wysiwyg_field">{"Text instructions"}</a></li>
 			</ul>
 		</div>
 		<div class="main">
@@ -259,6 +260,17 @@ $(function () {
 		<p><input type="checkbox" data-bind="checked: rules" /> {"Required field."}</p>
 		<p><span class="label">{"Error message:"}</span> <input type="text" size="35" data-bind="value: message, event: { blur: window.form.update_fields }" /></p>
 		</div>
+		<div class="clear"></div>
+	</div>
+</script>
+
+<script id="field-wysiwyg" type="text/x-jquery-tmpl">
+	<div class="section">
+		<div class="buttons">
+			<a href="#" class="delete-field" data-bind="click: function() { form.delete_field ($data); }">{"Delete"}</a>
+		</div>
+		<h6><i class="fa fa-info-circle"></i> {"Text instructions"}</h6>
+		<p><textarea class="field-wysiwyg" data-bind="redactor: default_value"></textarea></p>
 		<div class="clear"></div>
 	</div>
 </script>

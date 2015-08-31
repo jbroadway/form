@@ -63,6 +63,36 @@ var form = {
 				});
 			}
 		};
+		
+		/**
+		 * Custom binding for Redactor editor. Based on:
+		 * http://stackoverflow.com/a/20647413/1092725
+		 *
+		 * TODO: Figure out why update doesn't always trigger save
+		 */
+		ko.bindingHandlers.redactor = {
+			init: function (element, valueAccessor) {
+				var value = valueAccessor ();
+				
+				if (ko.isObservable (value)) {
+					$(element).redactor ({
+						replaceDivs: false,
+						linkTooltip: false,
+						buttonSource: true,
+						plugins: ['imagebrowser', 'filebrowser'],
+						changeCallback: value
+					});
+				}
+			},
+			
+			update: function (element, valueAccessor) {
+				var value = ko.utils.unwrapObservable (valueAccessor ()) || '';
+				
+				if (value !== $(element).redactor ('core.getTextarea').val ()) {
+					$(element).redactor ('code.set', value);
+				}
+			}
+		};
 
 		/**
 		 * Define an observable for the email action.
@@ -609,6 +639,35 @@ var form = {
 		f.rules.subscribe (function () {
 			form.update_fields ();
 		});
+		form.data.fields.push (f);
+		form.focus_last_field ();
+		return false;
+	},
+
+	/**
+	 * Add a wysiwyg editor field to the form.
+	 */
+	add_wysiwyg_field: function () {
+		var f = {
+			type: 'wysiwyg',
+			id: '',
+			default_value: ko.observable (''),
+			rules: ko.observable (''),
+			message: ko.observable (''),
+			icon: 'fa fa-info-circle'
+		};
+		f.default_value.subscribe (function () {
+			form.update_fields ();
+		});
+
+		// TODO: Turn this into a label for the sorting tab
+		f.label = ko.dependentObservable (function () {
+			var html = f.default_value ();
+			// TODO: Strip html tags
+			console.log (html);
+			return html;
+		});
+
 		form.data.fields.push (f);
 		form.focus_last_field ();
 		return false;

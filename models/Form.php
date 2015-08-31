@@ -155,7 +155,7 @@ class Form extends \Model
                 if (! isset ($field->max)) {
                     return false;
                 }
-            } elseif ($field->type !== 'date') {
+            } elseif ($field->type !== 'date' && $field->type !== 'wysiwyg') {
                 // invalid type
                 return false;
             }
