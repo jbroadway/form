@@ -210,9 +210,9 @@ var form = {
 		for (var i = 0; i < form.data.actions.length; i++) {
 			if (form.data.actions[i].type == 'cc_recipient' && form.data.actions[i].hasOwnProperty ('include_data')) {
 				if (form.data.actions[i].include_data == 'yes') {
-					$('#include-data').attr ('checked', true);
+					$('#include-data').prop ('checked', true);
 				} else {
-					$('#include-data').attr ('checked', false);
+					$('#include-data').prop ('checked', false);
 				}
 				break;
 			}
