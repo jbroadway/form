@@ -1,79 +1,77 @@
 <?php
 
-$this->require_admin ();
+// keep unauthorized users out
+$this->require_acl ('admin', $this->app);
 
+// set the layout
 $page->layout = 'admin';
 
-$cur = $this->installed ('form', $appconf['Admin']['version']);
+// get the version and check if the app installed
+$version = Appconf::get ($this->app, 'Admin', 'version');
+$current = $this->installed ($this->app, $version);
 
-if ($cur === true) {
-    $page->title = 'Already up-to-date';
-    echo '<p><a href="/form/admin">Continue</a></p>';
-
+if ($current === true) {
+    // app is already installed and up-to-date, stop here
+    $page->title = __ ('Already up-to-date');
+    printf ('<p><a href="/%s">%s</a>', Appconf::get ($this->app, 'Admin', 'handler'), __ ('Home'));
     return;
 }
 
-$page->title = 'Upgrading App: Forms';
+$page->title = sprintf (
+    '%s: %s',
+    __ ('Upgrading App'),
+    Appconf::get ($this->app, 'Admin', 'name')
+);
 
-$prefix = conf ('Database', 'prefix');
-if ($prefix !== '') {
-    if (! DB::shift ('select count(*) from #prefix#form')) {
-        $conn = conf ('Database', 'master');
-        $driver = $conn['driver'];
-        DB::beginTransaction ();
+// grab the database driver
+$conn = conf ('Database', 'master');
+$driver = $conn['driver'];
 
-        $error = false;
-        $sqldata = sql_split (file_get_contents ('apps/form/conf/install_' . $driver . '.sql'));
-        foreach ($sqldata as $sql) {
-            if (! DB::execute ($sql)) {
-                $error = DB::error ();
-                break;
-            }
+// get the base new version and current version for comparison
+$base_version = preg_replace ('/-.*$/', '', $version);
+$base_current = preg_replace ('/-.*$/', '', $current);
+
+// find upgrade scripts to apply
+$files = glob ('apps/' . $this->app . '/conf/upgrade_*_' . $driver . '.sql');
+$apply = array ();
+foreach ($files as $k => $file) {
+    if (preg_match ('/^apps\/' . $this->app . '\/conf\/upgrade_([0-9.]+)_' . $driver . '\.sql$/', $file, $regs)) {
+        if (version_compare ($regs[1], $base_current, '>') && version_compare ($regs[1], $base_version, '<=')) {
+            $apply[$regs[1]] = $file;
         }
-
-        if (! $error) {
-            if (! DB::execute (
-                'insert into #prefix#form
-					(id, title, message, ts, fields, actions, response_title, response_body)
-				select * from form'
-            )) {
-                $error = DB::error ();
-            }
-        }
-
-        if (! $error) {
-            if (! DB::execute (
-                'insert into #prefix#form_results
-					(id, form_id, ts, ip, results)
-				select * from results'
-            )) {
-                $error = DB::error ();
-            }
-        }
-
-        if (! $error) {
-            if (! DB::execute ('drop table form')) {
-                $error = DB::error ();
-            }
-        }
-
-        if (! $error) {
-            if (! DB::execute ('drop table results')) {
-                $error = DB::error ();
-            }
-        }
-
-        if ($error) {
-            DB::rollback ();
-            echo '<p class="visible-notice">Error: ' . $error . '</p>';
-            echo '<p>Upgrade failed.</p>';
-
-            return;
-        }
-        DB::commit ();
     }
 }
 
-echo '<p><a href="/form/admin">Done.</a></p>';
+// begin the transaction
+DB::beginTransaction ();
 
-$this->mark_installed ('form', $appconf['Admin']['version']);
+// apply the upgrade scripts
+foreach ($apply as $ver => $file) {
+    // parse the database schema into individual queries
+    $sql = sql_split (file_get_contents ($file));
+
+    // execute each query in turn
+    foreach ($sql as $query) {
+        if (! DB::execute ($query)) {
+            // show error and rollback on failures
+            printf (
+                '<p>%s</p><p class="visible-notice">%s: %s</p>',
+                __ ('Upgrade failed on version %s. Rolling back changes.', $ver),
+                __ ('Error'),
+                DB::error ()
+            );
+            DB::rollback ();
+            return;
+        }
+    }
+
+    // add any custom upgrade logic here
+}
+
+// commit the transaction
+DB::commit ();
+
+// mark the new version installed
+$this->mark_installed ($this->app, $version);
+
+printf ('<p><a href="/%s">%s</a>', Appconf::get ($this->app, 'Admin', 'handler'), __ ('Done.'));
