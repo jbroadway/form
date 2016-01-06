@@ -141,6 +141,11 @@ if ($f->submit ()) {
                 $field->default_value = gmdate ('Y-m-d');
             }
         }
+
+		if (trim ($field->message) === '') {
+			$field->message = __ ('Required.');
+		}
+
         echo $tpl->render ('form/field/' . $field->type, $field);
     }
 
