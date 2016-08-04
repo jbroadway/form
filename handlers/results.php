@@ -50,8 +50,12 @@ if ($count > 0) {
         $field_two_name = array_shift ($vals);
         foreach ($results as $k => $v) {
             $res = $v->results;
-            $results[$k]->field_one = (is_array ($res->{$field_one})) ? join (', ', $res->{$field_one}) : $res->{$field_one};
-            $results[$k]->field_two = (is_array ($res->{$field_two})) ? join (', ', $res->{$field_two}) : $res->{$field_two};
+            if ($field_one !== '') {
+                $results[$k]->field_one = (is_array ($res->{$field_one})) ? join (', ', $res->{$field_one}) : $res->{$field_one};
+            }
+            if ($field_two !== '') {
+                $results[$k]->field_two = (is_array ($res->{$field_two})) ? join (', ', $res->{$field_two}) : $res->{$field_two};
+            }
         }
     }
 }
