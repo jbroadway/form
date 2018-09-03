@@ -6,7 +6,7 @@
 
 .sidebar {
 	float: left;
-	width: 200px;
+	width: 25%;
 	padding: 10px;
 	margin-bottom: 15px;
 	border-radius: 5px;
@@ -34,7 +34,7 @@
 }
 
 .main {
-	width: 700px;
+	width: 70%;
 	float: right;
 }
 
