@@ -36,7 +36,7 @@ if ($f->submit ()) {
     $r = new form\Results (array (
         'form_id' => $id,
         'ts' => gmdate ('Y-m-d H:i:s'),
-        'ip' => $_SERVER['REMOTE_ADDR']
+        'ip' => $this->remote_addr ()
     ));
     $r->results = $_POST;
     $r->put ();
