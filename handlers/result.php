@@ -27,6 +27,8 @@ $fields = (array) $res->results;
 foreach ($fields as $k => $v) {
     if (is_array ($v)) {
         $fields[$k] = join (', ', $v);
+    } elseif (is_object ($v)) {
+    	$fields[$k] = json_encode ($v);
     }
 }
 
