@@ -28,6 +28,8 @@ $results = form\Results::query ()
     ->fetch ($limit, $_GET['offset']);
 $count = form\Results::query ()->where ('form_id', $_GET['id'])->count ();
 
+form\Unread::mark_results ($results, User::val ('id'));
+
 // determine which fields to display as columns
 // as well as the column names
 $labels = $f->labels ();

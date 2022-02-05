@@ -55,4 +55,20 @@ class Results extends \Model
 
         return parent::__set ($key, $val);
     }
+    
+    /**
+     * Mark the total results for a list of forms.
+     */
+    public static function mark_forms (&$forms) {
+    	$ids = array_map (function ($f) { return $f->id; }, $forms);
+
+    	$res = self::query ('form_id, count(*) as results')
+    		->where_in ('form_id', $ids)
+    		->group ('form_id')
+    		->fetch_assoc ('form_id', 'results');
+    	
+    	foreach ($forms as $k => $f) {
+    		$forms[$k]->results = isset ($res[$f->id]) ? $res[$f->id] : 0;
+    	}
+    }
 }

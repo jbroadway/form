@@ -9,10 +9,10 @@
 		<th width="15%">&nbsp;</th>
 	</tr>
 {% foreach forms %}
-	<tr>
+	<tr{% if loop_value->unread > 0 %} class="unread"{% end %}>
 		<td><a href="/form/{{loop_value->id}}" target="_blank">{{ loop_value->title }}</a></td>
 		<td>{{ loop_value->ts|date ('F j, Y - g:ia', strtotime (%s)) }}</td>
-		<td><a href="/form/results?id={{ loop_value->id }}" title="{" Browse results "}">{{ loop_value->id|form_results_count }}</a></td>
+		<td><a href="/form/results?id={{ loop_value->id }}" title="{" Browse results "}">{{ loop_value->results }} ({{ loop_value->unread}} {"unread"})</a></td>
 		<td style="text-align: right">
 			{% if loop_value->locked %}
 			{"Editing Locked"}
@@ -24,3 +24,9 @@
 {% end %}
 </table>
 </p>
+
+<style>
+tr.unread td {
+	font-weight: bold;
+}
+</style>

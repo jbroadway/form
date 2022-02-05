@@ -14,7 +14,7 @@
 		<th width="15%">&nbsp;</th>
 	</tr>
 {% foreach results %}
-	<tr>
+	<tr{% if loop_value->read == false %} class="unread"{% end %}>
 		<td>{{ loop_value->ts|date ('F j, Y - g:ia', strtotime (%s)) }}</td>
 		<td>{{ loop_value->ip }}</td>
 		<td>{{ loop_value->field_one }}</td>
@@ -28,3 +28,9 @@
 {% if more %}
 <p class="next"><a href="/form/results?id={{ id }}&offset={{ next }}">{"Next"} &raquo;</a></p>
 {% end %}
+
+<style>
+tr.unread td {
+	font-weight: bold;
+}
+</style>

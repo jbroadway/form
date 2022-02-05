@@ -10,8 +10,6 @@ if (! User::require_admin ()) {
     $this->redirect ('/admin');
 }
 
-require_once 'apps/form/lib/Functions.php';
-
 $page->title = 'Forms';
 
 $lock = new Lock ();
@@ -19,6 +17,9 @@ $lock = new Lock ();
 $forms = form\Form::query ()
     ->order ('title asc')
     ->fetch_orig ();
+
+form\Results::mark_forms ($forms);
+form\Unread::mark_forms ($forms, User::val ('id'));
 
 foreach ($forms as $k => $form) {
     $forms[$k]->locked = $lock->exists ('Form', $form->id);

@@ -19,6 +19,8 @@ if ($res->error) {
     $this->redirect ('/form/admin');
 }
 
+form\Unread::mark_read ($res->form_id, $res->id, User::val ('id'));
+
 $page->title = i18n_get ('Browsing Result') . ': ' . $res->id;
 
 $labels = $res->form_id ()->labels ();
