@@ -17,7 +17,7 @@
 	</tr>
 {% foreach results %}
 	<tr{% if loop_value->read == false %} class="unread"{% end %}>
-		<td>{{ loop_value->ts||I18n::date_time }}</td>
+		<td>{{ loop_value->ts|I18n::date_time }}</td>
 		<td>{{ loop_value->ip }}</td>
 		<td>{{ loop_value->field_one }}</td>
 		<td>{{ loop_value->field_two }}</td>
