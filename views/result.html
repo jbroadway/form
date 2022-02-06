@@ -3,7 +3,7 @@
 <p><a href="/form/results?id={{ form }}">{" All results "}</a></p>
 
 <p>
-<table width="100%">
+<table width="100%" class="result">
 	<tr>
 		<th width="30%">{" Field "}</th>
 		<th width="70%">{" Value "}</th>
@@ -24,3 +24,10 @@
 {% end %}
 </table>
 </p>
+
+<style>
+table.result td {
+	unicode-bidi: embed;
+	white-space: pre;
+}
+</style>
