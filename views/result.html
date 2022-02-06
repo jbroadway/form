@@ -1,3 +1,5 @@
+{! admin/util/dates !}
+
 <p><a href="/form/results?id={{ form }}">{" All results "}</a></p>
 
 <p>
@@ -8,7 +10,7 @@
 	</tr>
 	<tr>
 		<td>{" Submitted "}</td>
-		<td>{{ submitted|date ('F j, Y - g:ia', strtotime (%s)) }}</td>
+		<td>{{ submitted|I18n::date_time }}</td>
 	</tr>
 	<tr>
 		<td>{" IP Address "}</td>

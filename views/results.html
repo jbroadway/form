@@ -1,3 +1,5 @@
+{! admin/util/dates !}
+
 <p><a href="/form/admin">{" All forms "}</a> | <a href="/form/export?id={{ id }}">{" Export results (CSV) "}</a></p>
 
 {% if offset > 0 %}
@@ -15,7 +17,7 @@
 	</tr>
 {% foreach results %}
 	<tr{% if loop_value->read == false %} class="unread"{% end %}>
-		<td>{{ loop_value->ts|date ('F j, Y - g:ia', strtotime (%s)) }}</td>
+		<td>{{ loop_value->ts||I18n::date_time }}</td>
 		<td>{{ loop_value->ip }}</td>
 		<td>{{ loop_value->field_one }}</td>
 		<td>{{ loop_value->field_two }}</td>
