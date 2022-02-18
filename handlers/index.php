@@ -69,13 +69,15 @@ if ($f->submit ()) {
                     }
                 }
 
-                $f->send_email (
+                if (! $f->send_email (
                     $action->to,
                     $f->title,
                     $tpl->render ('form/email', array ('values' => $_POST)),
                     array (conf ('General', 'email_from'), conf ('General', 'site_name')),
                     $reply_to
-                );
+                )) {
+                	error_log ('Email delivery failed: ' . $f->error);
+                }
                 break;
             case 'cc_recipient':
                 $send_to = $action->name_field
@@ -93,12 +95,14 @@ if ($f->submit ()) {
                 }
                 $msg_body .= $action->body_sig;
 
-                $f->send_email (
+                if (! $f->send_email (
                     $send_to,
                     $action->subject,
                     $msg_body,
                     $action->reply_from
-                );
+                )) {
+                	error_log ('Email delivery failed: ' . $f->error);
+                }
                 break;
             case 'redirect':
                 $this->redirect ($action->url, false);
