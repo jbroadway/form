@@ -16,7 +16,7 @@ create table #prefix#form_results (
 	id serial not null primary key,
 	form_id integer not null,
 	ts timestamp not null,
-	ip character(15) not null,
+	ip character(46) not null,
 	results text not null 
 );
 
