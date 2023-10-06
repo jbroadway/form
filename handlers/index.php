@@ -39,7 +39,9 @@ if ($f->submit ()) {
         'ip' => $this->remote_addr ()
     ));
     $r->results = $_POST;
-    $r->put ();
+    if (! $r->put ()) {
+        error_log ('Error saving form submission to database: ' . $r->error);
+    }
 
     // call any custom hooks
     $this->hook ('form/submitted', array (
