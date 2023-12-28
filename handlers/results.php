@@ -30,6 +30,11 @@ $count = form\Results::query ()->where ('form_id', $_GET['id'])->count ();
 
 form\Unread::mark_results ($results, User::val ('id'));
 
+$field_one = '';
+$field_two = '';
+$field_one_name = '';
+$field_two_name = '';
+
 // determine which fields to display as columns
 // as well as the column names
 $labels = $f->labels ();
