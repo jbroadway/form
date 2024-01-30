@@ -289,7 +289,45 @@ class Form extends \Model
 	 */
     public function send_email($to, $subject, $body, $from = false, $reply_to = false)
     {
-        if (file_exists ('lib/Mailer.php')) {
+        if (\Envconf::form ('Service', 'sendgrid_api_key') != false) {
+            $msg = array (
+                'to' => $to,
+                'subject' => $subject,
+                'text' => $body
+            );
+            if ($from !== false) {
+                $msg['from'] = $from;
+            }
+            if ($reply_to) {
+                $msg['reply_to'] = $reply_to;
+            }
+            try {
+                return \form\Service\SendgridService::send ($msg);
+            } catch (\Exception $e) {
+                $this->error = $e->getMessage ();
+
+                return false;
+            }
+        } elseif (\Envconf::form ('Service', 'mailgun_api_key') != false) {
+            $msg = array (
+                'to' => $to,
+                'subject' => $subject,
+                'text' => $body
+            );
+            if ($from !== false) {
+                $msg['from'] = $from;
+            }
+            if ($reply_to) {
+                $msg['reply_to'] = $reply_to;
+            }
+            try {
+                return \form\Service\MailgunService::send ($msg);
+            } catch (\Exception $e) {
+                $this->error = $e->getMessage ();
+
+                return false;
+            }
+        } elseif (file_exists ('lib/Mailer.php')) {
             $msg = array (
                 'to' => $to,
                 'subject' => $subject,

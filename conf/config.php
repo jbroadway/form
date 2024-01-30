@@ -1,5 +1,11 @@
 ; <?php /*
 
+[Service]
+
+mailgun_api_key = Off
+mailgun_base_url = Off
+sendgrid_api_key = Off
+
 [Admin]
 
 handler = form/admin
