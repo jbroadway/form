@@ -26,34 +26,57 @@ class SendgridService {
 		
 		// Transform parameters
 
-		$email = $data['from'][0];
-		$name = $data['from'][1];
-		$data['from'] = [
-			'email' => $email,
-			'name' => $name
-		];
-
-		$email = $data['to'][0];
-		$name = $data['to'][1];
-		$data['personalizations'] = [
-			[
-				'to' => [
-					[
-						'email' => $email,
-						'name' => $name
-					]
-				]
-			]
-		];
-		unset ($data['to']);
-
-		if (isset ($data['reply_to'])) {
-			$email = $data['reply_to'][0];
-			$name = $data['reply_to'][1];
-			$data['reply_to'] = [
+		if (is_array ($data['from'])) {
+			$email = $data['from'][0];
+			$name = $data['from'][1];
+			$data['from'] = [
 				'email' => $email,
 				'name' => $name
 			];
+		} else {
+			$email = $data['from'];
+			$data['from'] = ['email' => $email];
+		}
+
+		if (is_array ($data['to'])) {
+			$email = $data['to'][0];
+			$name = $data['to'][1];
+			$data['personalizations'] = [
+				[
+					'to' => [
+						[
+							'email' => $email,
+							'name' => $name
+						]
+					]
+				]
+			];
+		} else {
+			$email = $data['to'];
+			$data['personalizations'] = [
+				[
+					'to' => [
+						[
+							'email' => $email
+						]
+					]
+				]
+			];
+		}
+		unset ($data['to']);
+
+		if (isset ($data['reply_to'])) {
+			if (is_array ($data['reply_to'])) {
+				$email = $data['reply_to'][0];
+				$name = $data['reply_to'][1];
+				$data['reply_to'] = [
+					'email' => $email,
+					'name' => $name
+				];
+			} else {
+				$email = $data['reply_to'];
+				$data['reply_to'] = ['email' => $email];
+			}
 		}
 
 		$data['content'] = [];
